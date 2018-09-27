@@ -1,22 +1,31 @@
 package com.sba6.srm.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 
 import lombok.*;
 
 @Entity
-@Getter @Setter
-@AllArgsConstructor
-public class Employee {
+@Table(name="employee")
+public @Data class Employee {
 	@Id @GeneratedValue
-	private int empId;
-	private String empName;
-	private int empMgr;
-	private String empDesignation;
-	private String empDepartment;
+	@Column
+	private Long id;
+	@Column
+	private String firstName;
+	@Column
+	private String lastName;
+	@Column
+	private Long mgrId;
+	@Column
+	private String designation;
+	@Column
+	private String department;
 	@Lob
-	private byte[] empImg; 
+	@Column
+	private byte[] img; 
 }
