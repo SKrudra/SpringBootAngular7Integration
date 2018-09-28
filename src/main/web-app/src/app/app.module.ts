@@ -7,6 +7,7 @@ import { BaseViewComponent } from './base-view/base-view.component';
 import { RequestComponent } from './request/request.component';
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
 
+import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,8 @@ import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard
     ManagerDashboardComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
