@@ -12,12 +12,12 @@ import lombok.*;
 @Table(name="request")
 public @Data class Request {
 	@Id @GeneratedValue
-	@Column
+	@Column(name="ID")
 	private Long id;
-	@Column
+	@Column(name="EMP_ID")
 	private String firstName;
-	@Column
+	@Column(name="FIRST_NAME")
 	private String lastName;
-	@Column
+	@Column(name="LAST_NAME")
 	private Long empId;
 }
