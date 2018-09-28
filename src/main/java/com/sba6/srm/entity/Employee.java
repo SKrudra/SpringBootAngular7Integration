@@ -13,19 +13,19 @@ import lombok.*;
 @Table(name="employee")
 public @Data class Employee {
 	@Id @GeneratedValue
-	@Column
+	@Column(name="ID")
 	private Long id;
-	@Column
+	@Column(name="FIRST_NAME")
 	private String firstName;
-	@Column
+	@Column(name="LAST_NAME")
 	private String lastName;
-	@Column
+	@Column(name="MGR_ID")
 	private Long mgrId;
-	@Column
+	@Column(name="DESIGNATION")
 	private String designation;
-	@Column
+	@Column(name="DEPARTMENT")
 	private String department;
 	@Lob
-	@Column
+	@Column(name="IMG")
 	private byte[] img; 
 }

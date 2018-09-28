@@ -7,19 +7,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.*;
+ 	  	  	  
 
 @Entity
 @Table(name="login_detail")
 public @Data class LoginDetail {
 	@Id @GeneratedValue
-	@Column
+	@Column(name="ID")
 	private Long id;
-	@Column
+	@Column(name="EMP_ID")
 	private Long empId;
-	@Column
+	@Column(name="USER_NAME")
 	private String userName;
-	@Column
+	@Column(name="PASSWORD")
 	private String password;
-	@Column
+	@Column(name="ROLE")
 	private Long role;
 }
