@@ -29,4 +29,9 @@ public class RequestService {
 	public void deleteRequest(Request request){
 		repository.delete(request);
 	}
+	
+	public Long getRequestedByEmployeeId(Long reqId){
+		return getRequest(reqId).getEmployee().getId();
+	}
+	
 }
