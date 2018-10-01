@@ -1,20 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-
-export interface UserData {
+import {MatButtonModule} from '@angular/material/button';
+export interface RequestData {
   id: string;
-  name: string;
-  progress: string;
-  color: string;
+  reqDesc: string;
+  empId: string;
+  status: string;
 }
 
 /** Constants used to fill up our data base. */
-const COLORS: string[] = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-  'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
-const NAMES: string[] = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-  'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-  'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
+let reqData : RequestData[];
 @Component({
   selector: 'app-manager-dashboard',
   templateUrl: './manager-dashboard.component.html',
@@ -22,18 +18,25 @@ const NAMES: string[] = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
 })
 export class ManagerDashboardComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
-  dataSource: MatTableDataSource<UserData>;
+  displayedColumns: string[] = ['id', 'reqDesc', 'empId', 'status','action'];
+  dataSource: MatTableDataSource<RequestData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor() {
     // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+    reqData = [{id:'1',reqDesc:'Seat change request',empId:'121',status:'open'},
+              {id:'2',reqDesc:'PC not working.',empId:'124',status:'closed'},
+              {id:'3',reqDesc:'Project discussion.',empId:'123',status:'closed'},
+              {id:'4',reqDesc:'Team outing tour.',empId:'125',status:'Rejected'},
+              {id:'5',reqDesc:'Appraisal discussion',empId:'129',status:'Closed'},
+              {id:'6',reqDesc:'Location Change request',empId:'130',status:'open'},
+              {id:'7',reqDesc:'Work from home request',empId:'131',status:'Rejected'}
+    ];
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+    this.dataSource = new MatTableDataSource(reqData);
   }
 
   ngOnInit() {
@@ -48,18 +51,4 @@ export class ManagerDashboardComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-}
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name =
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
 }

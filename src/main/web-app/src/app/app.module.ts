@@ -12,7 +12,7 @@ import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard
 import { AppRoutingModule } from './app-routing.module';
 
 import{MatDividerModule,MatTableModule,MatFormFieldModule,
-  MatSortModule,MatPaginatorModule,MatSelectModule,MatOptionModule,MatTooltipModule } from '@angular/material';
+  MatSortModule,MatPaginatorModule,MatSelectModule,MatOptionModule,MatTooltipModule,MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EmployeeDetailComponent,
     BaseViewComponent,
     RequestComponent,
-    ManagerDashboardComponent,
+    ManagerDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +35,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatPaginatorModule,
     MatSelectModule,
     MatOptionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
