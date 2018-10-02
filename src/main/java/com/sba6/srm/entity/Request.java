@@ -9,6 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.*;
+import com.sba6.srm.enumsconstants.RequestStatus;
 
 @Entity
 @Table(name="request")
@@ -24,5 +25,8 @@ public @Data class Request {
 	
 	@Column(name="REQUEST_DESCRIPTION")
 	private String requestDescription;
+	
+	@Column(name="STATUS")
+	private RequestStatus requestStatus;
 			
 }
