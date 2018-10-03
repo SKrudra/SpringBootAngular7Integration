@@ -539,11 +539,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 module.exports = __webpack_require__(/*! E:\SpringBootAngular6Integration\src\main\web-app\src\styles.css */"./src/styles.css");
-=======
-module.exports = __webpack_require__(/*! G:\SpringBootAngular6Integration\src\main\web-app\src\styles.css */"./src/styles.css");
->>>>>>> 2fcf506cd5ad388b0f5426b867369fd9401935fd
 
 
 /***/ })

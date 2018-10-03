@@ -568,11 +568,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 module.exports = __webpack_require__(/*! E:\SpringBootAngular6Integration\src\main\web-app\src\main.ts */"./src/main.ts");
-=======
-module.exports = __webpack_require__(/*! G:\SpringBootAngular6Integration\src\main\web-app\src\main.ts */"./src/main.ts");
->>>>>>> 2fcf506cd5ad388b0f5426b867369fd9401935fd
 
 
 /***/ })

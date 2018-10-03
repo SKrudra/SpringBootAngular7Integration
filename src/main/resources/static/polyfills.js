@@ -5473,11 +5473,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 module.exports = __webpack_require__(/*! E:\SpringBootAngular6Integration\src\main\web-app\src\polyfills.ts */"./src/polyfills.ts");
-=======
-module.exports = __webpack_require__(/*! G:\SpringBootAngular6Integration\src\main\web-app\src\polyfills.ts */"./src/polyfills.ts");
->>>>>>> 2fcf506cd5ad388b0f5426b867369fd9401935fd
 
 
 /***/ })
