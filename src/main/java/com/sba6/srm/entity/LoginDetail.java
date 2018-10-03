@@ -24,7 +24,7 @@ public @Data class LoginDetail {
 	@JoinColumn(name="EMP_ID")
 	private Employee employee;
 	
-	@Column(name="USER_NAME")
+	@Column(name="USERNAME")
 	private String userName;
 	
 	@Column(name="PASSWORD")

@@ -23,7 +23,7 @@ public class EmployeeService {
 		return getEmployee(id).getRequest();
 	}
 	
-	public List<Request> getRequestsForManager(Long id){
+	public List<Object[]> getRequestsForManager(Long id){
 		return employeeRepository.getRequestsForManager(id);
 	}	
 
