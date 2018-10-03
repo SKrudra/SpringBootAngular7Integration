@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
@@ -11,9 +11,11 @@ import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard
 
 import { AppRoutingModule } from './app-routing.module';
 
-import{MatDividerModule,MatTableModule,MatFormFieldModule,
-  MatSortModule,MatPaginatorModule,MatSelectModule,MatOptionModule,MatTooltipModule } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModules } from './material';
+
+import 'hammerjs';
+import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
+import { DisplayDataDialogComponent } from './display-data-dialog/display-data-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,22 +23,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BaseViewComponent,
     RequestComponent,
     ManagerDashboardComponent,
+    GenericDialogComponent,
+    DisplayDataDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule,
     FormsModule,
-    BrowserAnimationsModule,
-    MatDividerModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatTooltipModule
+    MaterialModules,
+    ReactiveFormsModule
   ],
+  entryComponents:[GenericDialogComponent,DisplayDataDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
