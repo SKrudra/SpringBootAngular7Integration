@@ -4,6 +4,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {MatDialog} from '@angular/material';
 
 import{GenericDialogComponent} from '../generic-dialog/generic-dialog.component';
+import{DisplayDataDialogComponent} from '../display-data-dialog/display-data-dialog.component';
 
 export interface RequestData {
   id: string;
@@ -33,7 +34,7 @@ export class ManagerDashboardComponent implements OnInit {
     reqData = [{id:'1',reqDesc:'Seat change request',empId:'121',status:'open'},
               {id:'2',reqDesc:'PC not working.',empId:'124',status:'closed'},
               {id:'3',reqDesc:'Project discussion.',empId:'123',status:'closed'},
-              {id:'4',reqDesc:'Team outing tour.',empId:'125',status:'Rejected'},
+              {id:'4',reqDesc:'Team outing tour.',empId:'125',status:'pending'},
               {id:'5',reqDesc:'Appraisal discussion',empId:'129',status:'Closed'},
               {id:'6',reqDesc:'Location Change request',empId:'130',status:'open'},
               {id:'7',reqDesc:'Work from home request',empId:'131',status:'Rejected'}
@@ -56,17 +57,40 @@ export class ManagerDashboardComponent implements OnInit {
     }
   }
 
-  onAccept(data:RequestData){
-    const dialogRef = this.dialog.open(GenericDialogComponent, {
-     
-      // data: {name: this.name, animal: this.animal}
-      data:{commentValue:this.comment}
+  onSubmit(request:RequestData,action:string){
+    const dialogRef = this.dialog.open(GenericDialogComponent,{
+      height: '250px',
+      width: '600px',
     });
+    dialogRef.componentInstance.onAdd.subscribe((data) => {
+        this.comment = data;
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.comment = result;
-      console.log('The dialog was closed'+ this.comment);
-      //this.data = result;
+    dialogRef.afterClosed().subscribe((result) => {
+        dialogRef.componentInstance.onAdd.unsubscribe(); 
+        if(result){
+        console.log(this.comment);
+        request.status=action;
+        }
     });
   }
+
+  onAccept(request:RequestData){
+    this.onSubmit(request,"approved");
+  }
+
+  onReject(request:RequestData){
+    this.onSubmit(request,"rejected");
+  }
+
+  onMeet(request:RequestData){
+    this.onSubmit(request,"pending");
+  }
+
+  viewReqDescription(row){
+    const dialogRef = this.dialog.open(DisplayDataDialogComponent,{
+      data:{value:row.reqDesc}
+    });
+  }
+
 }

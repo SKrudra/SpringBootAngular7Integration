@@ -15,6 +15,7 @@ import { MaterialModules } from './material';
 
 import 'hammerjs';
 import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
+import { DisplayDataDialogComponent } from './display-data-dialog/display-data-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { GenericDialogComponent } from './generic-dialog/generic-dialog.componen
     BaseViewComponent,
     RequestComponent,
     ManagerDashboardComponent,
-    GenericDialogComponent
+    GenericDialogComponent,
+    DisplayDataDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,7 @@ import { GenericDialogComponent } from './generic-dialog/generic-dialog.componen
     MaterialModules,
     ReactiveFormsModule
   ],
-  entryComponents:[GenericDialogComponent],
+  entryComponents:[GenericDialogComponent,DisplayDataDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
