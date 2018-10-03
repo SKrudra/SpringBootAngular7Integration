@@ -10,3 +10,8 @@ table {
 td, th {
   width: 25%;
 }
+
+.manager-icons{
+  padding: 0px 14px;
+  white-space: nowrap;
+}

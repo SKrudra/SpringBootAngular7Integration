@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Discussion Comment</h2>
+
+<mat-dialog-content>
+  <mat-form-field>
+    <textarea matInput placeholder="Please enter here..." maxlength="500" [formControl]="comment" required></textarea>
+    <mat-error *ngIf="comment.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" [disabled]="comment.invalid">Submit</button>
+</mat-dialog-actions>

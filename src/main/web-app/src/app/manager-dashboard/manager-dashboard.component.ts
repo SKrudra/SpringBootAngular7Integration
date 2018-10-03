@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {MatButtonModule} from '@angular/material/button';
+import {MatDialog} from '@angular/material';
+
+import{GenericDialogComponent} from '../generic-dialog/generic-dialog.component';
+
 export interface RequestData {
   id: string;
   reqDesc: string;
@@ -11,20 +14,21 @@ export interface RequestData {
 
 /** Constants used to fill up our data base. */
 let reqData : RequestData[];
+
 @Component({
   selector: 'app-manager-dashboard',
   templateUrl: './manager-dashboard.component.html',
   styleUrls: ['./manager-dashboard.component.css']
 })
 export class ManagerDashboardComponent implements OnInit {
-
+  comment:string;
   displayedColumns: string[] = ['id', 'reqDesc', 'empId', 'status','action'];
   dataSource: MatTableDataSource<RequestData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     // Create 100 users
     reqData = [{id:'1',reqDesc:'Seat change request',empId:'121',status:'open'},
               {id:'2',reqDesc:'PC not working.',empId:'124',status:'closed'},
@@ -50,5 +54,19 @@ export class ManagerDashboardComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  onAccept(data:RequestData){
+    const dialogRef = this.dialog.open(GenericDialogComponent, {
+     
+      // data: {name: this.name, animal: this.animal}
+      data:{commentValue:this.comment}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.comment = result;
+      console.log('The dialog was closed'+ this.comment);
+      //this.data = result;
+    });
   }
 }
