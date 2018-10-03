@@ -12,6 +12,8 @@ import com.sba6.srm.entity.Request;
 @RepositoryRestResource
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	
+
 	@Query(value="SELECT r FROM employee e, request r WHERE e.MGR_ID = ?1 AND r.EMP_ID = e.ID", nativeQuery = true)
 	public List<Request> getRequestsForManager(Long mgrId);
 }
+

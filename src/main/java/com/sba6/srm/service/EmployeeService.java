@@ -25,7 +25,6 @@ public class EmployeeService {
 	
 	public List<Request> getRequestsForManager(Long id){
 		return employeeRepository.getRequestsForManager(id);
-	}
-		
-	
+	}	
+
 }
