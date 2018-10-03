@@ -6,32 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sba6.srm.entity.Request;
+import com.sba6.srm.enumsconstants.RequestStatus;
+import com.sba6.srm.repository.EmployeeRepository;
 import com.sba6.srm.repository.RequestRepository;
 
 @Service
 public class RequestService {
 	
 	@Autowired
-	private RequestRepository repository;
-	
-	public List<Request> getRequests(){
-		return repository.findAll();
-	}
-	
-	public Request getRequest(Long id){
-		return getRequests().stream().filter(r -> r.getId().equals(id)).findFirst().get();
-	}
+	private RequestRepository requestRepository;
+	@Autowired
+	private EmployeeRepository employeeRepository;
 	
 	public void addRequest(Request request){
-		repository.save(request);
+		requestRepository.save(request);
 	}
 	
-	public void deleteRequest(Request request){
-		repository.delete(request);
+	public void setRequestStatus(RequestStatus requestStatus, Long empId){
+		//TODO
 	}
 	
-	public Long getRequestedByEmployeeId(Long reqId){
-		return getRequest(reqId).getEmployee().getId();
-	}
 	
 }
