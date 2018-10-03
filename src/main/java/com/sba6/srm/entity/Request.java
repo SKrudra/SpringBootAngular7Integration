@@ -5,10 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.*;
+import com.sba6.srm.enumsconstants.RequestStatus;
 
 @Entity
 @Table(name="request")
@@ -18,11 +19,14 @@ public @Data class Request {
 	@Column(name="ID")
 	private Long id;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="EMP_ID")
 	private Employee employee;
 	
 	@Column(name="REQUEST_DESCRIPTION")
 	private String requestDescription;
+	
+	@Column(name="STATUS")
+	private RequestStatus requestStatus;
 			
 }

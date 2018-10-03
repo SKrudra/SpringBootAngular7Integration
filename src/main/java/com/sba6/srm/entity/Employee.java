@@ -1,13 +1,11 @@
 package com.sba6.srm.entity;
 
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -43,7 +41,7 @@ public @Data class Employee {
 	@OneToOne(mappedBy="employee")
 	private LoginDetail loginDetail;
 	
-	@OneToMany(mappedBy="employee")
-	private List<Request> requests;
+	@OneToOne(mappedBy="employee")
+	private Request request;
 	
 }
