@@ -6,6 +6,8 @@ import {MatDialog} from '@angular/material';
 import{GenericDialogComponent} from '../generic-dialog/generic-dialog.component';
 import{DisplayDataDialogComponent} from '../display-data-dialog/display-data-dialog.component';
 
+import { RequestService } from '../request.service';
+
 export interface RequestData {
   id: string;
   reqDesc: string;
@@ -29,22 +31,24 @@ export class ManagerDashboardComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, public requestService: RequestService) {
     // Create 100 users
-    reqData = [{id:'1',reqDesc:'Seat change request',empId:'121',status:'open'},
-              {id:'2',reqDesc:'PC not working.',empId:'124',status:'closed'},
-              {id:'3',reqDesc:'Project discussion.',empId:'123',status:'closed'},
-              {id:'4',reqDesc:'Team outing tour.',empId:'125',status:'pending'},
-              {id:'5',reqDesc:'Appraisal discussion',empId:'129',status:'Closed'},
-              {id:'6',reqDesc:'Location Change request',empId:'130',status:'open'},
-              {id:'7',reqDesc:'Work from home request',empId:'131',status:'Rejected'}
-    ];
+    // reqData = [{id:'1',reqDesc:'Seat change request',empId:'121',status:'open'},
+    //           {id:'2',reqDesc:'PC not working.',empId:'124',status:'closed'},
+    //           {id:'3',reqDesc:'Project discussion.',empId:'123',status:'closed'},
+    //           {id:'4',reqDesc:'Team outing tour.',empId:'125',status:'pending'},
+    //           {id:'5',reqDesc:'Appraisal discussion',empId:'129',status:'Closed'},
+    //           {id:'6',reqDesc:'Location Change request',empId:'130',status:'open'},
+    //           {id:'7',reqDesc:'Work from home request',empId:'131',status:'Rejected'}
+    // ];
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(reqData);
+    
   }
 
   ngOnInit() {
+    this.requestService.getRequests(1).subscribe(result=>reqData=result);
+    // Assign the data to the data source for the table to render
+    this.dataSource = new MatTableDataSource(reqData);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

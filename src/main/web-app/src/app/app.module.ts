@@ -12,6 +12,7 @@ import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard
 import { AppRoutingModule } from './app-routing.module';
 
 import { MaterialModules } from './material';
+import { HttpClientModule }    from '@angular/common/http';
 
 import 'hammerjs';
 import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
@@ -32,7 +33,8 @@ import { DisplayDataDialogComponent } from './display-data-dialog/display-data-d
     CommonModule,
     FormsModule,
     MaterialModules,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   entryComponents:[GenericDialogComponent,DisplayDataDialogComponent],
   providers: [],
