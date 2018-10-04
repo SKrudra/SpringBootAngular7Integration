@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import{RequestData} from '../models/request-data';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,12 +13,13 @@ const httpOptions = {
 export class RequestService{
   
   private requestsUrl = 'api/requests/';
-  private requestUrl = 'api/requests/';
+  private requestUrl = 'api/request/';
   constructor(private http: HttpClient) { }
 
-  getRequests(empId:number):Observable<any>{
-    return this.http.get<any>(this.requestsUrl+`/${empId}`)
+  getRequests(empId:number):Observable<RequestData[]>{
+    return this.http.get<RequestData[]>(this.requestsUrl+`${empId}`)
     .pipe(
+      tap(result=>console.log("inside service"+result)),
       catchError(this.handleError('getRequest', []))
     );
   }
