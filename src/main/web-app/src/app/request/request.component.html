@@ -1,3 +1,40 @@
-<p>
-  request works!
-</p>
+<div class="mat-elevation-z8">
+<button mat-fab color="primary" (click)="onAddRequest()">
+    <mat-icon >add</mat-icon>
+ </button>
+  
+<table mat-table [dataSource]="dataSource" matSort>
+
+  
+
+    <!-- Request Description Column -->
+    <ng-container matColumnDef="reqDesc">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Request Description </th>
+      <td mat-cell *matCellDef="let row"><button mat-button color="primary" (click)="viewReqDescription(row)"> {{row.reqDesc | slice:0:25}} </button></td>
+    </ng-container>
+
+
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+    </ng-container>
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+      <td mat-cell *matCellDef="let row" class="manager-icons">
+        <button mat-icon-button color="primary" (click)="onCancel(row)" [disabled]="!(row.status==='open' || row.status==='pending')">
+          <mat-icon >cancel</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  </table>
+  
+  
+
+</div>

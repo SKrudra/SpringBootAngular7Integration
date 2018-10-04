@@ -26,7 +26,7 @@ public @Data class Request {
 	@Column(name="ID")
 	private Long id;
 	
-	@JsonIgnore
+	@JsonIgnore //https://stackoverflow.com/questions/37848789/spring-expected-instead-of-t-error-when-returning-list
 	@OneToOne
 	@JoinColumn(name="EMP_ID")
 	private Employee employee;
