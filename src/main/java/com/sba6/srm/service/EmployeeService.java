@@ -19,9 +19,5 @@ public class EmployeeService {
 	public Employee getEmployee(Long id){
 		return employeeRepository.findAll().stream().filter(e -> e.getId().equals(id)).findFirst().get();
 	}
-	
-	public Request getRequest(Long id){
-		return getEmployee(id).getRequest();
-	}	
 
 }

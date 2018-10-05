@@ -3,7 +3,8 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import{RequestData} from '../models/request-data';
-
+import{Employee} from '../models/employee';
+import { requestStatusMap } from '../constants';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -13,14 +14,49 @@ const httpOptions = {
 export class RequestService{
   
   private requestsUrl = 'api/requests/';
+  private empRequestUrl = '/api/emp/requests/';
   private requestUrl = 'api/request/';
   constructor(private http: HttpClient) { }
 
   getRequests(empId:number):Observable<RequestData[]>{
     return this.http.get<RequestData[]>(this.requestsUrl+`${empId}`)
     .pipe(
-      tap(result=>console.log("inside service"+result)),
+      tap(result=>console.log("inside getRequests"+result)),
       catchError(this.handleError('getRequest', []))
+    );
+  }
+
+  addRequest(empId:number,requestDescription :string):Observable<RequestData>{
+    let request = new RequestData();
+    let employee = new Employee();
+    employee.id=empId;
+    request.employee=employee;
+    request.requestDescription = requestDescription;
+    return this.http.post<RequestData>(this.requestUrl,request).
+    pipe(
+      tap(result=>console.log("inside addRequest"+result)),
+      catchError(this.handleError('getRequest', request))
+    );
+  }
+
+  getRequestsForEmployee(empId:number):Observable<RequestData>{
+    return this.http.get<RequestData>(this.empRequestUrl+`${empId}`)
+    .pipe(
+      tap(result=>console.log("inside getRequestsForEmployee"+result)),
+      catchError(this.handleError('getRequestsForEmployee',new RequestData()))
+    );
+  }
+
+  updateRequest(reqId:number,reqStatus:string,reqComment?:string):Observable<RequestData>{
+    let request = new RequestData();
+    request.id=reqId;
+    request.requestStatus=reqStatus;
+    if(reqComment!=null)
+      request.requestDescription = reqComment;
+    return this.http.put<RequestData>(this.empRequestUrl+`${reqId}`,request)
+    .pipe(
+      tap(result=>console.log("inside getRequestsForEmployee"+result)),
+      catchError(this.handleError('getRequestsForEmployee', []))
     );
   }
 

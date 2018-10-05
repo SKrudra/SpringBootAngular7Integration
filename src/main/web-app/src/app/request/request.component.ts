@@ -6,7 +6,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material';
 import {GenericDialogComponent} from '../generic-dialog/generic-dialog.component';
 import {DisplayDataDialogComponent} from '../display-data-dialog/display-data-dialog.component';
 import { RequestDialogComponent } from '../request-dialog/request-dialog.component';
-
+import { RequestService } from '../services/request.service';
 
 export interface RequestData {
   reqDesc: string;
@@ -32,7 +32,7 @@ export class RequestComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,public requestService:RequestService) {
     // Create 100 users
     this.reqData = [
               {reqDesc: 'Seat change request', status: 'open'},
@@ -91,6 +91,7 @@ export class RequestComponent implements OnInit {
       console.log(result);
       if(result){
         this.testinglog = this.comment;
+        this.requestService.addRequest(1002,this.comment).subscribe(result=>console.log(result));
         this.reqData.push({reqDesc: this.comment, status: 'open'});
 //        this.dataSource = new MatTableDataSource(this.reqData);
         this.dataSource.data = this.reqData;
