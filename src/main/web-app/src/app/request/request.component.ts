@@ -21,6 +21,7 @@ export interface RequestData {
 })
 export class RequestComponent implements OnInit {
 
+  disableAddRequest: boolean; //true if there is any request which is not inactivated
   comment: string;
   displayedColumns: string[] = ['reqDesc', 'status', 'action'];
   dataSource: MatTableDataSource<RequestData>;
@@ -35,18 +36,17 @@ export class RequestComponent implements OnInit {
   constructor(public dialog: MatDialog) {
     // Create 100 users
     this.reqData = [
-              {reqDesc: 'Seat change request', status: 'open'},
-              {reqDesc: 'PC not working.', status: 'inactivated'},
-              {reqDesc: 'Project discussion.', status: 'inactivated'}
+              //{reqDesc: 'Seat change request', status: 'open'}
     ];
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(this.reqData);
+    this.dataSource = new MatTableDataSource(this.filterRequestData(this.reqData));
 //    this.dataSource = this.reqData;
   }
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
+    this.disableAddRequest = false;
   }
 
   onSubmit(request: RequestData, action: string) {
@@ -54,13 +54,12 @@ export class RequestComponent implements OnInit {
       height: '250px',
       width: '600px',
     });
-    this.testinglog = "1";
     dialogRef.afterClosed().subscribe((result) => {
         dialogRef.componentInstance.onAdd.unsubscribe();
-        this.testinglog = result;
         if (result) {
-        this.testinglog = result;
-        request.status = action;
+          request.status = action;
+          this.dataSource.data = this.filterRequestData(this.reqData);
+          this.disableAddRequest = false;
         }
     });
   }
@@ -93,10 +92,15 @@ export class RequestComponent implements OnInit {
         this.testinglog = this.comment;
         this.reqData.push({reqDesc: this.comment, status: 'open'});
 //        this.dataSource = new MatTableDataSource(this.reqData);
-        this.dataSource.data = this.reqData;
+        this.disableAddRequest = true;
+        this.dataSource.data = this.filterRequestData(this.reqData);
 
       }
     });
+  }
+  
+  filterRequestData(reqData:RequestData[]):RequestData[]{
+    return reqData.filter(request=>request.status!='inactivated');
   }
 
 }

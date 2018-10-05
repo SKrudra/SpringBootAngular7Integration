@@ -3,6 +3,8 @@ package com.sba6.srm.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -11,6 +13,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.sba6.srm.enumsconstants.LoginDetailRole;
 
 import lombok.*;
  	  	  	  
@@ -35,6 +38,7 @@ public @Data class LoginDetail {
 	@Column(name="PASSWORD")
 	private String password;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="ROLE")
-	private Long role;
+	private LoginDetailRole role;
 }
