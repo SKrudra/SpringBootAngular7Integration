@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
@@ -17,6 +17,8 @@ import { HttpClientModule }    from '@angular/common/http';
 import 'hammerjs';
 import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
 import { DisplayDataDialogComponent } from './display-data-dialog/display-data-dialog.component';
+import { RequestDialogComponent } from './request-dialog/request-dialog.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,8 @@ import { DisplayDataDialogComponent } from './display-data-dialog/display-data-d
     RequestComponent,
     ManagerDashboardComponent,
     GenericDialogComponent,
-    DisplayDataDialogComponent
+    DisplayDataDialogComponent,
+    RequestDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,7 @@ import { DisplayDataDialogComponent } from './display-data-dialog/display-data-d
     ReactiveFormsModule,
     HttpClientModule
   ],
-  entryComponents:[GenericDialogComponent,DisplayDataDialogComponent],
+  entryComponents:[GenericDialogComponent,DisplayDataDialogComponent,RequestDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

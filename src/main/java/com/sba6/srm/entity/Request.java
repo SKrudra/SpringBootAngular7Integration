@@ -33,7 +33,6 @@ public @Data class Request {
 	@Column(name="ID")
 	private Long id;
 	
-	//@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="EMP_ID")
 	private Employee employee;
