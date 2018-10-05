@@ -11,9 +11,9 @@ values(1,1001,'sp','sp',1),
 (4,1004,'ck','ck',1);
 
 insert into request (ID, EMP_ID, REQUEST_DESCRIPTION, STATUS,COMMENT)
-values(1, 1001, 'Need a PS Vita.', 'OPEN',''),
-(2, 1002, 'Need iPhone X', 'OPEN',''),
-(3, 1003, 'Need Oppo', 'OPEN','');
+values(1, 1001, 'Need a PS Vita.', 'OPEN','NA'),
+(2, 1002, 'Need iPhone X', 'OPEN','NA'),
+(3, 1003, 'Need Oppo', 'OPEN','NA');
 
 
 

@@ -2,7 +2,9 @@ package com.sba6.srm.controller;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,22 +44,30 @@ public class RequestController {
 	
 	
 	//1. GET Requests for manager GET/requests/{mgrId} 
-	@RequestMapping(value = "/api/requests/{mgrId}", method = RequestMethod.GET)
-	public List<Request> getRequestsForManager(@PathVariable Long mgrId){
-		List<Object[]> queryResult =  this.employeeService.getRequestsForManager(mgrId);
-		List<Request> requestsForManager = new ArrayList<>();
-		for(Object[] o : queryResult){
-			Request r = new Request();
-			r.setId(((BigInteger)o[0]).longValue());
-			r.setComment((String)o[1]);
-			r.setRequestDescription((String)o[2]);
-			r.setRequestStatus(RequestStatus.valueOf((String)o[3]));
-			r.setEmployee( employeeService.getEmployee( ( (BigInteger)o[4] ).longValue() ) );
-			
-			requestsForManager.add(r);
+//	@RequestMapping(value = "/api/requests/{mgrId}", method = RequestMethod.GET)
+//	public List<Request> getRequestsForManager(@PathVariable Long mgrId){
+//		List<Object[]> queryResult =  this.employeeService.getRequestsForManager(mgrId);
+//		List<Request> requestsForManager = new ArrayList<>();
+//		for(Object[] o : queryResult){
+//			Request r = new Request();
+//			r.setId(((BigInteger)o[0]).longValue());
+//			r.setComment((String)o[1]);
+//			r.setRequestDescription((String)o[2]);
+//			r.setRequestStatus(RequestStatus.valueOf((String)o[3]));
+//			r.setEmployee( employeeService.getEmployee( ( (BigInteger)o[4] ).longValue() ) );
+//			
+//			requestsForManager.add(r);
+//		}
+//		return requestsForManager;
+//	}
+	
+	//1. GET Requests for manager GET/requests/{mgrId} 
+		@RequestMapping(value = "/api/requests/{mgrId}", method = RequestMethod.GET)
+		public List<Request> getRequestsForManager(@PathVariable Long mgrId){
+			List<Request> requestResult =  this.requestService.getRequestsForManager(mgrId);
+			//System.out.println(queryResult);
+			return requestResult;
 		}
-		return requestsForManager;
-	}
 	
 	//2. Update Request Status PUT/request/{EmpId}
 	@RequestMapping(value="/request/{empId}", method=RequestMethod.PUT)

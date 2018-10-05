@@ -44,7 +44,7 @@ public @Data class Employee {
 	@Column(name="IMG")
 	private byte[] img;
 	
-	@OneToOne(mappedBy="employee",fetch=FetchType.LAZY)
+	@OneToOne(mappedBy="employee")
 	private LoginDetail loginDetail;
 	
 	@OneToOne(mappedBy="employee")

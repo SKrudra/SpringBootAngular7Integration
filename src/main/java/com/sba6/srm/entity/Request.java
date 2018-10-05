@@ -34,7 +34,7 @@ public @Data class Request {
 	private Long id;
 	
 	//@JsonIgnore
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name="EMP_ID")
 	private Employee employee;
 	
@@ -46,6 +46,6 @@ public @Data class Request {
 	private RequestStatus requestStatus;
 	
 	@Column(name="COMMENT")
-	private String comment="NA";
+	private String comment;
 			
 }
