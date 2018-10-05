@@ -1,5 +1,7 @@
 package com.sba6.srm.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +25,8 @@ public class RequestService {
 		requestRepository.findByEmployee(employeeService.getEmployee(empId)).setRequestStatus(requestStatus);		
 	}
 	
+	public List<Request> getRequestsForManager(Long id){
+		return requestRepository.getRequestsForManager(id);
+	}
 	
 }

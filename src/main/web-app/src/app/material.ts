@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import{MatDividerModule,MatTableModule,MatFormFieldModule,MatIconModule,MatDialogModule,
     MatSortModule,MatPaginatorModule,MatSelectModule,MatOptionModule,MatTooltipModule,
-    MatButtonModule,MatInputModule } from '@angular/material';
+    MatButtonModule,MatInputModule,MatTabsModule } from '@angular/material';
   import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   @NgModule({
@@ -18,7 +18,8 @@ import{MatDividerModule,MatTableModule,MatFormFieldModule,MatIconModule,MatDialo
       MatButtonModule,
       MatIconModule,
       MatDialogModule,
-      MatInputModule
+      MatInputModule,
+      MatTabsModule
     ],
     exports:[BrowserAnimationsModule,
         MatDividerModule,
@@ -32,7 +33,8 @@ import{MatDividerModule,MatTableModule,MatFormFieldModule,MatIconModule,MatDialo
         MatButtonModule,
         MatIconModule,
         MatDialogModule,
-        MatInputModule
+        MatInputModule,
+        MatTabsModule
       ]
   })
 export class MaterialModules{

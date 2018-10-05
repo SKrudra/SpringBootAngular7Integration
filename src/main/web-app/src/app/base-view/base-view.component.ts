@@ -9,6 +9,8 @@ export class BaseViewComponent implements OnInit {
 
   constructor() { }
 
+  navLinks=[{path:'./mgrdashboard',label:'Manager Dashboard'},
+            {path:'./request',label:'Request'}];
   ngOnInit() {
   }
 

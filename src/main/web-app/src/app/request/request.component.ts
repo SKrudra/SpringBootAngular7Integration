@@ -24,7 +24,7 @@ export class RequestComponent implements OnInit {
   comment: string;
   displayedColumns: string[] = ['reqDesc', 'status', 'action'];
   dataSource: MatTableDataSource<RequestData>;
-  
+
   /** Constants used to fill up our data base. */
  reqData: RequestData[];
 
@@ -81,11 +81,11 @@ export class RequestComponent implements OnInit {
     dialogConfig.height = '250px';
     dialogConfig.width = '600px';
     const dialogRef = this.dialog.open(RequestDialogComponent, dialogConfig);
-    
+
     dialogRef.componentInstance.onAdd.subscribe((data) => {
         this.comment = data;
      });
-    
+
     dialogRef.afterClosed().subscribe((result) => {
       dialogRef.componentInstance.onAdd.unsubscribe();
       console.log(result);
@@ -94,7 +94,7 @@ export class RequestComponent implements OnInit {
         this.reqData.push({reqDesc: this.comment, status: 'open'});
 //        this.dataSource = new MatTableDataSource(this.reqData);
         this.dataSource.data = this.reqData;
-        
+
       }
     });
   }

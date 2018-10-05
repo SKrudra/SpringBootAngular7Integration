@@ -2,7 +2,9 @@ package com.sba6.srm.controller;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +19,7 @@ import com.sba6.srm.service.EmployeeService;
 import com.sba6.srm.service.RequestService;
 
 /*
-1. Send Requests for manager 
+1. GET Requests for manager 
 GET/requests/{mgrId} 
 (Change getRequestsForManager query to show only !inactivated requests )
 
@@ -41,20 +43,12 @@ public class RequestController {
 	private RequestService requestService;
 	
 	
-	//1. Send Requests for manager GET/requests/{mgrId} 
-	@RequestMapping(value = "/requests/{mgrId}", method = RequestMethod.GET)
+	//1. GET Requests for manager GET/requests/{mgrId} 
+	@RequestMapping(value = "/api/requests/{mgrId}", method = RequestMethod.GET)
 	public List<Request> getRequestsForManager(@PathVariable Long mgrId){
-		List<Object[]> queryResult =  this.employeeService.getRequestsForManager(mgrId);
-		List<Request> requestsForManager = new ArrayList<>();
-		for(Object[] o : queryResult){
-			Request r = new Request();
-			r.setId(((BigInteger)o[0]).longValue());
-			r.setRequestDescription((String)o[1]);
-			r.setRequestStatus(RequestStatus.valueOf((String)o[2]));
-			//r.setEmployee( employeeService.getEmployee( ( (BigInteger)o[3] ).longValue() ) );
-			requestsForManager.add(r);
-		}
-		return requestsForManager;
+		List<Request> requestResult =  this.requestService.getRequestsForManager(mgrId);
+		//System.out.println(queryResult);
+		return requestResult;
 	}
 	
 	//2. Update Request Status PUT/request/{EmpId}
