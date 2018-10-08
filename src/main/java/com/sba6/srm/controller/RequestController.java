@@ -2,6 +2,8 @@ package com.sba6.srm.controller;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +46,7 @@ public class RequestController {
 	
 	
 	//1. GET Requests for manager GET/requests/{mgrId} 
+	@Transactional
 	@RequestMapping(value = "/api/requests/{mgrId}", method = RequestMethod.GET)
 	public List<Request> getRequestsForManager(@PathVariable Long mgrId){
 		List<Request> requestResult =  this.requestService.getRequestsForManager(mgrId);
@@ -75,7 +78,7 @@ public class RequestController {
 	public ResponseEntity createRequest(@RequestBody Request newRequest){
 		Employee emp = new Employee();
 		emp = employeeService.getEmployee(newRequest.getEmployee().getId());
-		Request req =new Request();
+		Request req =newRequest;
 		req.setEmployee(emp);
 		requestService.addRequest(req);
 		return new ResponseEntity(HttpStatus.OK);

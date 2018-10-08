@@ -32,6 +32,8 @@ export class RequestService{
     employee.id=empId;
     request.employee=employee;
     request.requestDescription = requestDescription;
+    request.requestStatus='OPEN';
+    request.comment="NA";
     return this.http.post<RequestData>(this.requestUrl,request).
     pipe(
       tap(result=>console.log("inside addRequest"+result)),
@@ -56,7 +58,7 @@ export class RequestService{
     return this.http.put<RequestData>(this.empRequestUrl+`${reqId}`,request)
     .pipe(
       tap(result=>console.log("inside getRequestsForEmployee"+result)),
-      catchError(this.handleError('getRequestsForEmployee', []))
+      catchError(this.handleError('getRequestsForEmployee', request))
     );
   }
 

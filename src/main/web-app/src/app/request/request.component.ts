@@ -91,7 +91,8 @@ export class RequestComponent implements OnInit {
       console.log(result);
       if(result){
         this.testinglog = this.comment;
-        this.requestService.addRequest(1002,this.comment).subscribe(result=>console.log(result));
+        console.log(this.comment);
+        this.requestService.addRequest(1003,this.comment).subscribe(result=>console.log(result));
         this.reqData.push({reqDesc: this.comment, status: 'open'});
 //        this.dataSource = new MatTableDataSource(this.reqData);
         this.dataSource.data = this.reqData;

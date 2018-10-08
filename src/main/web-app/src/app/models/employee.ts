@@ -9,5 +9,5 @@ export class Employee{
    department:string;
    img:Blob;
    loginDetail:LoginDetail;
-   request:RequestData;
+   request:RequestData[];
 }
