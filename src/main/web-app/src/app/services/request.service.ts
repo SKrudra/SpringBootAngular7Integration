@@ -61,9 +61,8 @@ export class RequestService{
     // request.requestStatus=reqStatus;
     // if(reqComment!=null)
     //   request.requestDescription = reqComment;
-    return this.http.put<RequestData>(this.requestUrl,request)
-    .pipe(
-      tap(result=>console.log("inside updateRequest"+result)),
+    return this.http.put<RequestData>(this.requestUrl,request,httpOptions).
+    pipe(
       catchError(this.handleError('updateRequest', request))
     );
   }

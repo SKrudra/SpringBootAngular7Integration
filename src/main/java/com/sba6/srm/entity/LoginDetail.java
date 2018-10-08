@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sba6.srm.enumsconstants.LoginDetailRole;
 
@@ -21,6 +22,7 @@ import lombok.*;
 		  generator = ObjectIdGenerators.PropertyGenerator.class, 
 		  property = "id")
 @Entity
+@JsonIgnoreProperties
 @Table(name="login_detail")
 public @Data class LoginDetail {
 	
