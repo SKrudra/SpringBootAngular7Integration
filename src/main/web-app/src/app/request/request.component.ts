@@ -5,8 +5,10 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { GenericDialogComponent } from '../generic-dialog/generic-dialog.component';
 import { DisplayDataDialogComponent } from '../display-data-dialog/display-data-dialog.component';
 import { RequestDialogComponent } from '../request-dialog/request-dialog.component';
+
 import { RequestData } from '../models/request-data';
 import { RequestService } from '../services/request.service';
+
 
 
 
@@ -17,31 +19,41 @@ import { RequestService } from '../services/request.service';
   styleUrls: ['./request.component.css']
 })
 export class RequestComponent implements OnInit {
-
+  
+  myEmpId:number;
   disableAddRequest: boolean; //true if there is any request which is not inactivated
   comment: string;
   displayedColumns: string[] = ['reqDesc', 'status', 'action'];
   dataSource: MatTableDataSource<RequestData>;
 
   /** Constants used to fill up our data base. */
-  reqData: RequestData[];
+  reqData: RequestData[] = [];
 
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog: MatDialog, public requestService: RequestService) { }
 
-  ngOnInit() {
-    /*this.requestService.getRequestsForEmployee(1002).subscribe(result => {
-      this.reqData = result;
-      this.dataSource = new MatTableDataSource(this.reqData);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });*/
-    this.disableAddRequest = false;
+  constructor(public dialog: MatDialog, public requestService: RequestService) {
+    this.myEmpId = 1004;    
   }
 
-  onSubmit(request: RequestData, action: string) {
+
+  ngOnInit() {
+    this.requestService.getRequestsForEmployee(this.myEmpId).subscribe(result => {
+      if (result) {
+        this.reqData.push(result);
+        if (this.reqData.length > 0) {
+          this.disableAddRequest = true;
+        }
+        this.dataSource = new MatTableDataSource(this.reqData);
+        this.dataSource.sort = this.sort;
+      }
+    });
+  }
+
+
+
+  onCancel(request: RequestData) {
     const dialogRef = this.dialog.open(GenericDialogComponent, {
       height: '250px',
       width: '600px',
@@ -49,15 +61,11 @@ export class RequestComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
         dialogRef.componentInstance.onAdd.unsubscribe();
         if (result) {
-          request.requestStatus = action;
+          request.requestStatus = "inactivated";
           this.dataSource.data = this.filterRequestData(this.reqData);
           this.disableAddRequest = false;
         }
     });
-  }
-
-  onCancel(request: RequestData) {
-    this.onSubmit(request, "inactivated");
   }
 
   viewReqDescription(row) {
@@ -80,12 +88,12 @@ export class RequestComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       dialogRef.componentInstance.onAdd.unsubscribe();
       console.log(result);
+
       if (result) {
-        //this.reqData.push({requestDescription: this.comment, requestStatus: 'open'});
-//        this.dataSource = new MatTableDataSource(this.reqData);
+        console.log(this.comment);
+        this.requestService.addRequest(this.myEmpId, this.comment);
         this.disableAddRequest = true;
         this.dataSource.data = this.filterRequestData(this.reqData);
-
       }
     });
   }

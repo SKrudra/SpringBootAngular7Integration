@@ -1,12 +1,16 @@
 package com.sba6.srm.entity;
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,7 +25,7 @@ import lombok.*;
 @Table(name="employee")
 public @Data class Employee {
 	
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID")
 	private Long id;
 	
@@ -47,7 +51,7 @@ public @Data class Employee {
 	@OneToOne(mappedBy="employee")
 	private LoginDetail loginDetail;
 	
-	@OneToOne(mappedBy="employee")
-	private Request request;
+	@OneToMany(mappedBy="employee")
+	private List<Request> request;
 	
 }

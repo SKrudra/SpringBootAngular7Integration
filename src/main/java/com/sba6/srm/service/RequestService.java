@@ -1,6 +1,7 @@
 package com.sba6.srm.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,20 @@ public class RequestService {
 		requestRepository.save(request);
 	}
 	
-	public void setRequestStatus(RequestStatus requestStatus, Long empId){
-		requestRepository.findByEmployee(employeeService.getEmployee(empId)).setRequestStatus(requestStatus);		
+	public void updateRequest(Request request){
+		requestRepository.save(request);
 	}
-	
+		
 	public List<Request> getRequestsForManager(Long id){
 		return requestRepository.getRequestsForManager(id);
+	}
+	
+	public Request getRequestById(Long id){
+		return requestRepository.getOne(id);
+	}
+	
+	public Request getRequestForEmployee(Long id){
+		return requestRepository.getRequestForEmployee(id);
 	}
 	
 }
