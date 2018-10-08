@@ -61,8 +61,10 @@ export class ManagerDashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
         dialogRef.componentInstance.onAdd.unsubscribe(); 
         if(result){
-        console.log(this.comment);
+
         request.requestStatus=action;
+        request.comment=this.comment;
+        console.log(request);
         this.requestService.updateRequest(request).subscribe();
 
         }
