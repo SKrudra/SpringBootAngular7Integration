@@ -7,8 +7,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,17 +25,17 @@ import com.sba6.srm.enumsconstants.RequestStatus;
 
 @JsonIdentityInfo(
 generator = ObjectIdGenerators.PropertyGenerator.class, 
-property = "id")
+property = "id",scope=Request.class)
 @JsonIgnoreProperties
 @Entity
 @Table(name="request")
 public @Data class Request {
 	
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID")
 	private Long id;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="EMP_ID")
 	private Employee employee;
 	

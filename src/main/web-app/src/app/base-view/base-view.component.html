@@ -1,9 +1,6 @@
-<p>
-  base-view works!
-</p>
 <app-employee-detail></app-employee-detail>
 <mat-divider></mat-divider>
-<nav mat-tab-nav-bar>
+<nav mat-tab-nav-bar color="primary" backgroundColor="primary">
   <a mat-tab-link
      *ngFor="let link of navLinks"
      [routerLink]="link.path"

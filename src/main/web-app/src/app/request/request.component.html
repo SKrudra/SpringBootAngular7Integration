@@ -1,5 +1,5 @@
 <div class="mat-elevation-z8">
-<button mat-fab color="primary" (click)="onAddRequest()">
+<button mat-fab color="primary" (click)="onAddRequest()" [disabled]="disableAddRequest">
     <mat-icon >add</mat-icon>
  </button>
   
@@ -10,7 +10,7 @@
     <!-- Request Description Column -->
     <ng-container matColumnDef="reqDesc">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Request Description </th>
-      <td mat-cell *matCellDef="let row"><button mat-button color="primary" (click)="viewReqDescription(row)"> {{row.reqDesc | slice:0:25}} </button></td>
+      <td mat-cell *matCellDef="let row"><button mat-button color="primary" (click)="viewReqDescription(row)" > {{row.requestDescription | slice:0:25}} </button></td>
     </ng-container>
 
 
@@ -18,13 +18,13 @@
     <!-- Status Column -->
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-      <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.requestStatus}}</td>
     </ng-container>
     <!-- Action Column -->
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-      <td mat-cell *matCellDef="let row" class="manager-icons">
-        <button mat-icon-button color="primary" (click)="onCancel(row)" [disabled]="!(row.status==='open' || row.status==='pending')">
+      <td mat-cell *matCellDef="let row" class="manager-icons" >
+        <button  mat-icon-button color="primary" (click)="onCancel(row)" [disabled]="!(row.requestStatus === 'OPEN' || row.requestStatus === 'PENDING')">
           <mat-icon >cancel</mat-icon>
         </button>
       </td>

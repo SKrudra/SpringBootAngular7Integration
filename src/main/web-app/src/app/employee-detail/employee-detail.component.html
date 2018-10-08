@@ -1,3 +1,13 @@
-<p>
-  employee-detail works!
-</p>
+<mat-card class="employee-card">
+  <mat-card-header>
+    <div mat-card-avatar class="employee-header-image"></div>
+    <mat-card-title>{{employee.firstName +' '+ employee.lastName}}</mat-card-title>
+    <mat-card-subtitle>{{employee.designation}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src='../../assets/images/employeeImage.png' alt="Batman" height="200px" width="50px">
+  <mat-card-content>
+    <p><b>Name : </b>{{employee.firstName +' '+ employee.lastName}}</p>
+    <p><b>Designation : </b>{{employee.designation}}</p>
+    <p><b>Department : </b>{{employee.department}}</p>
+  </mat-card-content>
+</mat-card>

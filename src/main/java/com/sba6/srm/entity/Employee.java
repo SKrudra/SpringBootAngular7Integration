@@ -1,27 +1,32 @@
 package com.sba6.srm.entity;
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.*;
-@JsonIdentityInfo(
-		  generator = ObjectIdGenerators.PropertyGenerator.class, 
-		  property = "id")
+
 @Entity
 @Table(name="employee")
+@JsonIgnoreProperties
 public @Data class Employee {
 	
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID")
 	private Long id;
 	
@@ -44,10 +49,12 @@ public @Data class Employee {
 	@Column(name="IMG")
 	private byte[] img;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy="employee")
 	private LoginDetail loginDetail;
 	
-	@OneToOne(mappedBy="employee")
-	private Request request;
+	@JsonIgnore
+	@OneToMany(mappedBy="employee")
+	private List<Request> request;
 	
 }
