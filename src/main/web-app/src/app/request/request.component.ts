@@ -1,17 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {MatDialog, MatDialogConfig} from '@angular/material';
-
-import {GenericDialogComponent} from '../generic-dialog/generic-dialog.component';
-import {DisplayDataDialogComponent} from '../display-data-dialog/display-data-dialog.component';
+import { GenericDialogComponent } from '../generic-dialog/generic-dialog.component';
+import { DisplayDataDialogComponent } from '../display-data-dialog/display-data-dialog.component';
 import { RequestDialogComponent } from '../request-dialog/request-dialog.component';
+import { RequestData } from '../models/request-data';
+import { RequestService } from '../services/request.service';
 
 
-export interface RequestData {
-  reqDesc: string;
-  status: string;
-}
 
 
 @Component({
@@ -27,25 +24,20 @@ export class RequestComponent implements OnInit {
   dataSource: MatTableDataSource<RequestData>;
 
   /** Constants used to fill up our data base. */
- reqData: RequestData[];
+  reqData: RequestData[];
 
-  testinglog: string;
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog: MatDialog) {
-    // Create 100 users
-    this.reqData = [
-              //{reqDesc: 'Seat change request', status: 'open'}
-    ];
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(this.filterRequestData(this.reqData));
-//    this.dataSource = this.reqData;
-  }
+  constructor(public dialog: MatDialog, public requestService: RequestService) { }
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
+    /*this.requestService.getRequestsForEmployee(1002).subscribe(result => {
+      this.reqData = result;
+      this.dataSource = new MatTableDataSource(this.reqData);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });*/
     this.disableAddRequest = false;
   }
 
@@ -57,7 +49,7 @@ export class RequestComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
         dialogRef.componentInstance.onAdd.unsubscribe();
         if (result) {
-          request.status = action;
+          request.requestStatus = action;
           this.dataSource.data = this.filterRequestData(this.reqData);
           this.disableAddRequest = false;
         }
@@ -88,9 +80,8 @@ export class RequestComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       dialogRef.componentInstance.onAdd.unsubscribe();
       console.log(result);
-      if(result){
-        this.testinglog = this.comment;
-        this.reqData.push({reqDesc: this.comment, status: 'open'});
+      if (result) {
+        //this.reqData.push({requestDescription: this.comment, requestStatus: 'open'});
 //        this.dataSource = new MatTableDataSource(this.reqData);
         this.disableAddRequest = true;
         this.dataSource.data = this.filterRequestData(this.reqData);
@@ -98,9 +89,9 @@ export class RequestComponent implements OnInit {
       }
     });
   }
-  
-  filterRequestData(reqData:RequestData[]):RequestData[]{
-    return reqData.filter(request=>request.status!='inactivated');
+
+  filterRequestData(reqData: RequestData[]): RequestData[] {
+    return reqData.filter(request => request.requestStatus !== 'inactivated'); //i changed it to !== from !=
   }
 
 }

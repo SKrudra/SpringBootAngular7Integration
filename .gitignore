@@ -24,5 +24,18 @@
 /nbdist/
 /.nb-gradle/
 
-### node_modules ##
+### node_modules ###
 /main/web-app/node_modules/
+
+### bundle files ###
+/src/main/resources/static/3rdpartylicenses.txt
+/src/main/resources/static/main.js
+/src/main/resources/static/main.js.map
+/src/main/resources/static/polyfills.js
+/src/main/resources/static/polyfills.js.map
+/src/main/resources/static/styles.js
+/src/main/resources/static/vendor.js
+/src/main/resources/static/runtime.js
+/src/main/resources/static/runtime.js.map
+/src/main/resources/static/styles.js.map
+/src/main/resources/static/vendor.js.map
