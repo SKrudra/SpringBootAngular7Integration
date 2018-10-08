@@ -15,12 +15,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.*;
-@JsonIdentityInfo(
-		  generator = ObjectIdGenerators.PropertyGenerator.class, 
-		  property = "id")
+
 @Entity
 @Table(name="employee")
 public @Data class Employee {
@@ -51,6 +50,7 @@ public @Data class Employee {
 	@OneToOne(mappedBy="employee")
 	private LoginDetail loginDetail;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="employee")
 	private List<Request> request;
 	

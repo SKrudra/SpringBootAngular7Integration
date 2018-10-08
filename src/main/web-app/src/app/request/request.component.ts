@@ -88,18 +88,31 @@ export class RequestComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       dialogRef.componentInstance.onAdd.unsubscribe();
       console.log(result);
-
       if (result) {
         console.log(this.comment);
-        this.requestService.addRequest(this.myEmpId, this.comment);
+        this.requestService.addRequest(this.myEmpId, this.comment).subscribe(
+          response => console.log(response),
+          err => console.log(err)
+        );
         this.disableAddRequest = true;
-        this.dataSource.data = this.filterRequestData(this.reqData);
+        console.log(2);
+        //this.dataSource.data = this.filterRequestData(this.reqData);
+        console.log(3);
       }
     });
   }
 
   filterRequestData(reqData: RequestData[]): RequestData[] {
-    return reqData.filter(request => request.requestStatus !== 'inactivated'); //i changed it to !== from !=
+    console.log(reqData);
+    console.log(4);
+    if(reqData.length === 0){
+      console.log(5);
+      return null;
+    }
+    else{
+       console.log(6);
+      return reqData.filter(request => request.requestStatus !== 'inactivated'); //i changed it to !== from !=
+    }
   }
 
 }

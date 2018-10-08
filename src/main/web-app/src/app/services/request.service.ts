@@ -13,9 +13,9 @@ const httpOptions = {
 })
 export class RequestService{
   
-  private requestsUrl = 'api/requests/';
+  private requestsUrl = '/api/requests/';
   private empRequestUrl = '/api/emp/requests/';
-  private requestUrl = 'api/request/';
+  private requestUrl = '/api/request/';
   constructor(private http: HttpClient) { }
 
   getRequests(empId:number):Observable<RequestData[]>{
@@ -32,11 +32,16 @@ export class RequestService{
     employee.id=empId;
     request.employee=employee;
     request.requestDescription = requestDescription;
+    request.requestStatus='OPEN';
+    request.comment="NA";
+    console.log(request);
+    console.log("before post");
     return this.http.post<RequestData>(this.requestUrl,request).
     pipe(
       tap(result=>console.log("inside addRequest"+result)),
       catchError(this.handleError('getRequest', request))
     );
+    
   }
 
   getRequestsForEmployee(empId:number):Observable<RequestData>{
@@ -47,7 +52,22 @@ export class RequestService{
     );
   }
 
- 
+
+
+  updateRequest(updateRequest:RequestData):Observable<RequestData>{
+    let request = new RequestData();
+    request = updateRequest;
+    // request.id=reqId;
+    // request.requestStatus=reqStatus;
+    // if(reqComment!=null)
+    //   request.requestDescription = reqComment;
+    return this.http.put<RequestData>(this.requestUrl,request)
+    .pipe(
+      tap(result=>console.log("inside updateRequest"+result)),
+      catchError(this.handleError('updateRequest', request))
+    );
+  }
+
 
   /**
  * Handle Http operation that failed.
