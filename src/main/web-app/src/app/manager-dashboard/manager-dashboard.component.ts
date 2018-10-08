@@ -29,8 +29,7 @@ export class ManagerDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.requestService.getRequests(1001).subscribe(result => {
-      this.reqData=result
-      console.log(this.reqData);
+      this.reqData = result;
     // Assign the data to the data source for the table to render
       this.dataSource = new MatTableDataSource(this.reqData);
       this.dataSource.paginator = this.paginator;
@@ -60,7 +59,6 @@ export class ManagerDashboardComponent implements OnInit {
         if (result) {
           request.requestStatus = action;
           request.comment = this.comment;
-          console.log(request);
           this.requestService.updateRequest(request).subscribe();
         }
     });

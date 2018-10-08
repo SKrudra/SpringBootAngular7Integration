@@ -92,7 +92,6 @@ export class RequestComponent implements OnInit {
       dialogRef.componentInstance.onAdd.unsubscribe();
       if (result) {
         this.requestService.addRequest(this.myEmpId, this.comment).subscribe(
-          response => {console.log(response);},
           err => console.log(err)
         );
         this.disableAddRequest = true;
@@ -103,7 +102,7 @@ export class RequestComponent implements OnInit {
   }
 
   filterRequestData(reqData: RequestData[]): RequestData[] {
-      return reqData.filter(request => request.requestStatus !== 'INACTIVATED'); 
+      return reqData.filter(request => request.requestStatus !== 'INACTIVATED');
   }
 
 }
