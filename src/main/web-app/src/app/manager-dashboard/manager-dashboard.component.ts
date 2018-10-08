@@ -63,7 +63,7 @@ export class ManagerDashboardComponent implements OnInit {
         if(result){
         console.log(this.comment);
         request.requestStatus=action;
-        this.requestService.updateRequest(request.id,request.requestStatus,this.comment);
+        this.requestService.updateRequest(request).subscribe();
         }
     });
   }

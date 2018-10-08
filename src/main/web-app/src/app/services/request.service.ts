@@ -13,9 +13,9 @@ const httpOptions = {
 })
 export class RequestService{
   
-  private requestsUrl = 'api/requests/';
+  private requestsUrl = '/api/requests/';
   private empRequestUrl = '/api/emp/requests/';
-  private requestUrl = 'api/request/';
+  private requestUrl = '/api/request/';
   constructor(private http: HttpClient) { }
 
   getRequests(empId:number):Observable<RequestData[]>{
@@ -56,9 +56,8 @@ export class RequestService{
     // request.requestStatus=reqStatus;
     // if(reqComment!=null)
     //   request.requestDescription = reqComment;
-    return this.http.put<RequestData>(this.requestUrl,request)
-    .pipe(
-      tap(result=>console.log("inside updateRequest"+result)),
+    return this.http.put<RequestData>(this.requestUrl,request,httpOptions).
+    pipe(
       catchError(this.handleError('updateRequest', request))
     );
   }

@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,7 +56,19 @@ public class RequestController {
 	}
 	
 	//2. Update Request Status PUT/request/{reqId}
-	@RequestMapping(value="/api/request", method=RequestMethod.PUT)
+//	@RequestMapping(value="/api/request", method=RequestMethod.PUT)
+//	public ResponseEntity updateRequestStatus(@RequestBody Request updateRequest){
+//		Request req = requestService.getRequestById(updateRequest.getId());
+//		req.setRequestStatus(updateRequest.getRequestStatus());
+//		if(updateRequest.getComment()!=null && updateRequest.getComment()!="")
+//		{
+//			req.setRequestDescription(updateRequest.getComment());
+//		}
+//		requestService.updateRequest(req);
+//		return new ResponseEntity(HttpStatus.OK);
+//	}
+	
+	@RequestMapping(value="/api/request", method=RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity updateRequestStatus(@RequestBody Request updateRequest){
 		Request req = requestService.getRequestById(updateRequest.getId());
 		req.setRequestStatus(updateRequest.getRequestStatus());
