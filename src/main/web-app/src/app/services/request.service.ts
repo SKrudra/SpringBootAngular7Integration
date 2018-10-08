@@ -49,16 +49,17 @@ export class RequestService{
     );
   }
 
-  updateRequest(reqId:number,reqStatus:string,reqComment?:string):Observable<RequestData>{
+  updateRequest(updateRequest:RequestData):Observable<RequestData>{
     let request = new RequestData();
-    request.id=reqId;
-    request.requestStatus=reqStatus;
-    if(reqComment!=null)
-      request.requestDescription = reqComment;
-    return this.http.put<RequestData>(this.empRequestUrl+`${reqId}`,request)
+    request = updateRequest;
+    // request.id=reqId;
+    // request.requestStatus=reqStatus;
+    // if(reqComment!=null)
+    //   request.requestDescription = reqComment;
+    return this.http.put<RequestData>(this.requestUrl,request)
     .pipe(
-      tap(result=>console.log("inside getRequestsForEmployee"+result)),
-      catchError(this.handleError('getRequestsForEmployee', request))
+      tap(result=>console.log("inside updateRequest"+result)),
+      catchError(this.handleError('updateRequest', request))
     );
   }
 
