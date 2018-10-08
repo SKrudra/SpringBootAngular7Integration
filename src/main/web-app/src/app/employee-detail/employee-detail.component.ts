@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployeeService } from '../services/employee.service';
+import { Employee } from '../models/employee';
+import { MatCard } from '@angular/material';
 
 @Component({
   selector: 'app-employee-detail',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeDetailComponent implements OnInit {
 
-  constructor() { }
+  employee: Employee;
+
+  constructor(public employeeService: EmployeeService) { }
 
   ngOnInit() {
+    this.employeeService.getEmployee(1003).subscribe(result => {
+      this.employee = result;
+      console.log(this.employee);
+    });
   }
 
 }

@@ -57,6 +57,8 @@ export class RequestService{
   updateRequest(updateRequest:RequestData):Observable<RequestData>{
     let request = new RequestData();
     request = updateRequest;
+    console.log("inside update request:");
+    console.log(request);
     // request.id=reqId;
     // request.requestStatus=reqStatus;
     // if(reqComment!=null)

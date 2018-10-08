@@ -12,21 +12,20 @@ import { RequestService } from '../services/request.service';
 
 
 
-
 @Component({
   selector: 'app-request',
   templateUrl: './request.component.html',
   styleUrls: ['./request.component.css']
 })
+
 export class RequestComponent implements OnInit {
-  
-  myEmpId:number;
+
+  myEmpId: number;
   disableAddRequest: boolean; //true if there is any request which is not inactivated
   comment: string;
   displayedColumns: string[] = ['reqDesc', 'status', 'action'];
   dataSource: MatTableDataSource<RequestData>;
 
-  /** Constants used to fill up our data base. */
   reqData: RequestData[] = [];
 
 
@@ -34,23 +33,26 @@ export class RequestComponent implements OnInit {
 
 
   constructor(public dialog: MatDialog, public requestService: RequestService) {
-    this.myEmpId = 1004;    
+    this.myEmpId = 1004;
   }
 
 
   ngOnInit() {
-    this.requestService.getRequestsForEmployee(this.myEmpId).subscribe(result => {
-      if (result) {
-        this.reqData.push(result);
-        if (this.reqData.length > 0) {
-          this.disableAddRequest = true;
-        }
-        this.dataSource = new MatTableDataSource(this.reqData);
-        this.dataSource.sort = this.sort;
-      }
-    });
+    this.getRequests();
   }
 
+  getRequests() {
+    this.requestService.getRequestsForEmployee(this.myEmpId).subscribe(result => {
+          if (result) {
+            this.reqData.push(result);
+            if (this.reqData.length > 0) {
+              this.disableAddRequest = true;
+            }
+            this.dataSource = new MatTableDataSource(this.filterRequestData(this.reqData));
+            this.dataSource.sort = this.sort;
+          }
+        });
+  }
 
 
   onCancel(request: RequestData) {
@@ -61,7 +63,8 @@ export class RequestComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
         dialogRef.componentInstance.onAdd.unsubscribe();
         if (result) {
-          request.requestStatus = "inactivated";
+          request.requestStatus = 'INACTIVATED';
+          this.requestService.updateRequest(request).subscribe();
           this.dataSource.data = this.filterRequestData(this.reqData);
           this.disableAddRequest = false;
         }
@@ -87,32 +90,20 @@ export class RequestComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       dialogRef.componentInstance.onAdd.unsubscribe();
-      console.log(result);
       if (result) {
-        console.log(this.comment);
         this.requestService.addRequest(this.myEmpId, this.comment).subscribe(
-          response => console.log(response),
+          response => {console.log(response);},
           err => console.log(err)
         );
         this.disableAddRequest = true;
-        console.log(2);
-        //this.dataSource.data = this.filterRequestData(this.reqData);
-        console.log(3);
+        this.getRequests();
+        this.dataSource.data = this.filterRequestData(this.reqData);
       }
     });
   }
 
   filterRequestData(reqData: RequestData[]): RequestData[] {
-    console.log(reqData);
-    console.log(4);
-    if(reqData.length === 0){
-      console.log(5);
-      return null;
-    }
-    else{
-       console.log(6);
-      return reqData.filter(request => request.requestStatus !== 'inactivated'); //i changed it to !== from !=
-    }
+      return reqData.filter(request => request.requestStatus !== 'INACTIVATED'); 
   }
 
 }

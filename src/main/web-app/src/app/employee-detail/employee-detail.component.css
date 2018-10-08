@@ -1,0 +1,8 @@
+.employee-card {
+  max-width: 200px;
+}
+
+.employee-header-image {
+  background-image: url('../../assets/images/employeeImage.png');
+  background-size: cover;
+}

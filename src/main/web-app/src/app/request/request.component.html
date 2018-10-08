@@ -24,7 +24,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
       <td mat-cell *matCellDef="let row" class="manager-icons" >
-        <button  mat-icon-button color="primary" (click)="onCancel(row)">
+        <button  mat-icon-button color="primary" (click)="onCancel(row)" [disabled]="!(row.requestStatus === 'OPEN' || row.requestStatus === 'PENDING')">
           <mat-icon >cancel</mat-icon>
         </button>
       </td>

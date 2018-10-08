@@ -98,5 +98,11 @@ public class RequestController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
+	//5. Get employee details GET/api/emp/{empId}
+	@RequestMapping(value="/api/emp/{empId}", method = RequestMethod.GET)
+	public Employee getEmployee(@PathVariable Long empId){
+		return employeeService.getEmployee(empId);
+	}
+	
 	
 }

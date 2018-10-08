@@ -15,8 +15,6 @@ public class RequestService {
 	
 	@Autowired
 	private RequestRepository requestRepository;
-	@Autowired
-	private EmployeeService employeeService;
 	
 	public void addRequest(Request request){
 		requestRepository.save(request);

@@ -1,35 +1,34 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {MatDialog} from '@angular/material';
-
-import{GenericDialogComponent} from '../generic-dialog/generic-dialog.component';
-import{DisplayDataDialogComponent} from '../display-data-dialog/display-data-dialog.component';
-
+import { MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatDialog} from '@angular/material';
+import { GenericDialogComponent} from '../generic-dialog/generic-dialog.component';
+import { DisplayDataDialogComponent} from '../display-data-dialog/display-data-dialog.component';
 import { RequestService } from '../services/request.service';
 import { RequestData } from '../models/request-data';
 import { requestStatusMap } from '../constants';
+
 @Component({
   selector: 'app-manager-dashboard',
   templateUrl: './manager-dashboard.component.html',
   styleUrls: ['./manager-dashboard.component.css']
 })
+
 export class ManagerDashboardComponent implements OnInit {
-  reqData : RequestData[];
-  comment:string;
-  displayedColumns: string[] = ['id', 'reqDesc', 'empId', 'status','action'];
+  reqData: RequestData[];
+  comment: string;
+  displayedColumns: string[] = ['id', 'reqDesc', 'empId', 'status', 'action'];
   dataSource: MatTableDataSource<RequestData>;
-  requestStatusMap=requestStatusMap;
-  
+  requestStatusMap= requestStatusMap;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(public dialog: MatDialog, public requestService: RequestService) {
-    
+
   }
 
   ngOnInit() {
-    this.requestService.getRequests(1001).subscribe(result=> {
+    this.requestService.getRequests(1001).subscribe(result => {
       this.reqData=result
       console.log(this.reqData);
     // Assign the data to the data source for the table to render
@@ -37,8 +36,6 @@ export class ManagerDashboardComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
-    
-    
   }
 
   applyFilter(filterValue: string) {
@@ -49,8 +46,8 @@ export class ManagerDashboardComponent implements OnInit {
     }
   }
 
-  onSubmit(request:RequestData,action:string){
-    const dialogRef = this.dialog.open(GenericDialogComponent,{
+  onSubmit(request: RequestData, action: string) {
+    const dialogRef = this.dialog.open(GenericDialogComponent, {
       height: '250px',
       width: '600px',
     });
@@ -59,33 +56,31 @@ export class ManagerDashboardComponent implements OnInit {
       });
 
     dialogRef.afterClosed().subscribe((result) => {
-        dialogRef.componentInstance.onAdd.unsubscribe(); 
-        if(result){
-
-        request.requestStatus=action;
-        request.comment=this.comment;
-        console.log(request);
-        this.requestService.updateRequest(request).subscribe();
-
+        dialogRef.componentInstance.onAdd.unsubscribe();
+        if (result) {
+          request.requestStatus = action;
+          request.comment = this.comment;
+          console.log(request);
+          this.requestService.updateRequest(request).subscribe();
         }
     });
   }
 
-  onAccept(request:RequestData){
-    this.onSubmit(request,requestStatusMap.get('APPROVED'));
+  onAccept(request: RequestData) {
+    this.onSubmit(request, requestStatusMap.get('APPROVED'));
   }
 
-  onReject(request:RequestData){
-    this.onSubmit(request,requestStatusMap.get('REJECTED'));
+  onReject(request: RequestData) {
+    this.onSubmit(request, requestStatusMap.get('REJECTED'));
   }
 
-  onMeet(request:RequestData){
-    this.onSubmit(request,requestStatusMap.get('PENDING'));
+  onMeet(request: RequestData) {
+    this.onSubmit(request, requestStatusMap.get('PENDING'));
   }
 
-  viewReqDescription(row:RequestData){
-    const dialogRef = this.dialog.open(DisplayDataDialogComponent,{
-      data:{value:row.requestDescription}
+  viewReqDescription(row: RequestData) {
+    const dialogRef = this.dialog.open(DisplayDataDialogComponent, {
+      data: {value: row.requestDescription}
     });
   }
 
