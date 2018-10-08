@@ -74,7 +74,7 @@ public class RequestController {
 		req.setRequestStatus(updateRequest.getRequestStatus());
 		if(updateRequest.getComment()!=null && updateRequest.getComment()!="")
 		{
-			req.setRequestDescription(updateRequest.getComment());
+			req.setComment(updateRequest.getComment());
 		}
 		requestService.updateRequest(req);
 		return new ResponseEntity(HttpStatus.OK);

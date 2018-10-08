@@ -49,6 +49,7 @@ public @Data class Employee {
 	@Column(name="IMG")
 	private byte[] img;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy="employee")
 	private LoginDetail loginDetail;
 	

@@ -17,7 +17,7 @@ import lombok.*;
  	  	  	  
 @JsonIdentityInfo(
 		  generator = ObjectIdGenerators.PropertyGenerator.class, 
-		  property = "id")
+		  property = "id",scope=LoginDetail.class)
 @Entity
 @JsonIgnoreProperties
 @Table(name="login_detail")
