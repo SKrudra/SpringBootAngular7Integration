@@ -1,20 +1,30 @@
+ <mat-card>
 <mat-toolbar color="primary" class="topbar telative">
         <div class="navbar-header">
             SRM
         </div>
     </mat-toolbar>
     
-<app-employee-detail></app-employee-detail>
-<mat-divider></mat-divider>
-<nav mat-tab-nav-bar color="primary" backgroundColor="primary">
-  <a mat-tab-link
-     *ngFor="let link of navLinks"
-     [routerLink]="link.path"
-     routerLinkActive #rla="routerLinkActive"
-     [active]="rla.isActive">
-    {{link.label}}
-  </a>
-  
-</nav>
+ 
+
+ <mat-sidenav-container class = "layout-container">
+  <mat-sidenav mode="side" opened class="layout-sidenav">
+ 
+
+	<app-employee-detail></app-employee-detail>
+	</mat-sidenav>
+	 <mat-sidenav-content>
+	<nav mat-tab-nav-bar color="primary" backgroundColor="warn">
+	  <a mat-tab-link
+	     *ngFor="let link of navLinks"
+	     [routerLink]="link.path"
+	     routerLinkActive #rla="routerLinkActive"
+	     [active]="rla.isActive">
+	    {{link.label}}
+	  </a>  
+	</nav>
 
 <router-outlet></router-outlet>
+</mat-sidenav-content>
+</mat-sidenav-container> 
+</mat-card>

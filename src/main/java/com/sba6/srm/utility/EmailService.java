@@ -50,4 +50,6 @@ public class EmailService {
 			return false;
 		}
 	}
+	
+	//TODO - Seperate methods for different scenarios which use the above generic send mail method
 }
