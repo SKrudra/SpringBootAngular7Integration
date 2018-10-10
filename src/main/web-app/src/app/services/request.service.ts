@@ -34,8 +34,8 @@ export class RequestService {
     const employee = new Employee();
     employee.id = empId;
     request.employee=employee;
-    request.requestDescription = requestDescription;
-    request.requestStatus='OPEN';
+    request.description = requestDescription;
+    request.status='OPEN';
     request.comment="NA";
     return this.http.post<RequestData>(this.requestUrl,request).
     pipe(

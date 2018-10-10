@@ -17,8 +17,8 @@ public class EmailService {
 
 	public boolean sendMail(String recipientMailId, String mailSubject, String mailContent) {
 
-		final String username = "";
-		final String password = "";
+		final String username = "manishsharmaps2@gmail.com";
+		final String password = "iammangod96";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -36,7 +36,7 @@ public class EmailService {
 		try {
 
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("tyawtyaw@gmail.com"));
+			message.setFrom(new InternetAddress("manishsharmaps2@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(recipientMailId));
 			message.setSubject(mailSubject);
@@ -52,4 +52,8 @@ public class EmailService {
 	}
 	
 	//TODO - Seperate methods for different scenarios which use the above generic send mail method
+//	public boolean mailAddRequest(String recipientMailId, String mailSubject){
+//		String mailContent = 
+//		return true;
+//	}
 }

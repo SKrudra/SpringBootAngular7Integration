@@ -29,11 +29,11 @@ export class RequestComponent implements OnInit {
   reqData: RequestData[] = [];
 
 
-  @ViewChild(MatSort) sort: MatSort;
+  //@ViewChild(MatSort) sort: MatSort;
 
 
   constructor(public dialog: MatDialog, public requestService: RequestService) {
-    this.myEmpId = 1004;
+    this.myEmpId = 1003;
   }
 
 
@@ -49,7 +49,7 @@ export class RequestComponent implements OnInit {
               this.disableAddRequest = true;
             }
             this.dataSource = new MatTableDataSource(this.filterRequestData(this.reqData));
-            this.dataSource.sort = this.sort;
+            //this.dataSource.sort = this.sort;
           }
         });
   }
@@ -63,7 +63,7 @@ export class RequestComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
         dialogRef.componentInstance.onAdd.unsubscribe();
         if (result) {
-          request.requestStatus = 'INACTIVATED';
+          request.status = 'INACTIVATED';
           this.requestService.updateRequest(request).subscribe();
           this.dataSource.data = this.filterRequestData(this.reqData);
           this.disableAddRequest = false;
@@ -102,7 +102,7 @@ export class RequestComponent implements OnInit {
   }
 
   filterRequestData(reqData: RequestData[]): RequestData[] {
-      return reqData.filter(request => request.requestStatus !== 'INACTIVATED');
+      return reqData.filter(request => request.status !== 'INACTIVATED');
   }
 
 }

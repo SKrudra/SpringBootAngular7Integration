@@ -3,7 +3,7 @@ export class RequestData {
 
   id: number;
   employee: Employee;
-  requestDescription: string;
-  requestStatus: string;
+  description: string;
+  status: string;
   comment: string;
 }

@@ -57,7 +57,7 @@ export class ManagerDashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
         dialogRef.componentInstance.onAdd.unsubscribe();
         if (result) {
-          request.requestStatus = action;
+          request.status = action;
           request.comment = this.comment;
           this.requestService.updateRequest(request).subscribe();
         }
@@ -78,7 +78,7 @@ export class ManagerDashboardComponent implements OnInit {
 
   viewReqDescription(row: RequestData) {
     const dialogRef = this.dialog.open(DisplayDataDialogComponent, {
-      data: {value: row.requestDescription}
+      data: {value: row.description}
     });
   }
 

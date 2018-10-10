@@ -55,7 +55,7 @@ public class RequestController {
 	@RequestMapping(value = "/api/requests/{mgrId}", method = RequestMethod.GET)
 	public List<Request> getRequestsForManager(@PathVariable Long mgrId){
 		List<Request> requestResult =  requestService.getRequestsForManager(mgrId);
-		emailService.sendMail("manishsharmaps2@gmail.com", "Request Created", "Someone asked for employee detausk");
+		emailService.sendMail("skrudra12@gmail.com", "Request Created", "Someone asked for employee detausk");
 		return requestResult;
 	}
 	
@@ -63,7 +63,7 @@ public class RequestController {
 	@RequestMapping(value="/api/request", method=RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity updateRequestStatus(@RequestBody Request updateRequest){
 		Request req = requestService.getRequestById(updateRequest.getId());
-		req.setRequestStatus(updateRequest.getRequestStatus());
+		req.setStatus(updateRequest.getStatus());
 		if(updateRequest.getComment()!=null && updateRequest.getComment()!="")
 		{
 			req.setComment(updateRequest.getComment());
