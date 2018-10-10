@@ -17,8 +17,8 @@ public class EmailService {
 
 	public boolean sendMail(String recipientMailId, String mailSubject, String mailContent) {
 
-		final String username = "manishsharmaps2@gmail.com";
-		final String password = "iammangod961234";
+		final String username = "";
+		final String password = "";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
