@@ -1,0 +1,14 @@
+.layout-container {
+ min-height:600px;
+ background-color: #E0F7FA;
+}
+
+.layout-sidenav {
+  display: flex;
+  justify-content: center;
+  width: 200px; /*using percentage = 25% is exapnding the card too much*/
+}
+
+#mat-tab-navbar {
+	
+}

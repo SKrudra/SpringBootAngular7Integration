@@ -40,11 +40,11 @@ public @Data class Request {
 	private Employee employee;
 	
 	@Column(name="REQUEST_DESCRIPTION")
-	private String requestDescription;
+	private String description;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="STATUS")
-	private RequestStatus requestStatus;
+	private RequestStatus status;
 	
 	@Column(name="COMMENT")
 	private String comment;

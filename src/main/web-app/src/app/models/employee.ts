@@ -1,6 +1,6 @@
 import {RequestData} from './request-data';
 import {LoginDetail} from './login-detail';
-export class Employee{
+export class Employee {
    id: number;
    firstName: string;
    lastName: string;
@@ -8,6 +8,8 @@ export class Employee{
    designation: string;
    department: string;
    img: Blob;
+   email: string;
+   address: string;
    loginDetail: LoginDetail;
    request: RequestData[];
 }

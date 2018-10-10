@@ -20,6 +20,7 @@ import com.sba6.srm.entity.Request;
 import com.sba6.srm.enumsconstants.RequestStatus;
 import com.sba6.srm.service.EmployeeService;
 import com.sba6.srm.service.RequestService;
+import com.sba6.srm.utility.EmailService;
 
 /*
 1. GET Requests for manager 
@@ -45,6 +46,8 @@ public class RequestController {
 	private EmployeeService employeeService;
 	@Autowired
 	private RequestService requestService;
+	@Autowired
+	private EmailService emailService;
 	
 	
 	//1. GET Requests for manager GET/api/requests/{mgrId} 
@@ -52,6 +55,7 @@ public class RequestController {
 	@RequestMapping(value = "/api/requests/{mgrId}", method = RequestMethod.GET)
 	public List<Request> getRequestsForManager(@PathVariable Long mgrId){
 		List<Request> requestResult =  requestService.getRequestsForManager(mgrId);
+		emailService.sendMail("emailid", "Request Created", "Someone asked for employee detausk");
 		return requestResult;
 	}
 	
@@ -59,7 +63,7 @@ public class RequestController {
 	@RequestMapping(value="/api/request", method=RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity updateRequestStatus(@RequestBody Request updateRequest){
 		Request req = requestService.getRequestById(updateRequest.getId());
-		req.setRequestStatus(updateRequest.getRequestStatus());
+		req.setStatus(updateRequest.getStatus());
 		if(updateRequest.getComment()!=null && updateRequest.getComment()!="")
 		{
 			req.setComment(updateRequest.getComment());
@@ -71,6 +75,7 @@ public class RequestController {
 	//3. Get Request for employee GET/api/emp/requests/{empId}
 	@RequestMapping(value="/api/emp/requests/{empId}", method=RequestMethod.GET)
 	public Request getRequest(@PathVariable Long empId){
+		emailService.sendMail("emailid@gmail.com", "Request Created", "Someone asked for employee detausk");
 		return requestService.getRequestForEmployee(empId);
 	}
 	
@@ -82,6 +87,7 @@ public class RequestController {
 		Request req =newRequest;
 		req.setEmployee(emp);
 		requestService.addRequest(req);
+		emailService.sendMail("emailid@gmail.com", "Request Created", "Someone created a request");
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
