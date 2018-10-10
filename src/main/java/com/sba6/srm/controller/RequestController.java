@@ -55,7 +55,7 @@ public class RequestController {
 	@RequestMapping(value = "/api/requests/{mgrId}", method = RequestMethod.GET)
 	public List<Request> getRequestsForManager(@PathVariable Long mgrId){
 		List<Request> requestResult =  requestService.getRequestsForManager(mgrId);
-		emailService.sendMail("skrudra12@gmail.com", "Request Created", "Someone asked for employee detausk");
+		emailService.sendMail("emailid", "Request Created", "Someone asked for employee detausk");
 		return requestResult;
 	}
 	
@@ -75,7 +75,7 @@ public class RequestController {
 	//3. Get Request for employee GET/api/emp/requests/{empId}
 	@RequestMapping(value="/api/emp/requests/{empId}", method=RequestMethod.GET)
 	public Request getRequest(@PathVariable Long empId){
-		emailService.sendMail("manishsharmaps2@gmail.com", "Request Created", "Someone asked for employee detausk");
+		emailService.sendMail("emailid@gmail.com", "Request Created", "Someone asked for employee detausk");
 		return requestService.getRequestForEmployee(empId);
 	}
 	
@@ -87,7 +87,7 @@ public class RequestController {
 		Request req =newRequest;
 		req.setEmployee(emp);
 		requestService.addRequest(req);
-		emailService.sendMail("manishsharmaps2@gmail.com", "Request Created", "Someone created a request");
+		emailService.sendMail("emailid@gmail.com", "Request Created", "Someone created a request");
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	

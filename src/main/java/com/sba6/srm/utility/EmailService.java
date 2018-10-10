@@ -17,8 +17,8 @@ public class EmailService {
 
 	public boolean sendMail(String recipientMailId, String mailSubject, String mailContent) {
 
-		final String username = "manishsharmaps2@gmail.com";
-		final String password = "iammangod96";
+		final String username = "username";
+		final String password = "password";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -36,7 +36,7 @@ public class EmailService {
 		try {
 
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("manishsharmaps2@gmail.com"));
+			message.setFrom(new InternetAddress("emailid"));
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(recipientMailId));
 			message.setSubject(mailSubject);
