@@ -1,5 +1,7 @@
 package com.sba6.srm.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,15 +15,12 @@ public class EmployeeService {
    private EmployeeRepository employeeRepository;
 
    public Employee getEmployee(Long id) {
-      Long mrgId = employeeRepository.findAll().stream().filter(m -> m.getId().equals(id)).findFirst().get().getMgrId();
+      Employee employee = employeeRepository.findById(id).get();
       Employee manager = null;
-      if (mrgId != null) {
-         manager = employeeRepository.findAll().stream().filter(e -> e.getId().equals(mrgId)).findFirst().get();
-      }
-      Employee employee = employeeRepository.findAll().stream().filter(e -> e.getId().equals(id)).findFirst().get();
-      if (manager != null) {
+      if (employee.getMgrId() != null) {
+         manager = employeeRepository.findById(employee.getMgrId()).get();
          employee.setManagerName(manager.getFirstName() + " " + manager.getLastName());
-      }else {
+      } else {
          employee.setManagerName("");
       }
       return employee;
