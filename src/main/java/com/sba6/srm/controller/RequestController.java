@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sba6.srm.entity.Employee;
 import com.sba6.srm.entity.Request;
+import com.sba6.srm.enumsconstants.RequestStatus;
+import com.sba6.srm.service.EmailService;
 import com.sba6.srm.service.EmployeeService;
 import com.sba6.srm.service.RequestService;
-import com.sba6.srm.utility.EmailService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /*
 1. GET Requests for manager 
@@ -38,6 +42,7 @@ GET/api/emp/{empId}
 
  */
 @RestController
+@Api(value="Request-controller", description="Requests & Employees detail")
 public class RequestController {
 	
 	@Autowired
@@ -48,16 +53,17 @@ public class RequestController {
 	private EmailService emailService;
 	
 	
-	//1. GET Requests for manager GET/api/requests/{mgrId} 
+	//1. GET Requests for manager GET/api/requests/{mgrId}
+	@ApiOperation(value = "Get requests for manager ")
 	@Transactional
 	@RequestMapping(value = "/api/requests/{mgrId}", method = RequestMethod.GET)
 	public List<Request> getRequestsForManager(@PathVariable Long mgrId){
 		List<Request> requestResult =  requestService.getRequestsForManager(mgrId);
-		emailService.sendMail("emailid", "Request Created", "Someone asked for employee detausk");
 		return requestResult;
 	}
 	
 	//2. Update Request Status PUT/api/request
+	@ApiOperation(value = "Update Request Status")
 	@RequestMapping(value="/api/request", method=RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity updateRequestStatus(@RequestBody Request updateRequest){
 		Request req = requestService.getRequestById(updateRequest.getId());
@@ -67,17 +73,19 @@ public class RequestController {
 			req.setComment(updateRequest.getComment());
 		}
 		requestService.updateRequest(req);
+		emailService.mailRequestStatusUpdate(req, "ps2@gmail.com");
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
 	//3. Get Request for employee GET/api/emp/requests/{empId}
+	@ApiOperation(value = "Get Request for employee")
 	@RequestMapping(value="/api/emp/requests/{empId}", method=RequestMethod.GET)
 	public Request getRequest(@PathVariable Long empId){
-		emailService.sendMail("emailid@gmail.com", "Request Created", "Someone asked for employee detausk");
 		return requestService.getRequestForEmployee(empId);
 	}
 	
-	//4. create request for employee POST/api/request
+	//4. Create request for employee POST/api/request
+	@ApiOperation(value = "Create request for employee")
 	@RequestMapping(value="/api/request", method=RequestMethod.POST)
 	public ResponseEntity createRequest(@RequestBody Request newRequest){
 		Employee emp = new Employee();
@@ -85,11 +93,12 @@ public class RequestController {
 		Request req =newRequest;
 		req.setEmployee(emp);
 		requestService.addRequest(req);
-		emailService.sendMail("emailid@gmail.com", "Request Created", "Someone created a request");
+		emailService.mailAddRequest(req, "ps2@gmail.com");
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
 	//5. Get employee details GET/api/emp/{empId}
+	@ApiOperation(value = "Get employee details")
 	@RequestMapping(value="/api/emp/{empId}", method = RequestMethod.GET)
 	public Employee getEmployee(@PathVariable Long empId){
 		return employeeService.getEmployee(empId);
