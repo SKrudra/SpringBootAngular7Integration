@@ -108,6 +108,13 @@
 		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt</artifactId>
+		    <version>0.2</version>
+		</dependency>
+		
 		
 		
 		
