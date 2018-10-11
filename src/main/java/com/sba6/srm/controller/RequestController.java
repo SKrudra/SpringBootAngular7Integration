@@ -36,9 +36,6 @@ POST/api/request
 5. Get employee details 
 GET/api/emp/{empId}
 
-6. Get employee's manager details 
-GET/api/empMgr/{empId}
-
  */
 @RestController
 public class RequestController {
@@ -97,11 +94,5 @@ public class RequestController {
 	public Employee getEmployee(@PathVariable Long empId){
 		return employeeService.getEmployee(empId);
 	}
-
-   // 6. Get employee's manager details GET/api/empMgr/{empId}
-   @RequestMapping(value = "/api/empMgr/{empId}", method = RequestMethod.GET)
-   public Employee getEmployeeManager(@PathVariable Long empId) {
-      return employeeService.getEmployeeManager(empId);
-   }
-
+ 
 }
