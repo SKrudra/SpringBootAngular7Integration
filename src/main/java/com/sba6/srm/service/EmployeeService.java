@@ -18,5 +18,10 @@ public class EmployeeService {
 		return employeeRepository.findAll().stream().filter(e -> e.getId().equals(id)).findFirst().get();
 	}
 	
-
+	 public Employee getEmployeeManager(Long id) {
+	      return employeeRepository.findAll().stream().filter(e -> e.getId().equals(
+	               employeeRepository.findAll().stream().filter(m -> m.getId().equals(id)).findFirst().get().getMgrId()))
+	               .findFirst().get();
+	   }
+	 
 }

@@ -11,12 +11,17 @@ import { MatCard } from '@angular/material';
 export class EmployeeDetailComponent implements OnInit {
 
   employee: Employee;
+  manager:Employee;
 
   constructor(public employeeService: EmployeeService) { }
 
   ngOnInit() {
     this.employeeService.getEmployee(1003).subscribe(result => {
       this.employee = result;
+    });
+
+     this.employeeService.getEmployeeManager(1003).subscribe(result => {
+      this.manager = result;
     });
   }
 

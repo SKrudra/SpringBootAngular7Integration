@@ -10,13 +10,16 @@ import { Employee } from '../models/employee';
 export class EmployeeService {
 
   private requestEmployeeUrl = '/api/emp/';
+   private requestEmployeeManagerUrl = '/api/empMgr/';
 
   constructor(private http: HttpClient) { }
 
   getEmployee(empId: number): Observable<Employee> {
     return this.http.get<Employee>(this.requestEmployeeUrl + `${empId}` );
   }
-  
-  //getManager(empId: number) -> To get manager's name in matcard
 
+  getEmployeeManager(empId: number): Observable<Employee> {
+    return this.http.get<Employee>(this.requestEmployeeManagerUrl + `${empId}` );
+  }
+  
 }
