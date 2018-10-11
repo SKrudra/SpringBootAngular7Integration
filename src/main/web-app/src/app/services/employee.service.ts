@@ -14,9 +14,8 @@ export class EmployeeService {
   constructor(private http: HttpClient) { }
 
   getEmployee(empId: number): Observable<Employee> {
-    return this.http.get<Employee>(this.requestEmployeeUrl + `${empId}` );
+    return this.http.get<Employee>(this.requestEmployeeUrl + `${empId}`);
   }
-  
-  //getManager(empId: number) -> To get manager's name in matcard
+
 
 }

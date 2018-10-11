@@ -12,4 +12,6 @@ export class Employee {
    address: string;
    loginDetail: LoginDetail;
    request: RequestData[];
+   managerName:String;
+   isImg:boolean;
 }
