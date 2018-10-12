@@ -1,19 +1,8 @@
 package com.sba6.srm.service;
 
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sba6.srm.entity.Employee;
 import com.sba6.srm.entity.Request;
 import com.sba6.srm.utility.MailClient;
 
