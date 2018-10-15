@@ -18,6 +18,7 @@ import 'hammerjs';
 import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
 import { DisplayDataDialogComponent } from './display-data-dialog/display-data-dialog.component';
 import { RequestDialogComponent } from './request-dialog/request-dialog.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { RequestDialogComponent } from './request-dialog/request-dialog.componen
     ManagerDashboardComponent,
     GenericDialogComponent,
     DisplayDataDialogComponent,
-    RequestDialogComponent
+    RequestDialogComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
