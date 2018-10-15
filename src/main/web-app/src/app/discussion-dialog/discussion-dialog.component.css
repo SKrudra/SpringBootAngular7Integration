@@ -1,0 +1,27 @@
+.conversation {
+	position: relative;
+  	background: #efe7dd;
+  	border: 2px solid white;
+  	height:500px;
+  	overflow: auto;
+  	overflow-x: hidden;
+}
+
+.manager-comment {
+	margin:5px;
+	background: #e1ffc7;
+	padding:6px; 
+	border-radius: 0px 5px 5px 5px; 
+	width:300px;
+	float:left;
+}
+
+.employee-comment {
+	margin:5px;
+	background: #fff; 
+	padding:6px; 
+	border-radius: 5px 0px 5px 5px;
+	text-align:right;
+	width:300px;
+	float:right;
+}

@@ -1,5 +1,6 @@
 package com.sba6.srm.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -15,14 +16,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sba6.srm.entity.Comment;
 import com.sba6.srm.entity.Employee;
 import com.sba6.srm.entity.Request;
+
+import com.sba6.srm.enumsconstants.RequestStatus;
+import com.sba6.srm.service.CommentService;
 import com.sba6.srm.service.EmailService;
 import com.sba6.srm.service.EmployeeService;
 import com.sba6.srm.service.RequestService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+
 
 @RestController
 @Api(value = "Request-controller")
@@ -34,7 +40,11 @@ public class RequestController {
 	private RequestService requestService;
 	@Autowired
 	private EmailService emailService;
-
+	@Autowired
+	private CommentService commentService;
+	
+	
+	//1. GET Requests for manager GET/api/requests/{mgrId}
 	@ApiOperation(value = "Get requests for manager ")
 	@Transactional
 	@GetMapping(value = "/api/requests/{mgrId}")
@@ -76,6 +86,27 @@ public class RequestController {
 	@GetMapping(value = "/api/emp/{empId}")
 	public Employee getEmployee(@PathVariable Long empId) {
 		return employeeService.getEmployee(empId);
+	}
+
+	
+	/*@RequestMapping(value = "/user")
+	   public Principal user(Principal principal) {
+	      return principal;
+	   }*/
+	
+	//6. Add request comment POST/api/request/comment
+	@ApiOperation(value = "Add request comment")
+	@PostMapping(value="/api/request/comment")
+	public ResponseEntity addComment(@RequestBody Comment newComment){
+		commentService.addComment(newComment);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	//7. Get comments for request GET/api/request/comment/{requestId}
+	@ApiOperation(value = "Get comments for request")
+	@GetMapping(value="/api/request/comment/{requestId}")
+	public List<Comment> getCommentsForRequest(@PathVariable Long requestId){
+		return commentService.getCommentsForRequest(requestId);
 	}
 
 }
