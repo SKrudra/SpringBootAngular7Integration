@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginDetail } from './models/login-detail';
 import { Observable,of} from 'rxjs';
-import { catchError} from 'rxjs/operators';
+import { catchError,tap} from 'rxjs/operators';
+import {SecurityContext} from './security-context';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -13,14 +14,19 @@ export class AuthService {
   private loginUrl = "/api/signin";
   constructor(private http: HttpClient) { }
 
-  authenticate(loginDetail:LoginDetail):Observable<LoginDetail>{
-    return this.http.post<LoginDetail>(this.loginUrl,loginDetail,httpOptions).pipe(
+  authenticate(loginDetail:LoginDetail):Observable<SecurityContext>{
+    return this.http.post<SecurityContext>(this.loginUrl,loginDetail,httpOptions).pipe(
+      tap(sc=>console.log(sc)),
       catchError(this.handleError('authenticate', null))
     );
   }
 
   isLoggedIn():Boolean{
     return !!localStorage.getItem('SRM_USER');
+  }
+
+  getToken():string{
+    return localStorage.getItem('SRM_USER');
   }
 
   /**
