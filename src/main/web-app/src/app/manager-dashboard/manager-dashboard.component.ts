@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import { MatDialog} from '@angular/material';
+import { MatDialog, MatDialogConfig} from '@angular/material';
 import { GenericDialogComponent} from '../generic-dialog/generic-dialog.component';
 import { DisplayDataDialogComponent} from '../display-data-dialog/display-data-dialog.component';
+import { DiscussionDialogComponent } from '../discussion-dialog/discussion-dialog.component';
 import { RequestService } from '../services/request.service';
+import { CommentService } from '../services/comment.service';
 import { RequestData } from '../models/request-data';
-import { requestStatusMap } from '../constants';
+import { requestStatusMap, loginDetailRoleMap } from '../constants';
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -18,12 +20,15 @@ export class ManagerDashboardComponent implements OnInit {
   comment: string;
   displayedColumns: string[] = ['id', 'reqDesc', 'empId', 'status', 'action'];
   dataSource: MatTableDataSource<RequestData>;
-  requestStatusMap= requestStatusMap;
+  requestStatusMap = requestStatusMap;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog: MatDialog, public requestService: RequestService) {
+  constructor(public dialog: MatDialog,
+              public requestService: RequestService,
+              public commentService: CommentService
+  ) {
 
   }
 
@@ -73,7 +78,7 @@ export class ManagerDashboardComponent implements OnInit {
   }
 
   onMeet(request: RequestData) {
-    this.onSubmit(request, requestStatusMap.get('PENDING'));
+    this.onSubmit(request, requestStatusMap.get('INDISCUSSION'));
   }
 
   viewReqDescription(row: RequestData) {
@@ -81,5 +86,41 @@ export class ManagerDashboardComponent implements OnInit {
       data: {value: row.description}
     });
   }
+
+  onAddComment(request: RequestData) {
+    const dialogRef = this.dialog.open(GenericDialogComponent, {
+      height: '250px',
+      width: '600px',
+    });
+    dialogRef.componentInstance.onAdd.subscribe((data) => {
+        this.comment = data;
+      });
+
+    dialogRef.afterClosed().subscribe((result) => {
+        dialogRef.componentInstance.onAdd.unsubscribe();
+        if (result) {
+          request.comment = this.comment;
+          this.commentService.addComment(request.id, this.comment, loginDetailRoleMap.get('MANAGER')).subscribe();
+        }
+    });
+  }
+
+  onViewDiscussion(request: RequestData) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '700px';
+    dialogConfig.width = '500px';
+    dialogConfig.data = {
+      requestId: request.id
+    };
+    const dialogRef = this.dialog.open(DiscussionDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+
+      }
+    });
+  }
+
 
 }

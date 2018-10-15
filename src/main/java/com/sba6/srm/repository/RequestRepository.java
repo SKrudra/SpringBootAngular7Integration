@@ -13,6 +13,6 @@ public interface RequestRepository  extends JpaRepository<Request, Long>{
 	@Query("select r from Request r JOIN r.employee e where e.mgrId=:mgrId and r.employee.id=e.id and r.status!= 'INACTIVATED'")
 	public List<Request> getRequestsForManager(@Param("mgrId") Long mgrId);
 	
-	@Query("select r from Request r JOIN r.employee e where e.id=:empid and r.employee.id=e.id and (r.status= 'OPEN' or r.status= 'PENDING')")
+	@Query("select r from Request r JOIN r.employee e where e.id=:empid and r.employee.id=e.id and (r.status= 'OPEN' or r.status= 'INDISCUSSION')")
 	public Request getRequestForEmployee(@Param("empid") Long empId);
 }

@@ -1,5 +1,6 @@
 package com.sba6.srm.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sba6.srm.entity.Comment;
 import com.sba6.srm.entity.Employee;
 import com.sba6.srm.entity.Request;
 import com.sba6.srm.enumsconstants.RequestStatus;
+import com.sba6.srm.service.CommentService;
 import com.sba6.srm.service.EmailService;
 import com.sba6.srm.service.EmployeeService;
 import com.sba6.srm.service.RequestService;
@@ -25,23 +28,7 @@ import com.sba6.srm.service.RequestService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-/*
-1. GET Requests for manager 
-GET/api/requests/{mgrId}  
 
-2. Update Request Status 
-PUT/api/request
-
-3. Get Request for employee 
-GET/api/emp/requests/{empId}
-
-4. Create request for employee 
-POST/api/request
-
-5. Get employee details 
-GET/api/emp/{empId}
-
- */
 @RestController
 @Api(value="Request-controller", description="Requests & Employees detail")
 public class RequestController {
@@ -52,6 +39,8 @@ public class RequestController {
 	private RequestService requestService;
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private CommentService commentService;
 	
 	
 	//1. GET Requests for manager GET/api/requests/{mgrId}
@@ -105,5 +94,23 @@ public class RequestController {
 		return employeeService.getEmployee(empId);
 	}
 	
+	/*@RequestMapping(value = "/user")
+	   public Principal user(Principal principal) {
+	      return principal;
+	   }*/
 	
+	//6. Add request comment POST/api/request/comment
+	@ApiOperation(value = "Add request comment")
+	@RequestMapping(value="/api/request/comment", method = RequestMethod.POST)
+	public ResponseEntity addComment(@RequestBody Comment newComment){
+		commentService.addComment(newComment);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	//7. Get comments for request GET/api/request/comment/{requestId}
+	@ApiOperation(value = "Get comments for request")
+	@RequestMapping(value="/api/request/comment/{requestId}", method = RequestMethod.GET)
+	public List<Comment> getCommentsForRequest(@PathVariable Long requestId){
+		return commentService.getCommentsForRequest(requestId);
+	}
 }

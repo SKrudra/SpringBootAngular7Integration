@@ -4,7 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { RequestData } from '../models/request-data';
 import { Employee } from '../models/employee';
-import { requestStatusMap } from '../constants';
+import { Comment } from '../models/comment';
+import { requestStatusMap, loginDetailRoleMap } from '../constants';
 
 
 const httpOptions = {
@@ -20,6 +21,7 @@ export class RequestService {
   private requestsUrl = '/api/requests/';
   private empRequestUrl = '/api/emp/requests/';
   private requestUrl = '/api/request/';
+
   constructor(private http: HttpClient) { }
 
   getRequests(empId: number): Observable<RequestData[]> {
@@ -33,11 +35,11 @@ export class RequestService {
     const request = new RequestData();
     const employee = new Employee();
     employee.id = empId;
-    request.employee=employee;
+    request.employee = employee;
     request.description = requestDescription;
-    request.status='OPEN';
-    request.comment="NA";
-    return this.http.post<RequestData>(this.requestUrl,request).
+    request.status = 'OPEN';
+    request.comment = 'NA' ;
+    return this.http.post<RequestData>(this.requestUrl, request).
     pipe(
       catchError(this.handleError('getRequest', request))
     );
@@ -61,6 +63,7 @@ export class RequestService {
       catchError(this.handleError('updateRequest', request))
     );
   }
+
 
 
   /**
