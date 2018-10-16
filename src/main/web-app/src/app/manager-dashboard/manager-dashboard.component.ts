@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDatepicker, MatDatepickerInputEvent} from '@angular/material';
 import { MatDialog, MatDialogConfig} from '@angular/material';
 import { GenericDialogComponent} from '../generic-dialog/generic-dialog.component';
 import { DisplayDataDialogComponent} from '../display-data-dialog/display-data-dialog.component';
@@ -16,9 +16,11 @@ import { requestStatusMap, loginDetailRoleMap } from '../constants';
 })
 
 export class ManagerDashboardComponent implements OnInit {
+
+  startDate = new Date(2018, 8, 1);
   reqData: RequestData[];
   comment: string;
-  displayedColumns: string[] = ['id', 'reqDesc', 'empId', 'status', 'action'];
+  displayedColumns: string[] = ['id', 'reqDesc', 'empId', 'startDtm', 'tentativeEndDtm', 'status', 'action'];
   dataSource: MatTableDataSource<RequestData>;
   requestStatusMap = requestStatusMap;
 
@@ -30,6 +32,14 @@ export class ManagerDashboardComponent implements OnInit {
               public commentService: CommentService
   ) {
 
+  }
+
+
+  dateChanged(request: RequestData, event: MatDatepickerInputEvent<Date>) {
+    console.log(request);
+    console.log(event.value);
+    request.tentativeEndDtm = event.value;
+    this.requestService.updateRequest(request).subscribe();
   }
 
   ngOnInit() {
@@ -70,6 +80,7 @@ export class ManagerDashboardComponent implements OnInit {
   }
 
   onAccept(request: RequestData) {
+    request.tentativeEndDtm = new Date();
     this.onSubmit(request, requestStatusMap.get('APPROVED'));
   }
 

@@ -17,7 +17,11 @@ public class SrmSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable();		
+		http.csrf().disable()
+		.antMatcher("/**")
+        .authorizeRequests()
+        .antMatchers("/", "/index.html", "/loggedin.html")
+            .permitAll();
 	}
 	
 	

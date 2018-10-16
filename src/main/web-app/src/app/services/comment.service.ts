@@ -19,7 +19,6 @@ export class CommentService {
     comment.requestId = requestId;
     comment.content = content;
     comment.role = role;
-    console.log(comment);
     return this.http.post<Comment>(this.commentUrl, comment);
   }
 

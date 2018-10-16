@@ -21,6 +21,7 @@ import { RequestDialogComponent } from './request-dialog/request-dialog.componen
 import { LoginComponent } from './login/login.component';
 import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,7 @@ import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog
     DisplayDataDialogComponent,
     RequestDialogComponent,
     LoginComponent,
-    DiscussionDialogComponent
+    DiscussionDialogComponent,
   ],
   imports: [
     BrowserModule,

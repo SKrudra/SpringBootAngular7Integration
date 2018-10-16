@@ -1,6 +1,8 @@
 package com.sba6.srm.entity;
 
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -45,5 +49,11 @@ public @Data class Request {
 	
 	@Column(name="COMMENT")
 	private String comment;
-			
+	
+	@Column(name="START_DTM")
+	private Date startDtm;
+	
+	@Column(name="TENTATIVE_END_DTM")
+	private Date tentativeEndDtm;
+
 }

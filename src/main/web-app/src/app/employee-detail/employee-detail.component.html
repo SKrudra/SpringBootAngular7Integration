@@ -1,4 +1,4 @@
-<mat-card class="employee-card">
+<mat-card class="employee-card" *ngIf="employee">
   <mat-card-header>
     <div mat-card-avatar class="employee-header-image"></div>
     <mat-card-title>{{employee.firstName +' '+ employee.lastName}}</mat-card-title>

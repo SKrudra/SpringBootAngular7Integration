@@ -10,10 +10,10 @@ values(1,1001,'sp','sp','MANAGER'),
 (3,1003,'bw','bw','EMPLOYEE'),
 (4,1004,'ck','ck','EMPLOYEE');
 
-insert into request (ID, EMP_ID, REQUEST_DESCRIPTION, STATUS,COMMENT)
-values(1, 1001, 'Need a PS Vita.', 'OPEN','NA'),
-(2, 1002, 'Need iPhone X', 'OPEN','NA'),
-(3, 1003, 'Need Oppo', 'OPEN','NA');
+insert into request (ID, EMP_ID, REQUEST_DESCRIPTION, STATUS,COMMENT, START_DTM, TENTATIVE_END_DTM)
+values(1, 1001, 'Need a PS Vita.', 'OPEN','NA', NOW(), NOW()),
+(2, 1002, 'Need iPhone X', 'OPEN','NA', NOW(), NOW()),
+(3, 1003, 'Need Oppo', 'OPEN','NA',  NOW(), NOW());
 
 
 

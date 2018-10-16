@@ -8,10 +8,16 @@ table {
 }
 
 td, th {
-  width: 25%;
+  width: 15%;
 }
 
 .manager-icons{
   padding: 0px 14px;
   white-space: nowrap;
+}
+
+.myDatePicker {
+position: fixed;
+  top: 50px;
+  left: 500px;
 }

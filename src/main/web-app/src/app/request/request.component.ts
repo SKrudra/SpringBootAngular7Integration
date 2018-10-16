@@ -25,7 +25,7 @@ export class RequestComponent implements OnInit {
   myEmpId: number;
   disableAddRequest: boolean; // true if there is any request which is not inactivated
   comment: string;
-  displayedColumns: string[] = ['reqDesc', 'status', 'action'];
+  displayedColumns: string[] = ['reqDesc', 'startDtm', 'tentativeEndDtm', 'status', 'action'];
   dataSource: MatTableDataSource<RequestData>;
   requestStatusMap = requestStatusMap;
   commentsAreThere: boolean;
