@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LoginDetail} from '../models/login-detail';
 import{AuthService} from '../auth.service';
 import{SecurityContext} from '../security-context';
+import {Router,ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import{SecurityContext} from '../security-context';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService,private router:Router,private route: ActivatedRoute) { }
   loginDetail=new LoginDetail();
   securityContext:SecurityContext=null;
   ngOnInit() {
@@ -20,10 +21,10 @@ export class LoginComponent implements OnInit {
     
     this.authService.authenticate(this.loginDetail).subscribe(
       ld=>{
-        if(ld!=null){
-          this.securityContext=ld;
-          localStorage.setItem("SRM_USER",ld.token);
-          console.log(this.securityContext);
+        if(ld.token!=null){
+          let redirectURL = this.route.snapshot.paramMap.get('redirectURL');
+          redirectURL = redirectURL? redirectURL:'';
+          this.router.navigate([redirectURL]);
         }
       }
     );

@@ -12,21 +12,28 @@ const httpOptions = {
 })
 export class AuthService {
   private loginUrl = "/api/signin";
+  securityContext:SecurityContext=null;
+  token:string=null;
   constructor(private http: HttpClient) { }
 
   authenticate(loginDetail:LoginDetail):Observable<SecurityContext>{
     return this.http.post<SecurityContext>(this.loginUrl,loginDetail,httpOptions).pipe(
-      tap(sc=>console.log(sc)),
+      tap(sc=>{
+          if(sc!=null){
+          this.securityContext=sc;
+          this.token = sc.token;
+        }
+      }),
       catchError(this.handleError('authenticate', null))
     );
   }
 
   isLoggedIn():Boolean{
-    return !!localStorage.getItem('SRM_USER');
+    return !!this.securityContext;
   }
 
   getToken():string{
-    return localStorage.getItem('SRM_USER');
+    return this.token;
   }
 
   /**
