@@ -36,8 +36,6 @@ export class ManagerDashboardComponent implements OnInit {
 
 
   dateChanged(request: RequestData, event: MatDatepickerInputEvent<Date>) {
-    console.log(request);
-    console.log(event.value);
     request.tentativeEndDtm = event.value;
     this.requestService.updateRequest(request).subscribe();
   }
