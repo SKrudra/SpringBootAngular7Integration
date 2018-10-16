@@ -4,12 +4,14 @@ import{AuthService} from '../auth.service';
 import{SecurityContext} from '../security-context';
 import {Router,ActivatedRoute} from '@angular/router';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
 
   constructor(private authService:AuthService,private router:Router,private route: ActivatedRoute) { }
   loginDetail=new LoginDetail();
@@ -29,6 +31,7 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
 
 
 }

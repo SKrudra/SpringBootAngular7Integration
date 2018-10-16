@@ -5,10 +5,12 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { GenericDialogComponent } from '../generic-dialog/generic-dialog.component';
 import { DisplayDataDialogComponent } from '../display-data-dialog/display-data-dialog.component';
 import { RequestDialogComponent } from '../request-dialog/request-dialog.component';
+import { DiscussionDialogComponent } from '../discussion-dialog/discussion-dialog.component';
 
+import { CommentService } from '../services/comment.service';
 import { RequestData } from '../models/request-data';
 import { RequestService } from '../services/request.service';
-
+import { requestStatusMap, loginDetailRoleMap } from '../constants';
 
 
 
@@ -21,19 +23,21 @@ import { RequestService } from '../services/request.service';
 export class RequestComponent implements OnInit {
 
   myEmpId: number;
-  disableAddRequest: boolean; //true if there is any request which is not inactivated
+  disableAddRequest: boolean; // true if there is any request which is not inactivated
   comment: string;
   displayedColumns: string[] = ['reqDesc', 'status', 'action'];
   dataSource: MatTableDataSource<RequestData>;
-
+  requestStatusMap = requestStatusMap;
+  commentsAreThere: boolean;
   reqData: RequestData[] = [];
 
 
-  //@ViewChild(MatSort) sort: MatSort;
-
-
-  constructor(public dialog: MatDialog, public requestService: RequestService) {
+  constructor(public dialog: MatDialog,
+              public requestService: RequestService,
+              public commentService: CommentService
+  ) {
     this.myEmpId = 1003;
+    this.commentsAreThere = false;
   }
 
 
@@ -47,9 +51,13 @@ export class RequestComponent implements OnInit {
             this.reqData.push(result);
             if (this.reqData.length > 0) {
               this.disableAddRequest = true;
+              this.commentService.getCommentsForRequest(this.reqData[0].id).subscribe(result2 => {
+                if (result2) {
+                  this.commentsAreThere = true;
+                }
+              });
             }
             this.dataSource = new MatTableDataSource(this.filterRequestData(this.reqData));
-            //this.dataSource.sort = this.sort;
           }
         });
   }
@@ -103,6 +111,41 @@ export class RequestComponent implements OnInit {
 
   filterRequestData(reqData: RequestData[]): RequestData[] {
       return reqData.filter(request => request.status !== 'INACTIVATED');
+  }
+
+  onAddComment(request: RequestData) {
+    const dialogRef = this.dialog.open(GenericDialogComponent, {
+      height: '250px',
+      width: '600px',
+    });
+    dialogRef.componentInstance.onAdd.subscribe((data) => {
+        this.comment = data;
+      });
+
+    dialogRef.afterClosed().subscribe((result) => {
+        dialogRef.componentInstance.onAdd.unsubscribe();
+        if (result) {
+          request.comment = this.comment;
+          this.commentService.addComment(request.id, this.comment, loginDetailRoleMap.get('EMPLOYEE')).subscribe();
+        }
+    });
+  }
+
+  onViewDiscussion(request: RequestData) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '700px';
+    dialogConfig.width = '500px';
+    dialogConfig.data = {
+      requestId: request.id
+    };
+    const dialogRef = this.dialog.open(DiscussionDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+
+      }
+    });
   }
 
 }

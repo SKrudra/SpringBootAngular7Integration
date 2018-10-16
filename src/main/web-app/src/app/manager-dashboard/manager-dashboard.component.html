@@ -1,4 +1,4 @@
-<div class="mat-elevation-z8">
+                <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
 
     <!-- ID Column -->
@@ -28,14 +28,20 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
       <td mat-cell *matCellDef="let row" class="manager-icons">
-        <button mat-icon-button color="primary" (click)="onAccept(row)" [disabled]="!(row.status==requestStatusMap.get('OPEN') || row.status==requestStatusMap.get('PENDING'))">
+        <button mat-icon-button color="primary" (click)="onAccept(row)" [disabled]="!(row.status==requestStatusMap.get('OPEN') || row.status==requestStatusMap.get('INDISCUSSION'))">
           <mat-icon >thumb_up_alt</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="onReject(row)" [disabled]="!(row.status==requestStatusMap.get('OPEN') || row.status==requestStatusMap.get('PENDING'))">
+        <button mat-icon-button color="warn" (click)="onReject(row)" [disabled]="!(row.status==requestStatusMap.get('OPEN') || row.status==requestStatusMap.get('INDISCUSSION'))">
           <mat-icon >thumb_down_alt</mat-icon>
         </button>
-        <button mat-icon-button color="accent" (click)="onMeet(row)" [disabled]="!(row.status==requestStatusMap.get('OPEN'))">
+        <button mat-icon-button color="accent" *ngIf="!(row.status==requestStatusMap.get('INDISCUSSION'))" (click)="onMeet(row)" [disabled]="!(row.status==requestStatusMap.get('OPEN'))">
           <mat-icon >people</mat-icon>
+        </button>
+        <button mat-icon-button color="accent"  *ngIf="row.status==requestStatusMap.get('INDISCUSSION')" (click)="onAddComment(row)" >
+          <mat-icon >add_comment</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" *ngIf="row.status==requestStatusMap.get('INDISCUSSION')" (click)="onViewDiscussion(row)" >
+          <mat-icon >comment</mat-icon>
         </button>
       </td>
     </ng-container>

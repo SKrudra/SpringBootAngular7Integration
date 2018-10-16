@@ -12,13 +12,16 @@ import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard
 import { AppRoutingModule } from './app-routing.module';
 
 import { MaterialModules } from './material';
-import { HttpClientModule }    from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS }    from '@angular/common/http';
 
 import 'hammerjs';
 import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
 import { DisplayDataDialogComponent } from './display-data-dialog/display-data-dialog.component';
 import { RequestDialogComponent } from './request-dialog/request-dialog.component';
 import { LoginComponent } from './login/login.component';
+import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog.component';
+import {TokenInterceptorService} from './token-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { LoginComponent } from './login/login.component';
     GenericDialogComponent,
     DisplayDataDialogComponent,
     RequestDialogComponent,
-    LoginComponent
+    LoginComponent,
+    DiscussionDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -41,8 +45,12 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  entryComponents:[GenericDialogComponent,DisplayDataDialogComponent,RequestDialogComponent],
-  providers: [],
+  entryComponents:[GenericDialogComponent, DisplayDataDialogComponent, RequestDialogComponent, DiscussionDialogComponent],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptorService,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
