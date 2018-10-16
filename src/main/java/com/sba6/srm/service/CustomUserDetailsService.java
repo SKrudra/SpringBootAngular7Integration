@@ -35,7 +35,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserById(Long id) {
     	LoginDetail user = loginDetailRepository.findById(id).orElseThrow(
                 () -> new UsernameNotFoundException("User not found with id : " + id)
-    	        );;
+    	        );
 
         return UserPrincipal.create(user);
     }
