@@ -8,6 +8,7 @@ import { RequestService } from '../services/request.service';
 import { CommentService } from '../services/comment.service';
 import { RequestData } from '../models/request-data';
 import { requestStatusMap, loginDetailRoleMap } from '../constants';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -23,15 +24,17 @@ export class ManagerDashboardComponent implements OnInit {
   displayedColumns: string[] = ['id', 'reqDesc', 'empId', 'startDtm', 'tentativeEndDtm', 'status', 'action'];
   dataSource: MatTableDataSource<RequestData>;
   requestStatusMap = requestStatusMap;
+  myMgrId: number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(public dialog: MatDialog,
               public requestService: RequestService,
-              public commentService: CommentService
+              public commentService: CommentService,
+              public authService: AuthService
   ) {
-
+    this.myMgrId = authService.securityContext.id;
   }
 
 
@@ -41,7 +44,7 @@ export class ManagerDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.requestService.getRequests(1001).subscribe(result => {
+    this.requestService.getRequests(this.myMgrId).subscribe(result => {
       this.reqData = result;
     // Assign the data to the data source for the table to render
       this.dataSource = new MatTableDataSource(this.reqData);

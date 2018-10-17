@@ -11,7 +11,7 @@ import { CommentService } from '../services/comment.service';
 import { RequestData } from '../models/request-data';
 import { RequestService } from '../services/request.service';
 import { requestStatusMap, loginDetailRoleMap } from '../constants';
-
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -31,17 +31,18 @@ export class RequestComponent implements OnInit {
   commentsAreThere: boolean;
   reqData: RequestData[] = [];
 
-
   constructor(public dialog: MatDialog,
               public requestService: RequestService,
-              public commentService: CommentService
+              public commentService: CommentService,
+              public authService: AuthService
   ) {
-    this.myEmpId = 1003;
+    this.myEmpId = authService.securityContext.id;
     this.commentsAreThere = false;
   }
 
 
   ngOnInit() {
+    console.log(this.authService.securityContext);
     this.getRequests();
   }
 

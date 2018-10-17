@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-base-view',
@@ -7,10 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BaseViewComponent implements OnInit {
 
-  constructor() { }
+  isManager: boolean;
 
-  navLinks=[{path:'./mgrdashboard',label:'Manager Dashboard'},
-            {path:'./request',label:'Request'}];
+  constructor(
+    public authService: AuthService
+  ) {
+    if (authService.securityContext.role === 'MANAGER') {
+      this.isManager = true;
+    } else {
+      this.isManager = false;
+      this.navLinks.shift();
+    }
+   }
+
+  navLinks = [
+              {path: './mgrdashboard', label: 'Manager Dashboard'},
+              {path: './request', label: 'Request'}
+            ];
+
   ngOnInit() {
   }
 
