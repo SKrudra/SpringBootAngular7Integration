@@ -10,10 +10,6 @@ export class ManagerGuard implements CanActivate  {
   canActivate (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    if(this.authService.securityContext!=null && this.authService.securityContext.role === 'MANAGER') {
-      return true;
-    } else {
-      return false;
-    }
+    return (this.authService.securityContext != null && this.authService.securityContext.role === 'MANAGER');
   }
 }

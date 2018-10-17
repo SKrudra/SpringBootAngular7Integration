@@ -8,15 +8,10 @@ import { AuthService } from '../auth.service';
 })
 export class BaseViewComponent implements OnInit {
 
-  isManager: boolean;
-
   constructor(
     public authService: AuthService
   ) {
-    if (authService.securityContext.role === 'MANAGER') {
-      this.isManager = true;
-    } else {
-      this.isManager = false;
+    if (authService.securityContext.role === 'EMPLOYEE') {
       this.navLinks.shift();
     }
    }
