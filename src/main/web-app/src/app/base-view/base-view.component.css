@@ -1,14 +1,12 @@
 .layout-container {
- min-height:600px;
- background-color: #E0F7FA;
+ background-color: #FAFAFA;
+ height:100%;
 }
 
 .layout-sidenav {
   display: flex;
   justify-content: center;
-  width: 200px; /*using percentage = 25% is exapnding the card too much*/
+  width: 300px;
+  height:100%;
 }
 
-#mat-tab-navbar {
-	
-}
