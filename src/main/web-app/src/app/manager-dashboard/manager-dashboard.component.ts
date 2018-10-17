@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, element } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource, MatDatepicker, MatDatepickerInputEvent} from '@angular/material';
 import { MatDialog, MatDialogConfig} from '@angular/material';
 import { GenericDialogComponent} from '../generic-dialog/generic-dialog.component';
@@ -18,7 +18,6 @@ import { AuthService } from '../auth.service';
 
 export class ManagerDashboardComponent implements OnInit {
 
-  startDate = new Date(2018, 8, 1);
   reqData: RequestData[];
   comment: string;
   displayedColumns: string[] = ['id', 'reqDesc', 'empId', 'startDtm', 'tentativeEndDtm', 'status', 'action'];
@@ -46,6 +45,9 @@ export class ManagerDashboardComponent implements OnInit {
   ngOnInit() {
     this.requestService.getRequests(this.myMgrId).subscribe(result => {
       this.reqData = result;
+      this.reqData.forEach( (element) => { 
+        element.tentativeEndDtm = new Date(element.tentativeEndDtm);
+      });
     // Assign the data to the data source for the table to render
       this.dataSource = new MatTableDataSource(this.reqData);
       this.dataSource.paginator = this.paginator;

@@ -21,3 +21,7 @@ position: fixed;
   top: 50px;
   left: 500px;
 }
+
+.openstatusrow {
+	background-color: #f2fde4;
+}

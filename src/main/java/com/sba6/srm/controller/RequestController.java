@@ -47,7 +47,7 @@ public class RequestController {
 	
 	
 	//1. GET Requests for manager GET/api/requests/{mgrId}
-	//@PreAuthorize ("hasRole(T(com.sba6.srm.enumsconstants.LoginDetailRole).MANAGER)")
+	@PreAuthorize ("hasAuthority(T(com.sba6.srm.enumsconstants.LoginDetailRole).MANAGER.name())")
 	@ApiOperation(value = "Get requests for manager ")
 	@Transactional
 	@GetMapping(value = "/api/requests/{mgrId}")
