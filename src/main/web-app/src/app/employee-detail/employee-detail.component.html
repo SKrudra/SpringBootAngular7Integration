@@ -1,9 +1,5 @@
 <mat-card class="employee-card" *ngIf="employee">
-  <mat-card-header>
-    <div mat-card-avatar class="employee-header-image"></div>
-    <mat-card-title>{{employee.firstName +' '+ employee.lastName}}</mat-card-title>
-    <mat-card-subtitle>{{employee.designation}}</mat-card-subtitle>
-  </mat-card-header>
+
 
   <div *ngIf="isImg; else templateImg">
     <img mat-card-image src='employee.img' alt="employee" height="200px" width="50px">
@@ -14,9 +10,8 @@
   </ng-template>
 
   <mat-card-content>
-    <p><b>Name : </b>{{employee.firstName +' '+ employee.lastName}}</p>
-    <p><b>Designation : </b>{{employee.designation}}</p>
-    <p><b>Department : </b>{{employee.department}}</p>
-    <p><b>Manager : </b>{{employee.managerName}}</p>
+    <p><b>{{employee.firstName +' '+ employee.lastName}}</b></p>
+    <p><b>{{employee.designation}} ({{employee.department}})</b></p>
+    <p *ngIf="employee.managerName">Reports to {{employee.managerName}}</p>
   </mat-card-content>
 </mat-card>
