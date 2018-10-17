@@ -1,5 +1,5 @@
-                <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort>
+                <div class="mat-elevation-z8" >
+  <table mat-table [dataSource]="dataSource" matSort >
 
     <!-- ID Column -->
     <ng-container matColumnDef="id">
@@ -18,8 +18,26 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Raised By </th>
       <td mat-cell *matCellDef="let row"> {{row.employee.firstName}} {{row.employee.lastName}}</td>
     </ng-container>
+    
+    <!-- Start DateTime Column -->
+    <ng-container matColumnDef="startDtm">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Start DateTime </th>
+      <td mat-cell *matCellDef="let row"> {{row.startDtm | date}}</td>
+    </ng-container>
+    
+    <!-- Tentative end DateTime Column -->
 
-    <!-- Staus Column -->
+
+    <ng-container matColumnDef="tentativeEndDtm">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tentative End DateTime </th>
+      <td mat-cell *matCellDef="let row">
+      	<input [matDatepicker]="picker" type="hidden" [min]="startDate" [(ngModel)]="row.tentativeEndDtm" (dateChange)="dateChanged(row, $event)" >
+		<mat-datepicker #picker class="myDatePicker" startAt="{{row.tentativeEndDtm | date}}"></mat-datepicker>
+      	<button mat-button color="primary" (click)="picker.open()"> {{row.tentativeEndDtm | date}}</button>
+      </td>
+    </ng-container>
+
+    <!-- Status Column -->
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
       <td mat-cell *matCellDef="let row"> {{row.status}} </td>
@@ -52,4 +70,5 @@
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  <p>{{myDate}}</p>
 </div>

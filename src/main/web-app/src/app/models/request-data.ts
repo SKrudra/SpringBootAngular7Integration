@@ -6,4 +6,6 @@ export class RequestData {
   description: string;
   status: string;
   comment: string;
+  startDtm: Date;
+  tentativeEndDtm: Date;
 }

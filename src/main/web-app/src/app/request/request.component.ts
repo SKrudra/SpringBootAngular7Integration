@@ -11,7 +11,7 @@ import { CommentService } from '../services/comment.service';
 import { RequestData } from '../models/request-data';
 import { RequestService } from '../services/request.service';
 import { requestStatusMap, loginDetailRoleMap } from '../constants';
-
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -25,23 +25,24 @@ export class RequestComponent implements OnInit {
   myEmpId: number;
   disableAddRequest: boolean; // true if there is any request which is not inactivated
   comment: string;
-  displayedColumns: string[] = ['reqDesc', 'status', 'action'];
+  displayedColumns: string[] = ['reqDesc', 'startDtm', 'tentativeEndDtm', 'status', 'action'];
   dataSource: MatTableDataSource<RequestData>;
   requestStatusMap = requestStatusMap;
   commentsAreThere: boolean;
   reqData: RequestData[] = [];
 
-
   constructor(public dialog: MatDialog,
               public requestService: RequestService,
-              public commentService: CommentService
+              public commentService: CommentService,
+              public authService: AuthService
   ) {
-    this.myEmpId = 1003;
+    this.myEmpId = authService.securityContext.id;
     this.commentsAreThere = false;
   }
 
 
   ngOnInit() {
+    console.log(this.authService.securityContext);
     this.getRequests();
   }
 

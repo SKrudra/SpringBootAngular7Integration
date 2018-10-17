@@ -24,7 +24,6 @@ export class DiscussionDialogComponent implements OnInit {
     this.commentService.getCommentsForRequest(this.requestId).subscribe(result =>{
       if (result) {
         this.comments = result;
-        console.log(this.comments);
       }
     });
   }

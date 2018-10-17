@@ -56,11 +56,9 @@ export class RequestService {
 
 
   updateRequest(updateRequest: RequestData): Observable<RequestData> {
-    let request = new RequestData();
-    request = updateRequest;
-    return this.http.put<RequestData>(this.requestUrl, request, httpOptions).
+    return this.http.put<RequestData>(this.requestUrl, updateRequest, httpOptions).
     pipe(
-      catchError(this.handleError('updateRequest', request))
+      catchError(this.handleError('updateRequest', null))
     );
   }
 

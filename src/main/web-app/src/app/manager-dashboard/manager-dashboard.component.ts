@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDatepicker, MatDatepickerInputEvent} from '@angular/material';
 import { MatDialog, MatDialogConfig} from '@angular/material';
 import { GenericDialogComponent} from '../generic-dialog/generic-dialog.component';
 import { DisplayDataDialogComponent} from '../display-data-dialog/display-data-dialog.component';
@@ -8,6 +8,7 @@ import { RequestService } from '../services/request.service';
 import { CommentService } from '../services/comment.service';
 import { RequestData } from '../models/request-data';
 import { requestStatusMap, loginDetailRoleMap } from '../constants';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -16,24 +17,34 @@ import { requestStatusMap, loginDetailRoleMap } from '../constants';
 })
 
 export class ManagerDashboardComponent implements OnInit {
+
+  startDate = new Date(2018, 8, 1);
   reqData: RequestData[];
   comment: string;
-  displayedColumns: string[] = ['id', 'reqDesc', 'empId', 'status', 'action'];
+  displayedColumns: string[] = ['id', 'reqDesc', 'empId', 'startDtm', 'tentativeEndDtm', 'status', 'action'];
   dataSource: MatTableDataSource<RequestData>;
   requestStatusMap = requestStatusMap;
+  myMgrId: number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(public dialog: MatDialog,
               public requestService: RequestService,
-              public commentService: CommentService
+              public commentService: CommentService,
+              public authService: AuthService
   ) {
+    this.myMgrId = authService.securityContext.id;
+  }
 
+
+  dateChanged(request: RequestData, event: MatDatepickerInputEvent<Date>) {
+    request.tentativeEndDtm = event.value;
+    this.requestService.updateRequest(request).subscribe();
   }
 
   ngOnInit() {
-    this.requestService.getRequests(1001).subscribe(result => {
+    this.requestService.getRequests(this.myMgrId).subscribe(result => {
       this.reqData = result;
     // Assign the data to the data source for the table to render
       this.dataSource = new MatTableDataSource(this.reqData);
@@ -70,6 +81,7 @@ export class ManagerDashboardComponent implements OnInit {
   }
 
   onAccept(request: RequestData) {
+    request.tentativeEndDtm = new Date();
     this.onSubmit(request, requestStatusMap.get('APPROVED'));
   }
 

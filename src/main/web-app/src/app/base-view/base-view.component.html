@@ -15,13 +15,14 @@
 	</mat-sidenav>
 	 <mat-sidenav-content>
 	<nav mat-tab-nav-bar color="primary" backgroundColor="warn">
-	  <a mat-tab-link
-	     *ngFor="let link of navLinks"
-	     [routerLink]="link.path"
-	     routerLinkActive #rla="routerLinkActive"
-	     [active]="rla.isActive">
-	    {{link.label}}
-	  </a>  
+		<ng-container *ngFor="let link of navLinks">
+		  <a mat-tab-link
+		     [routerLink]="link.path"
+		     routerLinkActive #rla="routerLinkActive"
+		     [active]="rla.isActive">
+		    {{link.label}}
+		  </a>
+	  </ng-container>  
 	</nav>
 
 <router-outlet></router-outlet>

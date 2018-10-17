@@ -23,6 +23,7 @@ import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog
 import {TokenInterceptorService} from './token-interceptor.service';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,7 @@ import {TokenInterceptorService} from './token-interceptor.service';
     DisplayDataDialogComponent,
     RequestDialogComponent,
     LoginComponent,
-    DiscussionDialogComponent
+    DiscussionDialogComponent,
   ],
   imports: [
     BrowserModule,

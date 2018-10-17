@@ -1,6 +1,8 @@
 package com.sba6.srm.controller;
 
 import java.security.Principal;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -21,7 +23,6 @@ import com.sba6.srm.entity.Comment;
 import com.sba6.srm.entity.Employee;
 import com.sba6.srm.entity.Request;
 
-import com.sba6.srm.enumsconstants.RequestStatus;
 import com.sba6.srm.service.CommentService;
 import com.sba6.srm.service.EmailService;
 import com.sba6.srm.service.EmployeeService;
@@ -62,6 +63,7 @@ public class RequestController {
 		if (updateRequest.getComment() != null && updateRequest.getComment() != "") {
 			req.setComment(updateRequest.getComment());
 		}
+		req.setTentativeEndDtm(updateRequest.getTentativeEndDtm());
 		requestService.updateRequest(req);
 		emailService.mailRequestStatusUpdate(req, "ps2@gmail.com");
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -79,6 +81,9 @@ public class RequestController {
 		Employee emp = employeeService.getEmployee(newRequest.getEmployee().getId());
 		Request req = newRequest;
 		req.setEmployee(emp);
+		Date dt = new Date();
+		req.setStartDtm(dt);
+		req.setTentativeEndDtm( Date.from( dt.toInstant().plus(10, ChronoUnit.DAYS) ) );
 		requestService.addRequest(req);
 		emailService.mailAddRequest(req, "ps2@gmail.com");
 		return new ResponseEntity<>(HttpStatus.OK);
