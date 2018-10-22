@@ -25,7 +25,7 @@ export class BaseViewComponent implements OnInit {
   }
 
   myLogout() {
-    this.authService.logout().subscribe();
+    this.authService.logout();
   }
 
 }

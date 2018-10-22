@@ -69,7 +69,7 @@ public class RequestController {
 		}
 		req.setTentativeEndDtm(updateRequest.getTentativeEndDtm());
 		requestService.updateRequest(req);
-		emailService.mailRequestStatusUpdate(req, "ps2@gmail.com");
+		emailService.mailRequestStatusUpdate(req, req.getEmployee().getEmail());
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
@@ -95,7 +95,7 @@ public class RequestController {
 			reasonService.addReason(res);
 		});
 		
-		emailService.mailAddRequest(request, "ps2@gmail.com");
+		emailService.mailAddRequest(request, request.getEmployee().getEmail());
 		return new ResponseEntity(HttpStatus.OK);
 	}
 

@@ -147,7 +147,6 @@ export class RequestComponent implements OnInit {
       theRequest: request
     };
     const dialogRef = this.dialog.open(DisplayDataDialogComponent, dialogConfig);
-    console.log(request);
   }
 
 }

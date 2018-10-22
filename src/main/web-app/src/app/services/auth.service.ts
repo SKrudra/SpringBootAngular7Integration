@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginDetail } from '../models/login-detail';
-import { Observable,of} from 'rxjs';
-import { catchError,tap} from 'rxjs/operators';
+import { Observable, of} from 'rxjs';
+import { catchError, tap} from 'rxjs/operators';
 import {SecurityContext} from '../security-context';
 import { ObserveOnMessage } from 'rxjs/internal/operators/observeOn';
+import { Router} from '@angular/router';
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -12,16 +14,19 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = "/api/signin";
-  securityContext:SecurityContext=null;
-  token:string=null;
-  constructor(private http: HttpClient) { }
+  private loginUrl = '/api/signin';
+  securityContext: SecurityContext = null;
+  token: string = null;
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
-  authenticate(loginDetail:LoginDetail):Observable<SecurityContext>{
-    return this.http.post<SecurityContext>(this.loginUrl,loginDetail,httpOptions).pipe(
-      tap(sc=>{
-          if(sc!=null){
-          this.securityContext=sc;
+  authenticate(loginDetail: LoginDetail): Observable<SecurityContext> {
+    return this.http.post<SecurityContext>(this.loginUrl, loginDetail, httpOptions).pipe(
+      tap(sc => {
+          if (sc != null) {
+          this.securityContext = sc;
           this.token = sc.token;
         }
       }),
@@ -29,16 +34,18 @@ export class AuthService {
     );
   }
 
-  isLoggedIn():Boolean{
+  isLoggedIn(): Boolean {
     return !!this.securityContext;
   }
 
-  getToken():string{
+  getToken(): string {
     return this.token;
   }
 
-  logout(): Observable<null> {
-    return this.http.post<null>('/logout', null);
+  logout() {
+    this.token = null;
+    this.securityContext = null;
+    this.router.navigate(['login']);
   }
 
   /**
