@@ -2,8 +2,8 @@ import { Component, OnInit, Inject, EventEmitter, Output } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormControl, Validators, FormBuilder, FormGroup, FormArray} from '@angular/forms';
 import { MatInput, MatCheckbox, MatFormField } from '@angular/material';
-import { RequestService } from '../services/request.service';
-import { RequestData } from '../models/request-data';
+import { RequestService } from '../../services/request.service';
+import { RequestData } from '../../models/request-data';
 
 @Component({
   selector: 'app-request-dialog',

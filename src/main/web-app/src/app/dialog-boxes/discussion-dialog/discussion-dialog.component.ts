@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { CommentService } from '../services/comment.service';
-import { Comment } from '../models/comment';
+import { CommentService } from '../../services/comment.service';
+import { Comment } from '../../models/comment';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 
 @Component({

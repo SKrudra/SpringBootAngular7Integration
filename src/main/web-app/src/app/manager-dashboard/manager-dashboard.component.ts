@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource, MatDatepicker, MatDatepickerInputEvent} from '@angular/material';
 import { MatDialog, MatDialogConfig} from '@angular/material';
-import { GenericDialogComponent} from '../generic-dialog/generic-dialog.component';
-import { DisplayDataDialogComponent} from '../display-data-dialog/display-data-dialog.component';
-import { DiscussionDialogComponent } from '../discussion-dialog/discussion-dialog.component';
+import { GenericDialogComponent} from '../dialog-boxes/generic-dialog/generic-dialog.component';
+import { DisplayDataDialogComponent} from '../dialog-boxes/display-data-dialog/display-data-dialog.component';
+import { DiscussionDialogComponent } from '../dialog-boxes/discussion-dialog/discussion-dialog.component';
 import { RequestService } from '../services/request.service';
 import { CommentService } from '../services/comment.service';
 import { RequestData } from '../models/request-data';
 import { requestStatusMap, loginDetailRoleMap } from '../constants';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-manager-dashboard',

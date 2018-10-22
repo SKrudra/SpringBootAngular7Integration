@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
-import { RequestData } from '../models/request-data';
+import { RequestData } from '../../models/request-data';
 
 @Component({
   selector: 'app-display-data-dialog',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginDetail} from '../models/login-detail';
-import{AuthService} from '../auth.service';
+import{AuthService} from '../services/auth.service';
 import{SecurityContext} from '../security-context';
 import {Router,ActivatedRoute} from '@angular/router';
 

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoginDetail } from './models/login-detail';
+import { LoginDetail } from '../models/login-detail';
 import { Observable,of} from 'rxjs';
 import { catchError,tap} from 'rxjs/operators';
-import {SecurityContext} from './security-context';
+import {SecurityContext} from '../security-context';
 import { ObserveOnMessage } from 'rxjs/internal/operators/observeOn';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
