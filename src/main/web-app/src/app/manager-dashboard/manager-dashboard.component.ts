@@ -95,12 +95,6 @@ export class ManagerDashboardComponent implements OnInit {
     this.onSubmit(request, requestStatusMap.get('INDISCUSSION'));
   }
 
-  viewReqDescription(row: RequestData) {
-    const dialogRef = this.dialog.open(DisplayDataDialogComponent, {
-      data: {value: row.description}
-    });
-  }
-
   onAddComment(request: RequestData) {
     const dialogRef = this.dialog.open(GenericDialogComponent, {
       height: '250px',
@@ -134,6 +128,18 @@ export class ManagerDashboardComponent implements OnInit {
 
       }
     });
+  }
+
+  onViewRequest(request: RequestData) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '600px';
+    dialogConfig.width = '600px';
+    dialogConfig.data = {
+      theRequest: request
+    };
+    const dialogRef = this.dialog.open(DisplayDataDialogComponent, dialogConfig);
+    console.log(request);
   }
 
 

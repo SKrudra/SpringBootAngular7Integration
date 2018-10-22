@@ -1,6 +1,16 @@
-<h1 mat-dialog-title>Request Description</h1>
 <div mat-dialog-content>
-  {{data.value}}
+	<h1>{{theRequest.employee.firstName}} {{theRequest.employee.lastName}}</h1>
+	<h3>{{theRequest.employee.designation}} ( {{theRequest.employee.department}} )</h3>
+	<hr/>
+	
+	<h2> Reasons </h2>
+	<ul *ngFor="let res of theRequest.reasons">
+		<li>{{res.reasonId}}</li>
+	</ul>
+	<hr />
+	
+	<h2>Explanation</h2>
+	<p>{{theRequest.comment}}</p>
 </div>
 <div mat-dialog-actions align="end">  
   <button mat-button [mat-dialog-close]="false">OK</button>

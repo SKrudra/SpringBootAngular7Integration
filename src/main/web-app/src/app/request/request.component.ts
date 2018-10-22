@@ -79,12 +79,6 @@ export class RequestComponent implements OnInit {
     });
   }
 
-  viewReqDescription(row) {
-    const dialogRef = this.dialog.open(DisplayDataDialogComponent, {
-      data: {value: row.reqDesc}
-    });
-  }
-
   onAddRequest() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
@@ -142,6 +136,18 @@ export class RequestComponent implements OnInit {
 
       }
     });
+  }
+
+  onViewRequest(request: RequestData) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '600px';
+    dialogConfig.width = '600px';
+    dialogConfig.data = {
+      theRequest: request
+    };
+    const dialogRef = this.dialog.open(DisplayDataDialogComponent, dialogConfig);
+    console.log(request);
   }
 
 }
