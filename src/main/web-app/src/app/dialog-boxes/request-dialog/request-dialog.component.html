@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Add Request</h2>
+
+<mat-dialog-content>
+<form [formGroup]="form">
+ 	<h3>Reasons</h3>
+ 	<div formArrayName="reasons" *ngFor="let defaultReason of defaultReasons; let i = index">
+	 	<mat-checkbox [formControlName]="i" value ="defaultReason.id">{{defaultReason.reason}}</mat-checkbox><br />
+	</div>
+	<h4> Any other reason </h4>
+	<mat-form-field>
+		<input matInput maxlength="500" formControlName="otherReason" ><br />
+	</mat-form-field>
+	
+	<h3>Explanation</h3>
+	<mat-form-field>
+	    <textarea matInput maxlength="500" formControlName="comment" required></textarea>
+    </mat-form-field>
+</form>
+</mat-dialog-content>
+
+<mat-dialog-actions  align="end">
+  <button mat-button [mat-dialog-close]="true"  (click)="onSubmit()">Add</button>
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+</mat-dialog-actions>

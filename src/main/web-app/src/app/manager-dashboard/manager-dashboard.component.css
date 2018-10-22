@@ -16,12 +16,12 @@ td, th {
   white-space: nowrap;
 }
 
-.myDatePicker {
-position: fixed;
-  top: 50px;
-  left: 500px;
-}
-
 .openstatusrow {
 	background-color: #f2fde4;
 }
+
+
+.rejectedstatusrow {
+	background-color: #FFEBEE;
+}
+

@@ -6,6 +6,7 @@ import { RequestData } from '../models/request-data';
 import { Employee } from '../models/employee';
 import { Comment } from '../models/comment';
 import { requestStatusMap, loginDetailRoleMap } from '../constants';
+import { Reason } from '../models/reason';
 
 
 const httpOptions = {
@@ -31,14 +32,28 @@ export class RequestService {
     );
   }
 
-  addRequest(empId: number, requestDescription: string): Observable<RequestData> {
+  addRequest(empId: number, requestDescription: string, selectedReasonIds: number[]): Observable<RequestData> {
     const request = new RequestData();
     const employee = new Employee();
+
     employee.id = empId;
     request.employee = employee;
     request.description = requestDescription;
     request.status = 'OPEN';
     request.comment = 'NA' ;
+
+    const reasons: Reason[] = [];
+
+    selectedReasonIds.forEach(reasonId => {
+      const reason = new Reason();
+      reason.reasonId = reasonId;
+      reasons.push(reason);
+    });
+    request.reasons = reasons;
+
+    console.log('Inside add request');
+    console.log(request);
+
     return this.http.post<RequestData>(this.requestUrl, request).
     pipe(
       catchError(this.handleError('getRequest', request))

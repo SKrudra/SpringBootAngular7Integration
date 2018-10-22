@@ -21,11 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sba6.srm.entity.Comment;
 import com.sba6.srm.entity.Employee;
+import com.sba6.srm.entity.Reason;
 import com.sba6.srm.entity.Request;
 
 import com.sba6.srm.service.CommentService;
 import com.sba6.srm.service.EmailService;
 import com.sba6.srm.service.EmployeeService;
+import com.sba6.srm.service.ReasonService;
 import com.sba6.srm.service.RequestService;
 
 import io.swagger.annotations.Api;
@@ -44,6 +46,8 @@ public class RequestController {
 	private EmailService emailService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private ReasonService reasonService;
 	
 	
 	//1. GET Requests for manager GET/api/requests/{mgrId}
@@ -65,7 +69,7 @@ public class RequestController {
 		}
 		req.setTentativeEndDtm(updateRequest.getTentativeEndDtm());
 		requestService.updateRequest(req);
-		emailService.mailRequestStatusUpdate(req, "ps2@gmail.com");
+		emailService.mailRequestStatusUpdate(req, req.getEmployee().getEmail());
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
@@ -77,16 +81,22 @@ public class RequestController {
 
 	@ApiOperation(value = "Create request for employee")
 	@PostMapping(value = "/api/request")
-	public ResponseEntity createRequest(@RequestBody Request newRequest) {
-		Employee emp = employeeService.getEmployee(newRequest.getEmployee().getId());
-		Request req = newRequest;
-		req.setEmployee(emp);
+	public ResponseEntity createRequest(@RequestBody Request request) {
+		Employee emp = employeeService.getEmployee(request.getEmployee().getId());
+		request.setEmployee(emp);
 		Date dt = new Date();
-		req.setStartDtm(dt);
-		req.setTentativeEndDtm( Date.from( dt.toInstant().plus(10, ChronoUnit.DAYS) ) );
-		requestService.addRequest(req);
-		emailService.mailAddRequest(req, "ps2@gmail.com");
-		return new ResponseEntity<>(HttpStatus.OK);
+		request.setStartDtm(dt);
+		request.setTentativeEndDtm( Date.from( dt.toInstant().plus(10, ChronoUnit.DAYS) ) );
+		requestService.addRequest(request);
+		//add reasons in reason table
+		Request addedReq = requestService.getRequestForEmployee(emp.getId());
+		request.getReasons().forEach(res -> {
+			res.setRequest(addedReq);
+			reasonService.addReason(res);
+		});
+		
+		emailService.mailAddRequest(request, request.getEmployee().getEmail());
+		return new ResponseEntity(HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Get employee details")

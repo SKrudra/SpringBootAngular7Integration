@@ -2,16 +2,16 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 
-import { GenericDialogComponent } from '../generic-dialog/generic-dialog.component';
-import { DisplayDataDialogComponent } from '../display-data-dialog/display-data-dialog.component';
-import { RequestDialogComponent } from '../request-dialog/request-dialog.component';
-import { DiscussionDialogComponent } from '../discussion-dialog/discussion-dialog.component';
+import { GenericDialogComponent } from '../dialog-boxes/generic-dialog/generic-dialog.component';
+import { DisplayDataDialogComponent } from '../dialog-boxes/display-data-dialog/display-data-dialog.component';
+import { RequestDialogComponent } from '../dialog-boxes/request-dialog/request-dialog.component';
+import { DiscussionDialogComponent } from '../dialog-boxes/discussion-dialog/discussion-dialog.component';
 
 import { CommentService } from '../services/comment.service';
 import { RequestData } from '../models/request-data';
 import { RequestService } from '../services/request.service';
 import { requestStatusMap, loginDetailRoleMap } from '../constants';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -42,7 +42,6 @@ export class RequestComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.authService.securityContext);
     this.getRequests();
   }
 
@@ -80,29 +79,19 @@ export class RequestComponent implements OnInit {
     });
   }
 
-  viewReqDescription(row) {
-    const dialogRef = this.dialog.open(DisplayDataDialogComponent, {
-      data: {value: row.reqDesc}
-    });
-  }
-
   onAddRequest() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '250px';
+    dialogConfig.height = '600px';
     dialogConfig.width = '600px';
+    dialogConfig.data = {
+      empId: this.myEmpId
+    };
     const dialogRef = this.dialog.open(RequestDialogComponent, dialogConfig);
 
-    dialogRef.componentInstance.onAdd.subscribe((data) => {
-        this.comment = data;
-     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      dialogRef.componentInstance.onAdd.unsubscribe();
       if (result) {
-        this.requestService.addRequest(this.myEmpId, this.comment).subscribe(
-          err => console.log(err)
-        );
         this.disableAddRequest = true;
         this.getRequests();
         this.dataSource.data = this.filterRequestData(this.reqData);
@@ -147,6 +136,17 @@ export class RequestComponent implements OnInit {
 
       }
     });
+  }
+
+  onViewRequest(request: RequestData) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '600px';
+    dialogConfig.width = '600px';
+    dialogConfig.data = {
+      theRequest: request
+    };
+    const dialogRef = this.dialog.open(DisplayDataDialogComponent, dialogConfig);
   }
 
 }

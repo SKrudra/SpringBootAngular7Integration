@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild, element } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource, MatDatepicker, MatDatepickerInputEvent} from '@angular/material';
 import { MatDialog, MatDialogConfig} from '@angular/material';
-import { GenericDialogComponent} from '../generic-dialog/generic-dialog.component';
-import { DisplayDataDialogComponent} from '../display-data-dialog/display-data-dialog.component';
-import { DiscussionDialogComponent } from '../discussion-dialog/discussion-dialog.component';
+import { GenericDialogComponent} from '../dialog-boxes/generic-dialog/generic-dialog.component';
+import { DisplayDataDialogComponent} from '../dialog-boxes/display-data-dialog/display-data-dialog.component';
+import { DiscussionDialogComponent } from '../dialog-boxes/discussion-dialog/discussion-dialog.component';
 import { RequestService } from '../services/request.service';
 import { CommentService } from '../services/comment.service';
 import { RequestData } from '../models/request-data';
 import { requestStatusMap, loginDetailRoleMap } from '../constants';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -45,8 +45,8 @@ export class ManagerDashboardComponent implements OnInit {
   ngOnInit() {
     this.requestService.getRequests(this.myMgrId).subscribe(result => {
       this.reqData = result;
-      this.reqData.forEach( (element) => { 
-        element.tentativeEndDtm = new Date(element.tentativeEndDtm);
+      this.reqData.forEach( (req) => {
+        req.tentativeEndDtm = new Date(req.tentativeEndDtm);
       });
     // Assign the data to the data source for the table to render
       this.dataSource = new MatTableDataSource(this.reqData);
@@ -95,12 +95,6 @@ export class ManagerDashboardComponent implements OnInit {
     this.onSubmit(request, requestStatusMap.get('INDISCUSSION'));
   }
 
-  viewReqDescription(row: RequestData) {
-    const dialogRef = this.dialog.open(DisplayDataDialogComponent, {
-      data: {value: row.description}
-    });
-  }
-
   onAddComment(request: RequestData) {
     const dialogRef = this.dialog.open(GenericDialogComponent, {
       height: '250px',
@@ -134,6 +128,17 @@ export class ManagerDashboardComponent implements OnInit {
 
       }
     });
+  }
+
+  onViewRequest(request: RequestData) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '600px';
+    dialogConfig.width = '600px';
+    dialogConfig.data = {
+      theRequest: request
+    };
+    const dialogRef = this.dialog.open(DisplayDataDialogComponent, dialogConfig);
   }
 
 

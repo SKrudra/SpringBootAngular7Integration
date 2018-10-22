@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import{MatDividerModule,MatTableModule,MatFormFieldModule,MatIconModule,MatDialogModule,
     MatSortModule,MatPaginatorModule,MatSelectModule,MatOptionModule,MatTooltipModule,
     MatButtonModule,MatInputModule,MatTabsModule, MatCardModule, MatToolbarModule,
-    MatSidenavModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+    MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule, } from '@angular/material';
   import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   @NgModule({
@@ -25,7 +25,8 @@ import{MatDividerModule,MatTableModule,MatFormFieldModule,MatIconModule,MatDialo
       MatToolbarModule,
       MatSidenavModule,
       MatDatepickerModule,
-      MatNativeDateModule
+      MatNativeDateModule,
+      MatCheckboxModule
     ],
     exports:[BrowserAnimationsModule,
         MatDividerModule,
@@ -45,7 +46,8 @@ import{MatDividerModule,MatTableModule,MatFormFieldModule,MatIconModule,MatDialo
         MatToolbarModule,
         MatSidenavModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatCheckboxModule
       ]
   })
 export class MaterialModules{

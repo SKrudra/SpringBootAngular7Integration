@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-base-view',
@@ -22,6 +22,10 @@ export class BaseViewComponent implements OnInit {
             ];
 
   ngOnInit() {
+  }
+
+  myLogout() {
+    this.authService.logout();
   }
 
 }

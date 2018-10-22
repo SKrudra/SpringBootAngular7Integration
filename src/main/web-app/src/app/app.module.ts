@@ -12,15 +12,15 @@ import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard
 import { AppRoutingModule } from './app-routing.module';
 
 import { MaterialModules } from './material';
-import { HttpClientModule,HTTP_INTERCEPTORS }    from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import 'hammerjs';
-import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
-import { DisplayDataDialogComponent } from './display-data-dialog/display-data-dialog.component';
-import { RequestDialogComponent } from './request-dialog/request-dialog.component';
+import { GenericDialogComponent } from './dialog-boxes/generic-dialog/generic-dialog.component';
+import { DisplayDataDialogComponent } from './dialog-boxes/display-data-dialog/display-data-dialog.component';
+import { RequestDialogComponent } from './dialog-boxes/request-dialog/request-dialog.component';
 import { LoginComponent } from './login/login.component';
-import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog.component';
-import {TokenInterceptorService} from './token-interceptor.service';
+import { DiscussionDialogComponent } from './dialog-boxes/discussion-dialog/discussion-dialog.component';
+import {TokenInterceptorService} from './services/token-interceptor.service';
 
 
 
@@ -46,11 +46,11 @@ import {TokenInterceptorService} from './token-interceptor.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  entryComponents:[GenericDialogComponent, DisplayDataDialogComponent, RequestDialogComponent, DiscussionDialogComponent],
+  entryComponents: [GenericDialogComponent, DisplayDataDialogComponent, RequestDialogComponent, DiscussionDialogComponent],
   providers: [{
-    provide:HTTP_INTERCEPTORS,
-    useClass:TokenInterceptorService,
-    multi:true
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
   }],
   bootstrap: [AppComponent]
 })

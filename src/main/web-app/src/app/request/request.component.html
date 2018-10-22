@@ -1,5 +1,5 @@
 <div class="mat-elevation-z8">
-<button mat-fab color="primary" (click)="onAddRequest()" [disabled]="disableAddRequest">
+<button mat-fab color="primary" (click)="onAddRequest()" *ngIf="!disableAddRequest">
     <mat-icon >add</mat-icon>
  </button>
   
@@ -10,7 +10,7 @@
     <!-- Request Description Column -->
     <ng-container matColumnDef="reqDesc">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Request Description </th>
-      <td mat-cell *matCellDef="let row"><button mat-button color="primary" (click)="viewReqDescription(row)" > {{row.description | slice:0:25}} </button></td>
+      <td mat-cell *matCellDef="let row"><button mat-button color="primary" matTooltip="View request" (click)="onViewRequest(row)" > {{row.description | slice:0:25}} </button></td>
     </ng-container>
 
 	 <!-- Start DateTime Column -->
@@ -34,13 +34,16 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
       <td mat-cell *matCellDef="let row" class="manager-icons" >
-        <button  mat-icon-button color="primary" (click)="onCancel(row)" [disabled]="!(row.status === requestStatusMap.get('OPEN') || row.status === requestStatusMap.get('INDISCUSSION'))">
+      	<button mat-icon-button color="primary" (click)="onViewRequest(row)" matTooltip="View request">
+          <mat-icon >pageview</mat-icon>
+        </button>
+        <button  mat-icon-button color="warn" (click)="onCancel(row)" matTooltip="Cancel request" [disabled]="!(row.status === requestStatusMap.get('OPEN') || row.status === requestStatusMap.get('INDISCUSSION'))">
           <mat-icon >cancel</mat-icon>
         </button>
-        <button mat-icon-button color="accent"  *ngIf="row.status==requestStatusMap.get('INDISCUSSION') && commentsAreThere" (click)="onAddComment(row)" >
+        <button mat-icon-button color="accent"  matTooltip="Add comment" *ngIf="row.status==requestStatusMap.get('INDISCUSSION') && commentsAreThere" (click)="onAddComment(row)" >
           <mat-icon >add_comment</mat-icon>
         </button>
-        <button mat-icon-button color="accent" *ngIf="row.status==requestStatusMap.get('INDISCUSSION') && commentsAreThere" (click)="onViewDiscussion(row)" >
+        <button mat-icon-button color="accent" matTooltip="View discussion" *ngIf="row.status==requestStatusMap.get('INDISCUSSION') && commentsAreThere" (click)="onViewDiscussion(row)" >
           <mat-icon >comment</mat-icon>
         </button>
       </td>
