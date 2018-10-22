@@ -16,18 +16,7 @@ td, th {
   white-space: nowrap;
 }
 
-.myDatePicker {
-position: relative;
-  top: 50px;
-  left: 500px;
-}
-
 .openstatusrow {
 	background-color: #f2fde4;
 }
 
-.mat-input-underline {
-	visibility:hidden;
-	z-index:-1;
-	display:inline;
-}

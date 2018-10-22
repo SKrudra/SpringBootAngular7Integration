@@ -13,12 +13,6 @@ public class ReasonService {
 	@Autowired
 	private ReasonRepository reasonRepository;
 	
-	public void addReasonsForRequest(Request request){
-		request.getReasons().forEach(reason -> {
-			reasonRepository.save(reason);
-		});
-	}
-	
 	public void addReason(Reason reason) {
 		reasonRepository.save(reason);
 	}
