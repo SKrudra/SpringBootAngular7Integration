@@ -10,7 +10,8 @@ import com.sba6.srm.entity.Request;
 
 public interface RequestRepository  extends JpaRepository<Request, Long>{
 	
-	@Query("select r from Request r JOIN r.employee e where e.mgrId=:mgrId and r.employee.id=e.id and r.status!= 'INACTIVATED'")
+	@Query("select r from Request r JOIN r.employee e where e.mgrId=:mgrId and r.employee.id=e.id and r.status!= 'INACTIVATED' "
+			+ "order by (case when r.status='OPEN' then 0 else 1 end), (case when r.status='INDISCUSSION' then 0 else 1 end), r.status")
 	public List<Request> getRequestsForManager(@Param("mgrId") Long mgrId);
 	
 	@Query("select r from Request r JOIN r.employee e where e.id=:empid and r.employee.id=e.id and (r.status= 'OPEN' or r.status= 'INDISCUSSION')")

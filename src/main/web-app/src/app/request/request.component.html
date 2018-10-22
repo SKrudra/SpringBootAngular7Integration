@@ -1,5 +1,5 @@
 <div class="mat-elevation-z8">
-<button mat-fab color="primary" (click)="onAddRequest()" [disabled]="disableAddRequest">
+<button mat-fab color="primary" (click)="onAddRequest()" *ngIf="!disableAddRequest">
     <mat-icon >add</mat-icon>
  </button>
   

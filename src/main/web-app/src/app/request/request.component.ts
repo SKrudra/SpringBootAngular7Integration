@@ -42,7 +42,6 @@ export class RequestComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.authService.securityContext);
     this.getRequests();
   }
 
@@ -89,20 +88,16 @@ export class RequestComponent implements OnInit {
   onAddRequest() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '250px';
+    dialogConfig.height = '600px';
     dialogConfig.width = '600px';
+    dialogConfig.data = {
+      empId: this.myEmpId
+    };
     const dialogRef = this.dialog.open(RequestDialogComponent, dialogConfig);
 
-    dialogRef.componentInstance.onAdd.subscribe((data) => {
-        this.comment = data;
-     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      dialogRef.componentInstance.onAdd.unsubscribe();
       if (result) {
-        this.requestService.addRequest(this.myEmpId, this.comment).subscribe(
-          err => console.log(err)
-        );
         this.disableAddRequest = true;
         this.getRequests();
         this.dataSource.data = this.filterRequestData(this.reqData);

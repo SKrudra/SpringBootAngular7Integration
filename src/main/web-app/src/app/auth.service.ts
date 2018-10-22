@@ -4,6 +4,7 @@ import { LoginDetail } from './models/login-detail';
 import { Observable,of} from 'rxjs';
 import { catchError,tap} from 'rxjs/operators';
 import {SecurityContext} from './security-context';
+import { ObserveOnMessage } from 'rxjs/internal/operators/observeOn';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -34,6 +35,10 @@ export class AuthService {
 
   getToken():string{
     return this.token;
+  }
+
+  logout(): Observable<null> {
+    return this.http.post<null>('/logout', null);
   }
 
   /**

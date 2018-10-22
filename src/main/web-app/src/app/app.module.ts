@@ -12,7 +12,7 @@ import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard
 import { AppRoutingModule } from './app-routing.module';
 
 import { MaterialModules } from './material';
-import { HttpClientModule,HTTP_INTERCEPTORS }    from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import 'hammerjs';
 import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
@@ -46,11 +46,11 @@ import {TokenInterceptorService} from './token-interceptor.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  entryComponents:[GenericDialogComponent, DisplayDataDialogComponent, RequestDialogComponent, DiscussionDialogComponent],
+  entryComponents: [GenericDialogComponent, DisplayDataDialogComponent, RequestDialogComponent, DiscussionDialogComponent],
   providers: [{
-    provide:HTTP_INTERCEPTORS,
-    useClass:TokenInterceptorService,
-    multi:true
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
   }],
   bootstrap: [AppComponent]
 })

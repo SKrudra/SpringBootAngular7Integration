@@ -24,4 +24,8 @@ export class BaseViewComponent implements OnInit {
   ngOnInit() {
   }
 
+  myLogout() {
+    this.authService.logout().subscribe();
+  }
+
 }

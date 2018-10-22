@@ -1,4 +1,6 @@
-import {Employee} from './employee';
+import { Employee } from './employee';
+import { Reason } from './reason'
+
 export class RequestData {
 
   id: number;
@@ -8,4 +10,5 @@ export class RequestData {
   comment: string;
   startDtm: Date;
   tentativeEndDtm: Date;
+  reasons: Reason[];
 }
