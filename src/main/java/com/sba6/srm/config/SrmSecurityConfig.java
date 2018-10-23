@@ -64,9 +64,10 @@ public class SrmSecurityConfig extends WebSecurityConfigurerAdapter {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
         .authorizeRequests()
-            .antMatchers("/resources/**", "/api/signin")
-                .permitAll()
-            .anyRequest()
+            .antMatchers("/**")
+            	.permitAll()
+            .and()
+         .authorizeRequests().antMatchers("/api**")
                 .authenticated();
 
 // Add our custom JWT security filter
