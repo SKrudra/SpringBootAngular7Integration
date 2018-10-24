@@ -1,26 +1,36 @@
-<mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-title>Login</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form class="example-form">
-      <table class="example-full-width" cellspacing="0">
+<div class="parent">
+
+<mat-toolbar class="topbar telative" style="color:white;background-color:#3700B3;">
+	<span>SRM</span>
+</mat-toolbar>
+
+<button mat-fab><a href="https://accounts.google.com/o/oauth2/auth?
+redirect_uri=http://localhost:4200/login&
+response_type=code&
+client_id=698682231712-gbno37u3fdovq1rjrhurj4o6bo00okg9.apps.googleusercontent.com&
+scope=https://www.googleapis.com/auth/userinfo.email&
+approval_prompt=force&
+access_type=offline">G+</a></button>
+    <form>
+      <table>
         <tr>
           <td>
-            <mat-form-field class="example-full-width">
+            <mat-form-field>
             <input matInput placeholder="Username" [(ngModel)]="loginDetail.userName" name="username" required>
             </mat-form-field>
           </td>
         </tr>
         <tr>
-        <td><mat-form-field class="example-full-width">
-          <input matInput placeholder="Password" [(ngModel)]="loginDetail.password"type="password" name="password" required>
-        </mat-form-field></td>
-      </tr></table>
-    </form>
-    <!-- <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner> -->
-  </mat-card-content>
+        	<td>
+        		<mat-form-field>
+          		<input matInput placeholder="Password" [(ngModel)]="loginDetail.password" type="password" name="password" required>
+        		</mat-form-field>
+        	</td>
+     	</tr>
+      </table>
+    </form>    
+
   <mat-card-actions>
     <button mat-raised-button (click)="login()" color="primary">Login</button>
   </mat-card-actions>
-</mat-card>
+</div>

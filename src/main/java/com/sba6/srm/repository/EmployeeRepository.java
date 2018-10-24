@@ -10,5 +10,6 @@ import com.sba6.srm.entity.Employee;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
    Optional<Employee> findById(Long mgrId);
+   Optional<Employee> findByEmail(String email);
 
 }
