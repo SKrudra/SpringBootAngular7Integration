@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>Lets Meet Discussion</h2>
-<div class="conversation">
+<div class="conversation" #scrollMe>
 <mat-dialog-content >
 	
 	    <div *ngFor="let comment of comments">
@@ -10,11 +10,13 @@
 </mat-dialog-content>
 </div>
 
-<mat-form-field>
-  <textarea matInput maxlength="100" ></textarea>
-</mat-form-field>
+<form [formGroup]="form">
+	<mat-form-field>
+	  <textarea matInput maxlength="100" formControlName="message" ></textarea>
+	</mat-form-field>
+</form>
 
 <mat-dialog-actions  align="end">
-	<button mat-button [mat-dialog-close]="true" (click)="onSubmit()">Submit</button>
+	<button mat-button  (click)="onSubmit()">Submit</button>
 	<button mat-button [mat-dialog-close]="false">Cancel</button>
 </mat-dialog-actions>
