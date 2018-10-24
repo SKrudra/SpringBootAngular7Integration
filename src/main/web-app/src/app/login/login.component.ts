@@ -28,6 +28,14 @@ export class LoginComponent implements OnInit {
   securityContext: SecurityContext = null;
 
   googleCode: string;
+
+  googleCodeUrl = 'https://accounts.google.com/o/oauth2/auth?' +
+  'redirect_uri=http://localhost:4200/login&' +
+  'response_type=code&' +
+  'client_id=&' +
+  'scope=https://www.googleapis.com/auth/userinfo.email&' +
+  'approval_prompt=force&' +
+  'access_type=offline';
   postUrl = '/api/google';
 
 
