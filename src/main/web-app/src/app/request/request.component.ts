@@ -105,24 +105,6 @@ export class RequestComponent implements OnInit {
       return reqData.filter(request => request.status !== 'INACTIVATED');
   }
 
-  onAddComment(request: RequestData) {
-    const dialogRef = this.dialog.open(GenericDialogComponent, {
-      height: '250px',
-      width: '600px',
-    });
-    dialogRef.componentInstance.onAdd.subscribe((data) => {
-        this.comment = data;
-      });
-
-    dialogRef.afterClosed().subscribe((result) => {
-        dialogRef.componentInstance.onAdd.unsubscribe();
-        if (result) {
-          request.comment = this.comment;
-          this.commentService.addComment(request.id, this.comment, loginDetailRoleMap.get('EMPLOYEE')).subscribe();
-        }
-    });
-  }
-
   onViewDiscussion(request: RequestData) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;

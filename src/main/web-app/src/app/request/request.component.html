@@ -40,9 +40,6 @@
         <button  mat-icon-button color="warn" (click)="onCancel(row)" matTooltip="Cancel request" [disabled]="!(row.status === requestStatusMap.get('OPEN') || row.status === requestStatusMap.get('INDISCUSSION'))">
           <mat-icon >cancel</mat-icon>
         </button>
-        <button mat-icon-button color="accent"  matTooltip="Add comment" *ngIf="row.status==requestStatusMap.get('INDISCUSSION') && commentsAreThere" (click)="onAddComment(row)" >
-          <mat-icon >add_comment</mat-icon>
-        </button>
         <button mat-icon-button color="accent" matTooltip="View discussion" *ngIf="row.status==requestStatusMap.get('INDISCUSSION') && commentsAreThere" (click)="onViewDiscussion(row)" >
           <mat-icon >comment</mat-icon>
         </button>

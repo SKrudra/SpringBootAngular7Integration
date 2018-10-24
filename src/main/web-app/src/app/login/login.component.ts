@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     if (this.googleCode) {
       this.http.post<SecurityContext>(this.postUrl, this.googleCode).subscribe(res => {
-        console.log(res);
         if (res != null) {
           this.authService.setSecurityContext(res);
           this.authService.setToken(res.token);

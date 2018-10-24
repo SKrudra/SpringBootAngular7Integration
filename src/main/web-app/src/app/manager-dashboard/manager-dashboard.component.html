@@ -66,9 +66,6 @@
         <button mat-icon-button color="accent" matTooltip="Lets meet" *ngIf="!(row.status==requestStatusMap.get('INDISCUSSION'))" (click)="onMeet(row)" [disabled]="!(row.status==requestStatusMap.get('OPEN'))">
           <mat-icon >people</mat-icon>
         </button>
-        <button mat-icon-button color="accent" matTooltip="Add comment" *ngIf="row.status==requestStatusMap.get('INDISCUSSION')" (click)="onAddComment(row)" >
-          <mat-icon >add_comment</mat-icon>
-        </button>
         <button mat-icon-button color="accent" matTooltip="View discussion" *ngIf="row.status==requestStatusMap.get('INDISCUSSION')" (click)="onViewDiscussion(row)" >
           <mat-icon >comment</mat-icon>
         </button>

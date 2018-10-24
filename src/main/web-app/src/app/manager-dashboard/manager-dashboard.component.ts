@@ -97,24 +97,6 @@ export class ManagerDashboardComponent implements OnInit {
     this.onSubmit(request, requestStatusMap.get('INDISCUSSION'));
   }
 
-  onAddComment(request: RequestData) {
-    const dialogRef = this.dialog.open(GenericDialogComponent, {
-      height: '250px',
-      width: '600px',
-    });
-    dialogRef.componentInstance.onAdd.subscribe((data) => {
-        this.comment = data;
-      });
-
-    dialogRef.afterClosed().subscribe((result) => {
-        dialogRef.componentInstance.onAdd.unsubscribe();
-        if (result) {
-          request.comment = this.comment;
-          this.commentService.addComment(request.id, this.comment, loginDetailRoleMap.get('MANAGER')).subscribe();
-        }
-    });
-  }
-
   onViewDiscussion(request: RequestData) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
