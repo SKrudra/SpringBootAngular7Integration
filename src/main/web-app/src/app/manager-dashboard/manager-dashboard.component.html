@@ -55,7 +55,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
       <td mat-cell *matCellDef="let row" class="manager-icons">
       	<button mat-icon-button color="primary" (click)="onViewRequest(row)" matTooltip="View request">
-          <mat-icon >pageview</mat-icon>
+          <mat-icon >visibility</mat-icon>
         </button>
         <button mat-icon-button color="primary" (click)="onAccept(row)" matTooltip="Approve request" [disabled]="!(row.status==requestStatusMap.get('OPEN') || row.status==requestStatusMap.get('INDISCUSSION'))">
           <mat-icon >thumb_up_alt</mat-icon>
