@@ -11,10 +11,10 @@
 </div>
 
 <mat-form-field>
-  <textarea matInput maxlength="100" [formControl]="message"></textarea>
+  <textarea matInput maxlength="100" ></textarea>
 </mat-form-field>
 
 <mat-dialog-actions  align="end">
-	<button mat-button [mat-dialog-close]="true" [disabled]="message.invalid" (click)="onSubmit()">Submit</button>
+	<button mat-button [mat-dialog-close]="true" (click)="onSubmit()">Submit</button>
 	<button mat-button [mat-dialog-close]="false">Cancel</button>
 </mat-dialog-actions>
