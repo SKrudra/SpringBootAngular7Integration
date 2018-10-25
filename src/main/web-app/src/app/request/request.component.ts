@@ -75,7 +75,7 @@ export class RequestComponent implements OnInit {
         if (result) {
           request.status = 'INACTIVATED';
           this.requestService.updateRequest(request).subscribe();
-          this.dataSource.data = this.filterRequestData(this.reqData);
+          this.dataSource = null;
           this.disableAddRequest = false;
         }
     });
