@@ -146,8 +146,8 @@ public class RequestController {
 		final String postUrl = "https://accounts.google.com/o/oauth2/token";
 		RestTemplate restTemplate = new RestTemplate();
 		String input = "code="+googleCode+"&"
-		+"client_id=-&"
-		+"client_secret=-&"
+		+"client_id=&"
+		+"client_secret=&"
 		+"redirect_uri=http://localhost:4200/login&"
 		+"grant_type=authorization_code";
 		HttpHeaders headers = new HttpHeaders();

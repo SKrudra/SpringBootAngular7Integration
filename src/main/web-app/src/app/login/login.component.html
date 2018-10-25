@@ -1,30 +1,32 @@
 <div class="parent">
 
-<mat-toolbar class="topbar telative" style="color:white;background-color:#3700B3;">
-	<span>SRM</span>
-</mat-toolbar>
+	<div class="hgroup">
+	  <h1>SRM</h1>
+	  <h3>Service Request Management</h3>
+	</div>
+	
+	<div class="form">
 
-<button mat-fab><a [href]="googleCodeUrl">G+</a></button>
-    <form>
-      <table>
-        <tr>
-          <td>
-            <mat-form-field>
-            <input matInput placeholder="Username" [(ngModel)]="loginDetail.userName" name="username" required>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-        	<td>
-        		<mat-form-field>
-          		<input matInput placeholder="Password" [(ngModel)]="loginDetail.password" type="password" name="password" required>
-        		</mat-form-field>
-        	</td>
-     	</tr>
-      </table>
-    </form>    
-
-  <mat-card-actions>
-    <button mat-raised-button (click)="login()" color="primary">Login</button>
-  </mat-card-actions>
+	<mat-toolbar class="topbar telative" style="margin:0px 10px;">
+		<span>SRM</span>
+	</mat-toolbar>
+	
+	    <form>
+	          	<div class="group">
+		        <mat-form-field>
+		            <input matInput placeholder="Username" [(ngModel)]="loginDetail.userName" name="username" required>
+		        </mat-form-field>
+	            </div>
+	        	<mat-form-field>
+	          		<input matInput placeholder="Password" [(ngModel)]="loginDetail.password" type="password" name="password" required>
+	        	</mat-form-field>
+	        	
+	    </form>    
+	
+	  <mat-card-actions>
+	    <button mat-raised-button (click)="login()" color="primary">Login</button>
+	  </mat-card-actions>
+	  
+	  <button class="loginBtn loginBtn--google"><a [href]="googleCodeUrl">Login with Google</a></button>
+	</div>
 </div>
