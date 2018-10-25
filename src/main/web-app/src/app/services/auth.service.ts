@@ -42,6 +42,14 @@ export class AuthService {
     return this.token;
   }
 
+  setToken(token: string): void {
+    this.token = token;
+  }
+
+  setSecurityContext(sc: SecurityContext): void {
+    this.securityContext = sc;
+  }
+
   logout() {
     this.token = null;
     this.securityContext = null;

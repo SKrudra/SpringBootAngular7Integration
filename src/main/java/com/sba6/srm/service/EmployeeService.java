@@ -27,5 +27,14 @@ public class EmployeeService {
 		}
 		return employee;
 	}
+	
+	public Employee getEmployee(String email) {
+		Optional<Employee> opt = employeeRepository.findByEmail(email);
+		if(opt.isPresent()) {
+			return opt.get();
+		} else {
+			return null;
+		}
+	}
 
 }

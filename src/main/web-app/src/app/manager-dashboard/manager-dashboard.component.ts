@@ -24,6 +24,7 @@ export class ManagerDashboardComponent implements OnInit {
   dataSource: MatTableDataSource<RequestData>;
   requestStatusMap = requestStatusMap;
   myMgrId: number;
+  myEmpRole: string; // used in onViewDiscussion
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -34,6 +35,7 @@ export class ManagerDashboardComponent implements OnInit {
               public authService: AuthService
   ) {
     this.myMgrId = authService.securityContext.id;
+    this.myEmpRole = authService.securityContext.role;
   }
 
 
@@ -95,31 +97,14 @@ export class ManagerDashboardComponent implements OnInit {
     this.onSubmit(request, requestStatusMap.get('INDISCUSSION'));
   }
 
-  onAddComment(request: RequestData) {
-    const dialogRef = this.dialog.open(GenericDialogComponent, {
-      height: '250px',
-      width: '600px',
-    });
-    dialogRef.componentInstance.onAdd.subscribe((data) => {
-        this.comment = data;
-      });
-
-    dialogRef.afterClosed().subscribe((result) => {
-        dialogRef.componentInstance.onAdd.unsubscribe();
-        if (result) {
-          request.comment = this.comment;
-          this.commentService.addComment(request.id, this.comment, loginDetailRoleMap.get('MANAGER')).subscribe();
-        }
-    });
-  }
-
   onViewDiscussion(request: RequestData) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.height = '700px';
     dialogConfig.width = '500px';
     dialogConfig.data = {
-      requestId: request.id
+      requestId: request.id,
+      empRole: this.myEmpRole
     };
     const dialogRef = this.dialog.open(DiscussionDialogComponent, dialogConfig);
 
