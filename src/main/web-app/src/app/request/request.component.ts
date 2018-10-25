@@ -23,6 +23,7 @@ import { AuthService } from '../services/auth.service';
 export class RequestComponent implements OnInit {
 
   myEmpId: number;
+  myEmpRole: string; // used in onViewDiscussion
   disableAddRequest: boolean; // true if there is any request which is not inactivated
   comment: string;
   displayedColumns: string[] = ['reqDesc', 'startDtm', 'tentativeEndDtm', 'status', 'action'];
@@ -37,6 +38,7 @@ export class RequestComponent implements OnInit {
               public authService: AuthService
   ) {
     this.myEmpId = authService.securityContext.id;
+    this.myEmpRole = authService.securityContext.role;
     this.commentsAreThere = false;
   }
 
@@ -103,31 +105,14 @@ export class RequestComponent implements OnInit {
       return reqData.filter(request => request.status !== 'INACTIVATED');
   }
 
-  onAddComment(request: RequestData) {
-    const dialogRef = this.dialog.open(GenericDialogComponent, {
-      height: '250px',
-      width: '600px',
-    });
-    dialogRef.componentInstance.onAdd.subscribe((data) => {
-        this.comment = data;
-      });
-
-    dialogRef.afterClosed().subscribe((result) => {
-        dialogRef.componentInstance.onAdd.unsubscribe();
-        if (result) {
-          request.comment = this.comment;
-          this.commentService.addComment(request.id, this.comment, loginDetailRoleMap.get('EMPLOYEE')).subscribe();
-        }
-    });
-  }
-
   onViewDiscussion(request: RequestData) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.height = '700px';
     dialogConfig.width = '500px';
     dialogConfig.data = {
-      requestId: request.id
+      requestId: request.id,
+      empRole: this.myEmpRole
     };
     const dialogRef = this.dialog.open(DiscussionDialogComponent, dialogConfig);
 

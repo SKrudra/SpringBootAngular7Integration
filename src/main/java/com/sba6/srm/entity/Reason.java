@@ -24,4 +24,8 @@ public @Data class Reason {
 	
 	@Column(name = "REASON_ID")
 	private Long reasonId;
+	
+	/*@OneToOne
+	@JoinColumn(name = "REASON_ID")
+	private ReasonMasterTable reasonMasterTable;*/
 }
