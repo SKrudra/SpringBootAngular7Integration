@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate([redirectURL]);
         } else {
           // user not present in DB
-          this.snackbar.open('Login failed', undefined, { duration: 3000, });
+          this.snackbar.open('Login failed', undefined, { duration: 5000, });
         }
       });
     }

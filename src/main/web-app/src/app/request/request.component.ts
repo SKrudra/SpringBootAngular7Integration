@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { GenericDialogComponent } from '../dialog-boxes/generic-dialog/generic-dialog.component';
@@ -32,10 +32,12 @@ export class RequestComponent implements OnInit {
   commentsAreThere: boolean;
   reqData: RequestData[] = [];
 
-  constructor(public dialog: MatDialog,
+  constructor(
+              public dialog: MatDialog,
               public requestService: RequestService,
               public commentService: CommentService,
-              public authService: AuthService
+              public authService: AuthService,
+              public snackBar: MatSnackBar
   ) {
     this.myEmpId = authService.securityContext.id;
     this.myEmpRole = authService.securityContext.role;
@@ -77,6 +79,7 @@ export class RequestComponent implements OnInit {
           this.requestService.updateRequest(request).subscribe();
           this.dataSource = null;
           this.disableAddRequest = false;
+          this.snackBar.open('Request Cancelled', undefined , {duration : 3000});
         }
     });
   }
@@ -97,6 +100,7 @@ export class RequestComponent implements OnInit {
         this.disableAddRequest = true;
         this.getRequests();
         this.dataSource.data = this.filterRequestData(this.reqData);
+        this.snackBar.open('Request Added', 'SUCCESS', {duration : 3000});
       }
     });
   }
