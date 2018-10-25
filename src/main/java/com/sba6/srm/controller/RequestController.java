@@ -28,6 +28,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.sba6.srm.bean.GoogleResponse;
 import com.sba6.srm.bean.GoogleTokens;
+import com.sba6.srm.dto.SecurityContextDTO;
 import com.sba6.srm.entity.Comment;
 import com.sba6.srm.entity.Employee;
 import com.sba6.srm.entity.LoginDetail;
@@ -167,6 +168,9 @@ public class RequestController {
 		
 		//3. Verify email in db
 		Employee theEmployee = employeeService.getEmployee(googleResponse.getBody().getEmail());
+		if(theEmployee == null) {
+			 return ResponseEntity.ok(null);
+		}
 		LoginDetail loginDetail = new LoginDetail();
 		loginDetail.setUserName(theEmployee.getLoginDetail().getUserName());
 		loginDetail.setPassword(theEmployee.getLoginDetail().getPassword());

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginDetail} from '../models/login-detail';
-import {AuthService} from '../services/auth.service';
-import {SecurityContext} from '../security-context';
-import {Router, ActivatedRoute} from '@angular/router';
+import { LoginDetail} from '../models/login-detail';
+import { AuthService} from '../services/auth.service';
+import { SecurityContext} from '../security-context';
+import { Router, ActivatedRoute} from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
+import { FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -20,10 +21,13 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private http: HttpClient,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private snackbar: MatSnackBar
   ) {
     this.route.queryParams.subscribe(params => {
-      this.googleCode = params['code'];
+      if (params['code']) {
+        this.googleCode = params['code'];
+      }
     });
    }
 
@@ -41,6 +45,7 @@ export class LoginComponent implements OnInit {
   postUrl = '/api/google';
 
 
+
   ngOnInit() {
     this.form = this.fb.group({
       'username': new FormControl('', Validators.required),
@@ -49,15 +54,17 @@ export class LoginComponent implements OnInit {
 
     // check google login
     if (this.googleCode) {
-      this.http.post<SecurityContext>(this.postUrl, this.googleCode).subscribe(res => {
+      this.http.post<any>(this.postUrl, this.googleCode).subscribe(res => {
         if (res != null) {
-          this.authService.setSecurityContext(res);
-          this.authService.setToken(res.token);
-        }
-        if (res.token != null) {
-          let redirectURL = this.route.snapshot.paramMap.get('redirectURL');
-          redirectURL = redirectURL ? redirectURL : '';
-          this.router.navigate([redirectURL]);
+            // user present in db
+            this.authService.setSecurityContext(res);
+            this.authService.setToken(res.token);
+            let redirectURL = this.route.snapshot.paramMap.get('redirectURL');
+            redirectURL = redirectURL ? redirectURL : '';
+            this.router.navigate([redirectURL]);
+        } else {
+          // user not present in DB
+          this.snackbar.open('Login failed', undefined, { duration: 3000, });
         }
       });
     }
