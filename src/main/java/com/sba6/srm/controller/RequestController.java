@@ -117,12 +117,6 @@ public class RequestController {
 	public Employee getEmployee(@PathVariable Long empId) {
 		return employeeService.getEmployee(empId);
 	}
-
-	
-	@RequestMapping(value = "/user")
-	public Principal user(Principal principal) {
-	      return principal;
-	}
 	
 	//6. Add request comment POST/api/request/comment
 	@ApiOperation(value = "Add request comment")

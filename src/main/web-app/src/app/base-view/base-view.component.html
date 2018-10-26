@@ -7,12 +7,12 @@
 
 <mat-sidenav-container class = "layout-container" >
 	
-	<mat-sidenav mode="side" opened class="layout-sidenav" style="background-color:#F5F5F5;">
+	<mat-sidenav mode="side" opened class="layout-sidenav" style="background-color:#F5F5F5;padding:10px;">
 		<app-employee-detail></app-employee-detail>
 	</mat-sidenav>
 	
 	<mat-sidenav-content>
-		<nav mat-tab-nav-bar style="background-color:#555555">
+		<nav mat-tab-nav-bar style="background-color:#555555;padding:5px;">
 			<ng-container *ngFor="let link of navLinks">
 			  <a mat-tab-link style="color:white;"
 			     [routerLink]="link.path"

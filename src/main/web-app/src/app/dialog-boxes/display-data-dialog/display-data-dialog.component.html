@@ -3,11 +3,13 @@
 	<h3>{{theRequest.employee.designation}} ( {{theRequest.employee.department}} )</h3>
 	<hr/>
 	
-	<h2> Reasons </h2>
-	<ul *ngFor="let res of theRequest.reasons">
-		<li>{{res.reasonId}}</li>
-	</ul>
-	<hr />
+	<div *ngIf="theRequest.reasons.length > 0">
+		<h2> Reasons </h2>
+		<ul *ngFor="let res of theRequest.reasons">
+			<li>{{res.reasonId}}</li>
+		</ul>
+		<hr />
+	</div>
 	
 	<h2>Explanation</h2>
 	<p>{{theRequest.description}}</p>
