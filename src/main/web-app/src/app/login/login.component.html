@@ -22,11 +22,12 @@
 	        	</mat-form-field>        	
 	    </form>    
 	
-		<mat-card-actions>
-		  <button mat-raised-button (click)="login()" color="primary">Login</button>
-		</mat-card-actions>	  
+		<!-- loginBtn loginBtn--google -->
+		<button mat-raised-button (click)="login()" color="primary">Login</button>
+		<button mat-raised-button class="googleLoginBtn"><a [href]="googleCodeUrl">Login with Google</a></button>
+		  
 	  	
-		<button class="loginBtn loginBtn--google"><a [href]="googleCodeUrl">Login with Google</a></button>
+		
 	
 	</div>
 </div>
