@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginDetail} from '../models/login-detail';
 import { AuthService} from '../services/auth.service';
-import { SecurityContext} from '../security-context';
+import { SecurityContext} from '../models/security-context';
 import { Router, ActivatedRoute} from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';

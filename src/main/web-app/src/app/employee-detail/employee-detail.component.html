@@ -1,4 +1,4 @@
-<mat-card class="employee-card" *ngIf="employee" style="font-family:helvetica">
+<mat-card class="employee-card" style="font-family:helvetica">
 
 
   <div *ngIf="isImg; else templateImg">
@@ -10,8 +10,9 @@
   </ng-template>
 
   <mat-card-content>
-    <h1><b>{{employee.firstName +' '+ employee.lastName}}</b></h1>
-    <h3><b>{{employee.designation}} ({{employee.department}})</b></h3>
-    <p *ngIf="employee.managerName"><b>Reports to {{employee.managerName}}</b></p>
+    <h1><b>{{securityContext.firstName +' '+ securityContext.lastName}}</b></h1>
+    <h3><b>{{securityContext.designation}} ({{securityContext.department}})</b></h3>
+    <p *ngIf="securityContext.managerName"><b>Reports to {{securityContext.managerName}}</b></p>
+    <p>{{securityContext.firstName}}</p>
   </mat-card-content>
 </mat-card>

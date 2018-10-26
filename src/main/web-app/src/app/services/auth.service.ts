@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginDetail } from '../models/login-detail';
 import { Observable, of} from 'rxjs';
 import { catchError, tap} from 'rxjs/operators';
-import {SecurityContext} from '../security-context';
+import {SecurityContext} from '../models/security-context';
 import { ObserveOnMessage } from 'rxjs/internal/operators/observeOn';
 import { Router} from '@angular/router';
 

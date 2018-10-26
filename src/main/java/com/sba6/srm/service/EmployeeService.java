@@ -28,6 +28,13 @@ public class EmployeeService {
 		return employee;
 	}
 	
+	public String getManagerName(Employee employee) {
+		if(employee.getMgrId() != null) {
+			Employee manager = employeeRepository.findById(employee.getMgrId()).get();
+			return manager.getFirstName() + " " + manager.getLastName();
+		} else return null;
+	}
+	
 	public Employee getEmployee(String email) {
 		Optional<Employee> opt = employeeRepository.findByEmail(email);
 		if(opt.isPresent()) {
