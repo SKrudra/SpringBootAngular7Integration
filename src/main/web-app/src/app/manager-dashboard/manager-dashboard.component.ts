@@ -121,7 +121,7 @@ export class ManagerDashboardComponent implements OnInit {
   onViewRequest(request: RequestData) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '600px';
+    dialogConfig.maxHeight = '600px';
     dialogConfig.width = '600px';
     dialogConfig.data = {
       theRequest: request

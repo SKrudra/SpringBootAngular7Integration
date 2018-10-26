@@ -25,3 +25,8 @@
 	width:300px;
 	float:right;
 }
+
+mat-form-field {
+    width: 100%;
+    height: 100%;
+}

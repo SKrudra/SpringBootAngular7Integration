@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { EmployeeService } from '../services/employee.service';
 
 @Component({
   selector: 'app-base-view',
@@ -9,7 +10,8 @@ import { AuthService } from '../services/auth.service';
 export class BaseViewComponent implements OnInit {
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    public employeeService: EmployeeService
   ) {
     if (authService.securityContext.role === 'EMPLOYEE') {
       this.navLinks.shift();
