@@ -12,7 +12,9 @@ export class BaseViewComponent implements OnInit {
     public authService: AuthService
   ) {
     if (authService.securityContext.role === 'EMPLOYEE') {
-      this.navLinks.shift();
+		this.navLinks.shift();
+    } else if(authService.securityContext.managerName === null) {
+    	this.navLinks.pop();
     }
    }
 
