@@ -61,7 +61,7 @@ public @Data class Request {
 //	@OneToMany(mappedBy="request")
 //	private List<Reason> reasons;
 	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="reasons")
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="request_reasons",
     joinColumns={@JoinColumn(name="request_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="reason_id", referencedColumnName="id")})
