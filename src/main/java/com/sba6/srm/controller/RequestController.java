@@ -101,10 +101,10 @@ public class RequestController {
 		requestService.addRequest(request);
 		//add reasons in reason table
 		Request addedReq = requestService.getRequestForEmployee(emp.getId());
-		request.getReasons().forEach(res -> {
-			res.setRequest(addedReq);
-			reasonService.addReason(res);
-		});
+//		request.getReasons().forEach(res -> {
+//			res.setRequest(addedReq);
+//			reasonService.addReason(res);
+//		});
 		
 		emailService.mailAddRequest(request, request.getEmployee().getEmail());
 		return new ResponseEntity(HttpStatus.OK);
