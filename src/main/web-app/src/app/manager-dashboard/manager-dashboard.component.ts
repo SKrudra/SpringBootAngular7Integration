@@ -68,6 +68,7 @@ export class ManagerDashboardComponent implements OnInit {
   }
 
   onSubmit(request: RequestData, action: string) {
+  	console.log(request);
     const dialogRef = this.dialog.open(GenericDialogComponent, {
       height: '250px',
       width: '600px',
@@ -82,6 +83,9 @@ export class ManagerDashboardComponent implements OnInit {
           request.status = action;
           request.comment = this.comment;
           this.requestService.updateRequest(request).subscribe();
+          if(action === requestStatusMap.get('INDISCUSSION') {
+          	this.commentService.addComment(request.id, this.comment, loginDetailRoleMap.get(this.myEmpRole)).subscribe();
+          }          
           this.snackBar.open('Request Status Changed', action , {duration : 3000});
         }
     });
@@ -103,7 +107,7 @@ export class ManagerDashboardComponent implements OnInit {
   onViewDiscussion(request: RequestData) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '700px';
+    dialogConfig.maxHeight = '700px';
     dialogConfig.width = '500px';
     dialogConfig.data = {
       requestId: request.id,
