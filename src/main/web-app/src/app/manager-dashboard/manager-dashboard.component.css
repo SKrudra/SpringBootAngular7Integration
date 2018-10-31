@@ -9,6 +9,7 @@ table {
 
 td, th {
   width: 15%;
+  text-align: center;
 }
 
 .manager-icons{
@@ -29,6 +30,11 @@ td, th {
 	background-color:#fff;
 	position:sticky;
 	top:0;
-	z-index:1000;	
+	z-index:1001;	
 }
+
+mat-header-row {
+   display:flex;
+   justify-content:flex-end;
+  }
 

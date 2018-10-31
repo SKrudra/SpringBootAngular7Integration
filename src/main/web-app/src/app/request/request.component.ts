@@ -112,7 +112,7 @@ export class RequestComponent implements OnInit {
   onViewDiscussion(request: RequestData) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '700px';
+    dialogConfig.maxHeight = '700px';
     dialogConfig.width = '500px';
     dialogConfig.data = {
       requestId: request.id,
