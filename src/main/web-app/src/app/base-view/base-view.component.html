@@ -1,8 +1,8 @@
-
-<mat-toolbar class="topbar telative" style="color:white;background-color:#111">
-	<span style="background-color: 	#777777; padding:5px 20px; margin:0px;">SRM</span>
+<mat-toolbar class="topbar telative" class="toolbar-top">
+	<span id="logo">SRM</span>
+	<span class="logo-desc">Service Request Management</span>
     <span class="spacer"></span>
-	<button mat-raised-button (click)="myLogout()" style="float:right;"> Logout </button>
+	<button mat-raised-button (click)="myLogout()"  style="float:right;margin-right:10px;"> Logout </button>
 </mat-toolbar>
 
 <mat-sidenav-container class = "layout-container" >
@@ -12,7 +12,7 @@
 	</mat-sidenav>
 	
 	<mat-sidenav-content>
-		<nav mat-tab-nav-bar style="background-color:#555555;padding:5px;">
+		<nav mat-tab-nav-bar  style="background-color:#705d5d;padding:5px;">
 			<ng-container *ngFor="let link of navLinks">
 			  <a mat-tab-link style="color:white;"
 			     [routerLink]="link.path"

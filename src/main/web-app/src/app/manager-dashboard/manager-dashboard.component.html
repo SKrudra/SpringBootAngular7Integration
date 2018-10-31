@@ -72,7 +72,7 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-headings"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'rejectedstatusrow': row.status==requestStatusMap.get('REJECTED'), 'openstatusrow': (row.status==requestStatusMap.get('OPEN') || row.status==requestStatusMap.get('INDISCUSSION'))}">
     </tr>
   </table>

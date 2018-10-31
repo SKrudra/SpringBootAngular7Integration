@@ -15,4 +15,26 @@
   flex: 1 1 auto;
 }
 
+#logo {
+	background-color: 	red;
+	color: white;	
+	font-weight:bold; 
+	padding:20px 30px;
+	text-align: center;
+	height:90px;
+	line-height:90px;
+}
+
+.logo-desc {
+	margin-left:10px;
+}
+
+.toolbar-top {
+	color:white;
+	background-color:#111;
+	padding:0px;
+	font-family:helvetica;
+}
+
+
 
