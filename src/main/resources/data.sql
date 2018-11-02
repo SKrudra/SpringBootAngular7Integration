@@ -16,13 +16,13 @@ values(1, 1001, 'Need a PS Vita.', 'OPEN','NA', NOW(), NOW()),
 (3, 1003, 'Need Oppo', 'OPEN','NA',  NOW(), NOW());
 
 
-/*insert into reasonmastertable (ID, DESCRIPTION)
+insert into reason (ID, DESCRIPTION)
 values(1, 'Not able to work up to the true potential'),
 (2, 'Not satisfied with the technical growth'),
 (3, 'Not satisfied with the economical growth'),
 (4, 'Unable to maintain work life balance'),
 (5, 'Hostile work environment');
-*/
+
 
 
 

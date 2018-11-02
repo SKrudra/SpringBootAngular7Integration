@@ -46,7 +46,7 @@ export class RequestService {
 
     selectedReasonIds.forEach(reasonId => {
       const reason = new Reason();
-      reason.reasonId = reasonId;
+      reason.id = reasonId;
       reasons.push(reason);
     });
     request.reasons = reasons;

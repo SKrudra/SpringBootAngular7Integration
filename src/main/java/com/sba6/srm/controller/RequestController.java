@@ -100,7 +100,7 @@ public class RequestController {
 		request.setTentativeEndDtm( Date.from( dt.toInstant().plus(10, ChronoUnit.DAYS) ) );
 		requestService.addRequest(request);
 		//add reasons in reason table
-		Request addedReq = requestService.getRequestForEmployee(emp.getId());
+		//Request addedReq = requestService.getRequestForEmployee(emp.getId());
 //		request.getReasons().forEach(res -> {
 //			res.setRequest(addedReq);
 //			reasonService.addReason(res);
