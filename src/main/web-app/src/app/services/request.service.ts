@@ -22,6 +22,7 @@ export class RequestService {
   private requestsUrl = '/api/requests/';
   private empRequestUrl = '/api/emp/requests/';
   private requestUrl = '/api/request/';
+  private reasonUrl = '/api/reasons';
 
   constructor(private http: HttpClient) { }
 
@@ -76,7 +77,13 @@ export class RequestService {
       catchError(this.handleError('updateRequest', null))
     );
   }
-
+    
+  getReasons(): Observable<Reason[]> {
+    return this.http.get<Reason[]>(this.reasonUrl).
+    pipe(
+      catchError(this.handleError('getReasons', []))
+    );    
+  }
 
 
   /**

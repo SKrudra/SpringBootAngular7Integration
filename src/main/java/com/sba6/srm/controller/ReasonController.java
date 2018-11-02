@@ -15,7 +15,7 @@ public class ReasonController {
 	@Autowired
 	ReasonRepository reasonRepository;
 	
-	@GetMapping("api/reasons")
+	@GetMapping("/api/reasons")
 	public ResponseEntity<List<Reason>> getReasons()
 	{
 		return new ResponseEntity<>(reasonRepository.findAll(),HttpStatus.OK);

@@ -16,6 +16,7 @@ export class DisplayDataDialogComponent implements OnInit {
    }
 
   ngOnInit() {
+      console.log(this.theRequest);
   }
 
 }

@@ -16,13 +16,15 @@ export class RequestDialogComponent implements OnInit {
   form: FormGroup;
   myEmpId: number;
 
-  defaultReasons = [
+  /*defaultReasons = [
     {id: 1, reason: 'Not able to work up to the true potential'},
     {id: 2, reason: 'Not satisfied with the technical growth'},
     {id: 3, reason: 'Not satisfied with the economical growth'},
     {id: 4, reason: 'Unable to maintain work life balance'},
     {id: 5, reason: 'Hostile work environment'}
-  ];
+  ];*/
+    
+  defaultReasons = [];
 
 
   constructor(
@@ -35,6 +37,7 @@ export class RequestDialogComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.defaultReasons = this.requestService.getReasons().subscribe();
     const reasonControls = this.defaultReasons.map(c => new FormControl(false));
     this.form = this.fb.group({
       'reasons': new FormArray(reasonControls),
