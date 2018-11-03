@@ -1,4 +1,9 @@
 <mat-toolbar class="topbar telative" class="toolbar-top">
+	<span>
+		<button mat-icon-button (click)="sidenav.toggle()" matTooltip="Toggle Employee Details">
+			<mat-icon >view_headline</mat-icon>
+        </button>
+	</span>
 	<span id="logo">SRM</span>
 	<span class="logo-desc">Service Request Management</span>
     <span class="spacer"></span>
@@ -7,7 +12,7 @@
 
 <mat-sidenav-container class = "layout-container" >
 	
-	<mat-sidenav mode="side" opened class="layout-sidenav" style="background-color:#F5F5F5;padding:10px;">
+	<mat-sidenav mode="side" #sidenav class="layout-sidenav" style="background-color:#F5F5F5;padding:10px;">
 		<app-employee-detail></app-employee-detail>
 	</mat-sidenav>
 	
