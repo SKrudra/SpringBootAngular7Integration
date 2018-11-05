@@ -52,9 +52,6 @@ export class RequestService {
     });
     request.reasons = reasons;
 
-    console.log('Inside add request');
-    console.log(request);
-
     return this.http.post<RequestData>(this.requestUrl, request).
     pipe(
       catchError(this.handleError('getRequest', request))

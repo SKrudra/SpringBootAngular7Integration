@@ -99,7 +99,6 @@ export class RequestComponent implements OnInit {
       if (result) {
         this.disableAddRequest = true;
         this.getRequests();
-        this.dataSource.data = this.filterRequestData(this.reqData);
         this.snackBar.open('Request Added', 'SUCCESS', {duration : 3000});
       }
     });

@@ -68,7 +68,6 @@ export class ManagerDashboardComponent implements OnInit {
   }
 
   onSubmit(request: RequestData, action: string) {
-  	console.log(request);
     const dialogRef = this.dialog.open(GenericDialogComponent, {
       height: '250px',
       width: '600px',
