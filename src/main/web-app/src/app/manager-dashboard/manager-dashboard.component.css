@@ -7,7 +7,7 @@ table {
   width: 100%;
 }
 
-td, th {
+td {
   width: 15%;
   text-align: center;
 }
@@ -32,3 +32,4 @@ td, th {
 	top:0;
 	z-index:1001;
 }
+
