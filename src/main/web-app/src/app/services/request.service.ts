@@ -22,6 +22,7 @@ export class RequestService {
   private requestsUrl = '/api/requests/';
   private empRequestUrl = '/api/emp/requests/';
   private requestUrl = '/api/request/';
+  private reasonUrl = '/api/reasons';
 
   constructor(private http: HttpClient) { }
 
@@ -46,13 +47,10 @@ export class RequestService {
 
     selectedReasonIds.forEach(reasonId => {
       const reason = new Reason();
-      reason.reasonId = reasonId;
+      reason.id = reasonId;
       reasons.push(reason);
     });
     request.reasons = reasons;
-
-    console.log('Inside add request');
-    console.log(request);
 
     return this.http.post<RequestData>(this.requestUrl, request).
     pipe(
@@ -76,7 +74,13 @@ export class RequestService {
       catchError(this.handleError('updateRequest', null))
     );
   }
-
+    
+  getReasons(): Observable<Reason[]> {
+    return this.http.get<Reason[]>(this.reasonUrl).
+    pipe(
+      catchError(this.handleError('getReasons', []))
+    );    
+  }
 
 
   /**

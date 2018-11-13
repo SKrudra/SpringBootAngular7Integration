@@ -1,18 +1,23 @@
-
-<mat-toolbar class="topbar telative" style="color:white;background-color:#3700B3">
-	<span>SRM</span>
+<mat-toolbar class="topbar telative" class="toolbar-top">
+	<span>
+		<button mat-icon-button (click)="sidenav.toggle()" matTooltip="Toggle Employee Details">
+			<mat-icon >view_headline</mat-icon>
+        </button>
+	</span>
+	<span id="logo">SRM</span>
+	<span class="logo-desc">Service Request Management</span>
     <span class="spacer"></span>
-	<button mat-raised-button (click)="myLogout()" style="float:right;"> Logout </button>
+	<button mat-raised-button (click)="myLogout()"  style="float:right;margin-right:10px;"> Logout </button>
 </mat-toolbar>
 
 <mat-sidenav-container class = "layout-container" >
 	
-	<mat-sidenav mode="side" opened class="layout-sidenav" style="background-color:#F5F5F5;">
+	<mat-sidenav mode="side" #sidenav class="layout-sidenav" style="background-color:#F5F5F5;padding:10px;">
 		<app-employee-detail></app-employee-detail>
 	</mat-sidenav>
 	
 	<mat-sidenav-content>
-		<nav mat-tab-nav-bar style="background-color:#6200EE">
+		<nav mat-tab-nav-bar  style="background-color:#444;padding:5px;"> <!--  white -->
 			<ng-container *ngFor="let link of navLinks">
 			  <a mat-tab-link style="color:white;"
 			     [routerLink]="link.path"

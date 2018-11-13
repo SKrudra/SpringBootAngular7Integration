@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import{MatDividerModule,MatTableModule,MatFormFieldModule,MatIconModule,MatDialogModule,
-    MatSortModule,MatPaginatorModule,MatSelectModule,MatOptionModule,MatTooltipModule,
-    MatButtonModule,MatInputModule,MatTabsModule, MatCardModule, MatToolbarModule,
-    MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule, } from '@angular/material';
+import { MatDividerModule, MatTableModule, MatFormFieldModule, MatIconModule, MatDialogModule,
+    MatSortModule, MatPaginatorModule, MatSelectModule, MatOptionModule, MatTooltipModule,
+    MatButtonModule, MatInputModule, MatTabsModule, MatCardModule, MatToolbarModule,
+    MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule,
+    MatSnackBarModule } from '@angular/material';
   import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   @NgModule({
@@ -26,9 +27,11 @@ import{MatDividerModule,MatTableModule,MatFormFieldModule,MatIconModule,MatDialo
       MatSidenavModule,
       MatDatepickerModule,
       MatNativeDateModule,
-      MatCheckboxModule
+      MatCheckboxModule,
+      MatSnackBarModule
     ],
-    exports:[BrowserAnimationsModule,
+    exports: [
+        BrowserAnimationsModule,
         MatDividerModule,
         MatTableModule,
         MatFormFieldModule,
@@ -47,9 +50,10 @@ import{MatDividerModule,MatTableModule,MatFormFieldModule,MatIconModule,MatDialo
         MatSidenavModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatSnackBarModule
       ]
   })
-export class MaterialModules{
+export class MaterialModules {
 
 }

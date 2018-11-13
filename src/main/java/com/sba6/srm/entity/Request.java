@@ -2,7 +2,7 @@ package com.sba6.srm.entity;
 
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,8 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -56,7 +56,7 @@ public @Data class Request {
 	@Column(name="TENTATIVE_END_DTM")
 	private Date tentativeEndDtm;
 	
-	@OneToMany(mappedBy="request")
-	private List<Reason> reasons;
-
+	@ManyToMany
+	private Set<Reason> reasons;  
+	
 }

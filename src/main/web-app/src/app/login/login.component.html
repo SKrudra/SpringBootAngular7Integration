@@ -7,26 +7,27 @@
 	
 	<div class="form">
 
-	<mat-toolbar class="topbar telative" style="margin:0px 10px;">
-		<span>SRM</span>
-	</mat-toolbar>
+		<mat-toolbar class="topbar telative" style="margin:0px 10px;">
+			<span>SRM</span>
+		</mat-toolbar>
 	
-	    <form>
+	    <form [formGroup]="form">
 	          	<div class="group">
 		        <mat-form-field>
-		            <input matInput placeholder="Username" [(ngModel)]="loginDetail.userName" name="username" required>
+		            <input matInput placeholder="Username" formControlName ="username" required>
 		        </mat-form-field>
 	            </div>
 	        	<mat-form-field>
-	          		<input matInput placeholder="Password" [(ngModel)]="loginDetail.password" type="password" name="password" required>
-	        	</mat-form-field>
-	        	
+	          		<input matInput placeholder="Password" type="password" formControlName = "password" required>
+	        	</mat-form-field>        	
 	    </form>    
 	
-	  <mat-card-actions>
-	    <button mat-raised-button (click)="login()" color="primary">Login</button>
-	  </mat-card-actions>
-	  
-	  <button class="loginBtn loginBtn--google"><a [href]="googleCodeUrl">Login with Google</a></button>
+		<!-- loginBtn loginBtn--google -->
+		<button mat-raised-button (click)="login()" color="primary">Login</button>
+		<button mat-raised-button class="googleLoginBtn"><a [href]="googleCodeUrl">Login with Google</a></button>
+		  
+	  	
+		
+	
 	</div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource, MatDatepicker, MatDatepickerInputEvent} from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDatepicker, MatDatepickerInputEvent, MatSnackBar} from '@angular/material';
 import { MatDialog, MatDialogConfig} from '@angular/material';
 import { GenericDialogComponent} from '../dialog-boxes/generic-dialog/generic-dialog.component';
 import { DisplayDataDialogComponent} from '../dialog-boxes/display-data-dialog/display-data-dialog.component';
@@ -32,7 +32,8 @@ export class ManagerDashboardComponent implements OnInit {
   constructor(public dialog: MatDialog,
               public requestService: RequestService,
               public commentService: CommentService,
-              public authService: AuthService
+              public authService: AuthService,
+              public snackBar: MatSnackBar
   ) {
     this.myMgrId = authService.securityContext.id;
     this.myEmpRole = authService.securityContext.role;
@@ -42,6 +43,7 @@ export class ManagerDashboardComponent implements OnInit {
   dateChanged(request: RequestData, event: MatDatepickerInputEvent<Date>) {
     request.tentativeEndDtm = event.value;
     this.requestService.updateRequest(request).subscribe();
+    this.snackBar.open('Tentative data changed', 'SUCCESS', {duration : 3000});
   }
 
   ngOnInit() {
@@ -80,6 +82,10 @@ export class ManagerDashboardComponent implements OnInit {
           request.status = action;
           request.comment = this.comment;
           this.requestService.updateRequest(request).subscribe();
+          if(action === requestStatusMap.get('INDISCUSSION')) {
+          	this.commentService.addComment(request.id, this.comment, loginDetailRoleMap.get(this.myEmpRole)).subscribe();
+          }          
+          this.snackBar.open('Request Status Changed', action , {duration : 3000});
         }
     });
   }
@@ -100,7 +106,7 @@ export class ManagerDashboardComponent implements OnInit {
   onViewDiscussion(request: RequestData) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '700px';
+    dialogConfig.maxHeight = '700px';
     dialogConfig.width = '500px';
     dialogConfig.data = {
       requestId: request.id,
@@ -118,7 +124,7 @@ export class ManagerDashboardComponent implements OnInit {
   onViewRequest(request: RequestData) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '600px';
+    dialogConfig.maxHeight = '600px';
     dialogConfig.width = '600px';
     dialogConfig.data = {
       theRequest: request

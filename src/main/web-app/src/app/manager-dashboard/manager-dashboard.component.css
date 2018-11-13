@@ -7,8 +7,9 @@ table {
   width: 100%;
 }
 
-td, th {
+td {
   width: 15%;
+  text-align: center;
 }
 
 .manager-icons{
@@ -23,5 +24,12 @@ td, th {
 
 .rejectedstatusrow {
 	background-color: #FFEBEE;
+}
+
+.table-headings {
+	background-color:#fff;
+	position:sticky;
+	top:0;
+	z-index:1001;
 }
 

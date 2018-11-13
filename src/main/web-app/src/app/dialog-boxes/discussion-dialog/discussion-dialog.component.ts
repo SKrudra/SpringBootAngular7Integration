@@ -54,6 +54,7 @@ export class DiscussionDialogComponent implements OnInit {
     messageComment.role = loginDetailRoleMap.get(this.empRole);
     this.comments.push(messageComment);
     this.scrollToBottom();
+    this.form.get('message').setValue('');
   }
 
 

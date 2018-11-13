@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../services/employee.service';
 import { Employee } from '../models/employee';
 import { MatCard } from '@angular/material';
 import { AuthService } from '../services/auth.service';
+import { SecurityContext } from '../models/security-context';
 
 @Component({
   selector: 'app-employee-detail',
@@ -11,20 +11,14 @@ import { AuthService } from '../services/auth.service';
 })
 export class EmployeeDetailComponent implements OnInit {
 
-  myEmpId: number;
-  employee: Employee;
+  securityContext: SecurityContext;
 
   constructor(
-    public employeeService: EmployeeService,
     public authService: AuthService
   ) {
-    this.myEmpId = authService.securityContext.id;
+    this.securityContext = authService.securityContext;
   }
 
-  ngOnInit() {
-    this.employeeService.getEmployee(this.myEmpId).subscribe(result => {
-      this.employee = result;
-    });
-  }
+  ngOnInit() { }
 
 }

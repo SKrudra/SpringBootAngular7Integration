@@ -72,7 +72,10 @@ public class SrmSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
         .authorizeRequests()
 
-            .antMatchers("/","/index.html","/api/signin","/api/google","/assets/**","/styles*","/runtime*","/polyfills**","/main*")
+            .antMatchers("/","/index.html","/api/signin","/api/google","/assets/**","/styles*","/runtime*",
+            		"/polyfills**","/main*","/vendor*","/favicon*",
+            		"/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", //swagger UI
+            		"/webjars/**","/swagger-resources/configuration/ui","/swagger-ui.html")	//swagger UI
             	.permitAll()
             .and()
             .authorizeRequests().anyRequest()

@@ -4,9 +4,12 @@ import lombok.Data;
 
 public @Data class SecurityContextDTO {
 	Long id;
-	String role;
+	String email;
 	String firstName;
 	String lastName;
-	String email;
+	String role;
 	String token;
+	String designation;
+	String department;
+	String managerName;
 }

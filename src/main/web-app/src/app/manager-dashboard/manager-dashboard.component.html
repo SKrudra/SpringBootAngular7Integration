@@ -1,5 +1,5 @@
 
-                <div class="mat-elevation-z8" >
+ <div class="mat-elevation-z8" >
   <table mat-table [dataSource]="dataSource" matSort >
 
     <!-- ID Column -->
@@ -72,11 +72,11 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-headings"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'rejectedstatusrow': row.status==requestStatusMap.get('REJECTED'), 'openstatusrow': (row.status==requestStatusMap.get('OPEN') || row.status==requestStatusMap.get('INDISCUSSION'))}">
     </tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
   <!--<p>{{myDate}}</p>-->
 </div>
