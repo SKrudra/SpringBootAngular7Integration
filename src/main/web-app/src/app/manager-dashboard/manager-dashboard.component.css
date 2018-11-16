@@ -26,10 +26,9 @@ td {
 	background-color: #FFEBEE;
 }
 
-.table-headings {
-	background-color:#fff;
-	position:sticky;
-	top:0;
-	z-index:1001;
+/deep/ .mat-sort-header-button {
+	margin: 0px auto;
+	font-weight:900 !important;
+	color:black !important;
 }
 

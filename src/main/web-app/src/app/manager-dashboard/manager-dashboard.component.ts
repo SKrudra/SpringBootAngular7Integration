@@ -9,6 +9,7 @@ import { CommentService } from '../services/comment.service';
 import { RequestData } from '../models/request-data';
 import { requestStatusMap, loginDetailRoleMap } from '../constants';
 import { AuthService } from '../services/auth.service';
+import { CounterService } from '../services/counter.service';
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -25,6 +26,7 @@ export class ManagerDashboardComponent implements OnInit {
   requestStatusMap = requestStatusMap;
   myMgrId: number;
   myEmpRole: string; // used in onViewDiscussion
+  pendingCount: number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -33,10 +35,12 @@ export class ManagerDashboardComponent implements OnInit {
               public requestService: RequestService,
               public commentService: CommentService,
               public authService: AuthService,
-              public snackBar: MatSnackBar
+              public snackBar: MatSnackBar,
+              public counterService: CounterService
   ) {
     this.myMgrId = authService.securityContext.id;
     this.myEmpRole = authService.securityContext.role;
+    this.pendingCount = 0;
   }
 
 
@@ -47,11 +51,18 @@ export class ManagerDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    
+    this.counterService.currentCount.subscribe(count => this.pendingCount = count);
     this.requestService.getRequests(this.myMgrId).subscribe(result => {
+      this.pendingCount = 0;
       this.reqData = result;
       this.reqData.forEach( (req) => {
         req.tentativeEndDtm = new Date(req.tentativeEndDtm);
+        if(req.status === requestStatusMap.get('INDISCUSSION') || req.status === requestStatusMap.get('OPEN')) {
+            this.pendingCount++;
+        }
       });
+      this.counterService.changeCounter(this.pendingCount);
     // Assign the data to the data source for the table to render
       this.dataSource = new MatTableDataSource(this.reqData);
       this.dataSource.paginator = this.paginator;
