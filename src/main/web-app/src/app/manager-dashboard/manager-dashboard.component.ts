@@ -22,12 +22,13 @@ export class ManagerDashboardComponent implements OnInit {
     
   reqData: RequestData[];
   comment: string;
-  displayedColumns: string[] = ['id', 'reqDesc', 'empId', 'startDtm', 'tentativeEndDtm', 'status', 'action'];
+  displayedColumns: string[] = ['id', 'empId', 'reqDesc', 'startDtm', 'tentativeEndDtm', 'status', 'action'];
   dataSource: MatTableDataSource<RequestData>;
   requestStatusMap = requestStatusMap;
   myMgrId: number;
   myEmpRole: string; // used in onViewDiscussion
   pendingCount: number;
+  today: Date = new Date();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

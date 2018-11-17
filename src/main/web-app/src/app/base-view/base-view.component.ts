@@ -20,14 +20,14 @@ export class BaseViewComponent implements OnInit {
     if (authService.securityContext.role === 'EMPLOYEE') {
 		this.navLinks.shift();
     } else if(authService.securityContext.managerName === null) {
-    	//this.navLinks.pop();
+    	this.navLinks.pop();
         this.router.navigate(['dashboard/mgrdashboard']);
     }
    }
 
   navLinks = [
               {path: './mgrdashboard', label: 'Manager Dashboard'},
-              {path: './request', label: 'Request'}
+              {path: './request', label: 'Resignation'}
             ];
 
   ngOnInit() {

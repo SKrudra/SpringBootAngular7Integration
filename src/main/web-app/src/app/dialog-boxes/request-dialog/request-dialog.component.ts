@@ -45,8 +45,9 @@ export class RequestDialogComponent implements OnInit {
 
   onSubmit(): void {
     // generate explanation
-    const explanation = this.form.get('comment').value +' '+ this.form.get('otherReason').value;
+    let explanation = this.form.get('comment').value;
     if(explanation) {
+        explanation += ' '+ this.form.get('otherReason').value;
         // get selected reason IDs from checkboxes
         this.formIsInvalid = false;
         const selectedReasonIds = this.form.value.reasons
