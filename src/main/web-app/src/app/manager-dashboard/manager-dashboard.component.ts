@@ -19,6 +19,7 @@ import { CounterService } from '../services/counter.service';
 
 export class ManagerDashboardComponent implements OnInit {
 
+    
   reqData: RequestData[];
   comment: string;
   displayedColumns: string[] = ['id', 'empId', 'reqDesc', 'startDtm', 'tentativeEndDtm', 'status', 'action'];
