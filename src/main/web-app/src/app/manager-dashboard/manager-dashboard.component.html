@@ -33,7 +33,7 @@
       <td mat-cell *matCellDef="let row">
       	<mat-form-field>
 	      <input matInput [matDatepicker]="picker" 
-	      [min]="row.tentativeEndDtm" 
+	      [min]="row.startDtm" 
 	      [(ngModel)]="row.tentativeEndDtm" 
 	      (dateChange)="dateChanged(row, $event)" 
 	      [disabled]="!(row.status==requestStatusMap.get('OPEN') || row.status==requestStatusMap.get('INDISCUSSION'))"

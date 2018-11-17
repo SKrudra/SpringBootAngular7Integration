@@ -1,3 +1,4 @@
+<p *ngIf="failed">Failed login</p>
 <div class="parent">
 
 	<div class="hgroup">
@@ -17,11 +18,12 @@
 	            </div>
 	        	<mat-form-field>
 	          		<input matInput placeholder="Password" type="password" formControlName = "password" required>
-	        	</mat-form-field>        	
+	        	</mat-form-field>
+	        	<button mat-raised-button (click)="login()" color="primary">Login</button>        	
 	    </form>    
 	
 		<!-- loginBtn loginBtn--google -->
-		<button mat-raised-button (click)="login()" color="primary">Login</button>
+		
 		<button mat-raised-button class="googleLoginBtn"><a [href]="googleCodeUrl">Login with Google</a></button>
 		  
 	  	
