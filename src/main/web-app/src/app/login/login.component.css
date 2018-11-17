@@ -58,3 +58,12 @@ a {
 	color: #FFFFFF;
     text-decoration: none;
 }
+
+
+.topbar-new {
+	text-align:center;
+	margin:10px;
+	padding:20px;
+	background-color:#efefef;
+	font-weight:600;
+}
