@@ -77,12 +77,15 @@ export class LoginComponent implements OnInit {
     if (loginDetail.userName && loginDetail.password) {
       this.authService.authenticate(loginDetail).subscribe(
         ld => {
-          if (ld.token != null) {
-            let redirectURL = this.route.snapshot.paramMap.get('redirectURL');
-            redirectURL = redirectURL ? redirectURL : '';
-            this.router.navigate([redirectURL]);
+          if(ld != null) {
+            if (ld.token != null) {
+                let redirectURL = this.route.snapshot.paramMap.get('redirectURL');
+                redirectURL = redirectURL ? redirectURL : '';
+                this.router.navigate([redirectURL]);
+              }
           }
-        }
+          else this.snackbar.open('Login failed', undefined, { duration: 5000, });        
+        } // end of ld
       );
     }
   }

@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   width: 300px;
-  height:100%;
+  height:91%;
 }
 
 .spacer {
@@ -27,6 +27,10 @@
 
 .logo-desc {
 	margin-left:10px;
+}
+
+.zzz::backdrop {
+	background: rgba(255,0,0,.25);
 }
 
 .toolbar-top {
