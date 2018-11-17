@@ -1,11 +1,11 @@
 <mat-toolbar class="topbar telative" class="toolbar-top">
 	<span>
 		<button mat-icon-button (click)="sidenav.toggle()" matTooltip="Toggle Employee Details">
-			<mat-icon >view_headline</mat-icon>
+			<mat-icon >menu</mat-icon>
         </button>
 	</span>
-	<span id="logo">SRM</span>
-	<span class="logo-desc">Service Request Management</span>
+	<span id="logo">GGK RMS</span>
+	<span class="logo-desc">GGK Technologies</span>
     <span class="spacer"></span>
 	<button mat-raised-button (click)="myLogout()"  style="float:right;margin-right:10px;"> Logout </button>
 </mat-toolbar>
@@ -17,15 +17,16 @@
 	</mat-sidenav>
 	
 	<mat-sidenav-content>
-		<nav mat-tab-nav-bar  style="background-color:#444;padding:5px;"> <!--  white -->
+		<nav mat-tab-nav-bar  style="background-color:#444;padding:5px;">
 			<ng-container *ngFor="let link of navLinks">
 			  <a mat-tab-link style="color:white;"
 			     [routerLink]="link.path"
 			     routerLinkActive #rla="routerLinkActive"
 			     [active]="rla.isActive">
-			    {{link.label}}
+			    {{link.label}} <span class="pendingCount" *ngIf='link.label==="Manager Dashboard"'>{{pendingCount}}</span>
 			  </a>
-		  </ng-container>  
+		  </ng-container>
+		    
 		</nav>
 		<router-outlet></router-outlet>
 	</mat-sidenav-content>

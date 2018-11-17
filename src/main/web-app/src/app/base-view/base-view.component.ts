@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { CounterService } from '../services/counter.service';
 
 @Component({
   selector: 'app-base-view',
@@ -8,15 +9,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./base-view.component.css']
 })
 export class BaseViewComponent implements OnInit {
+        
+    pendingCount:number;
 
   constructor(
     public authService: AuthService,
+    public counterService: CounterService,
     public router: Router
   ) {
     if (authService.securityContext.role === 'EMPLOYEE') {
 		this.navLinks.shift();
     } else if(authService.securityContext.managerName === null) {
-    	this.navLinks.pop();
+    	//this.navLinks.pop();
         this.router.navigate(['dashboard/mgrdashboard']);
     }
    }
@@ -27,6 +31,7 @@ export class BaseViewComponent implements OnInit {
             ];
 
   ngOnInit() {
+      this.counterService.currentCount.subscribe(count => this.pendingCount = count);
   }
 
   myLogout() {
