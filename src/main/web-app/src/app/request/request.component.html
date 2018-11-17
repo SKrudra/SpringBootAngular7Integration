@@ -31,10 +31,10 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
       <td mat-cell *matCellDef="let row" class="manager-icons" >
-      	<button mat-icon-button color="primary" (click)="onViewRequest(row)" matTooltip="View request">
+      	<button mat-icon-button color="primary" (click)="onViewRequest(row)" matTooltip="View">
           <mat-icon >visibility</mat-icon>
         </button>
-        <button  mat-icon-button color="warn" (click)="onCancel(row)" matTooltip="Cancel request" [disabled]="!(row.status === requestStatusMap.get('OPEN') || row.status === requestStatusMap.get('INDISCUSSION'))">
+        <button  mat-icon-button color="warn" (click)="onCancel(row)" matTooltip="Withdraw" [disabled]="!(row.status === requestStatusMap.get('OPEN') || row.status === requestStatusMap.get('INDISCUSSION'))">
           <mat-icon >cancel</mat-icon>
         </button>
         <button mat-icon-button color="accent" matTooltip="View discussion" *ngIf="row.status==requestStatusMap.get('INDISCUSSION') && commentsAreThere" (click)="onViewDiscussion(row)" >
