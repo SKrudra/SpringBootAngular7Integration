@@ -20,7 +20,7 @@ export class BaseViewComponent implements OnInit {
     if (authService.securityContext.role === 'EMPLOYEE') {
 		this.navLinks.shift();
     } else if(authService.securityContext.managerName === null) {
-    	//this.navLinks.pop();
+    	this.navLinks.pop();
         this.router.navigate(['dashboard/mgrdashboard']);
     }
    }

@@ -27,6 +27,7 @@ export class ManagerDashboardComponent implements OnInit {
   myMgrId: number;
   myEmpRole: string; // used in onViewDiscussion
   pendingCount: number;
+  today: Date = new Date();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
