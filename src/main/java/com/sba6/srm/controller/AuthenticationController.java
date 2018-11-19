@@ -72,7 +72,7 @@ public class AuthenticationController {
 		RestTemplate restTemplate = new RestTemplate();
 		String input = "code="+googleCode+"&"
 		+"client_id=698682231712-gbno37u3fdovq1rjrhurj4o6bo00okg9.apps.googleusercontent.com&"
-		+"client_secret=IImw1dZ0P1tm2tq82QeXPW19&"
+		+"client_secret=&"
 		+"redirect_uri=http://localhost:4200/login&"
 		+"grant_type=authorization_code";
 		HttpHeaders headers = new HttpHeaders();

@@ -1,7 +1,7 @@
 insert into employee (ID, FIRST_NAME, LAST_NAME, MGR_ID, DESIGNATION, DEPARTMENT, IMG, EMAIL, ADDRESS)
-values(1001,'Sandeep', 'Kumar', null, 'SSE', 'IT', null,"sandeep.kumar@ggktech.com","Gachibowli"),
-(1002,'Manish', 'Sharma', 1001, 'SE', 'IT', null,"manish.sharma@ggktech.com", "Gachibowli"),
-(1003, 'Satyanarayan', 'Paidi', 1001, 'SE', 'IT', null,"satyanarayana.paidi@ggktech.com", "Gachibowli");
+values(1001,'Sand', 'Kum', null, 'SSE', 'IT', null,"ab@c.com","Gac"),
+(1002,'Mani', 'Shar', 1001, 'SE', 'IT', null,"bc@d.com", "Gachi"),
+(1003, 'Satyan', 'Pai', 1001, 'SE', 'IT', null,"cd@e.com", "Gachi");
 
 insert into login_detail (ID, EMP_ID, USERNAME, PASSWORD, ROLE)
 values(1,1001,'sk','sk','MANAGER'),
