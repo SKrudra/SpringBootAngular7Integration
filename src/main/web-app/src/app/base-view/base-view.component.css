@@ -29,10 +29,6 @@
 	margin-left:10px;
 }
 
-.zzz::backdrop {
-	background: rgba(255,0,0,.25);
-}
-
 .toolbar-top {
 	color:white;
 	background-color:#111;

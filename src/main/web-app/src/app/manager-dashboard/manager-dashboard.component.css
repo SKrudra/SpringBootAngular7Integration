@@ -26,9 +26,3 @@ td {
 	background-color: #FFEBEE;
 }
 
-/deep/ .mat-sort-header-button {
-	margin: 0px auto;
-	font-weight:900 !important;
-	color:black !important;
-}
-
