@@ -18,8 +18,8 @@ public class MailClient {
     public void prepareAndSend(String recipient, String subject, String message) {
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-            messageHelper.setFrom("manishsharmaps2@gmail.com");
-            messageHelper.setTo("manish.sharma@ggktech.com");
+            messageHelper.setFrom("ps2@gmail.com");
+            messageHelper.setTo("man@tech.com");
             messageHelper.setSubject(subject);
             String content = mailContentBuilder.build(message);
             messageHelper.setText(content,true);

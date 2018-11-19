@@ -140,9 +140,37 @@ export class ManagerDashboardComponent implements OnInit {
     dialogConfig.maxHeight = '600px';
     dialogConfig.width = '600px';
     dialogConfig.data = {
-      theRequest: request
+      theRequest: request,
+      empRole: this.myEmpRole
     };
     const dialogRef = this.dialog.open(DisplayDataDialogComponent, dialogConfig);
+      
+    dialogRef.afterClosed().subscribe((result) => {
+        console.log(result);
+        if(result != false) {
+            switch(result) {
+                case 1: {
+                    console.log("Approve request");
+                    this.onAccept(request);
+                    break;   
+                }
+                case 2: {
+                    console.log("Reject request");
+                    this.onReject(request);
+                    break;   
+                }
+                case 3: {
+                    console.log("Let's meet request");
+                    this.onMeet(request);
+                    break;   
+                }
+                default: {
+                    console.log("Invalid Action");
+                    break;   
+                }
+            }   
+        }
+    });
   }
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import { RequestData } from '../../models/request-data';
+import { requestStatusMap } from '../../constants';
 
 @Component({
   selector: 'app-display-data-dialog',
@@ -8,12 +9,15 @@ import { RequestData } from '../../models/request-data';
   styleUrls: ['./display-data-dialog.component.css']
 })
 export class DisplayDataDialogComponent implements OnInit {
-
+    
   theRequest: RequestData;
+  requestStatusMap = requestStatusMap;
+  empRole: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data) {
-    this.theRequest = data.theRequest;
-   }
+    constructor(@Inject(MAT_DIALOG_DATA) data) {
+        this.theRequest = data.theRequest;
+        this.empRole = data.empRole;
+    }
 
   ngOnInit() {
   }
