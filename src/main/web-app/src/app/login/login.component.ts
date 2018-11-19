@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   googleCodeUrl = 'https://accounts.google.com/o/oauth2/auth?' +
   'redirect_uri=http://localhost:4200/login&' +
   'response_type=code&' +
-  'client_id=&' +
+  'client_id=698682231712-gbno37u3fdovq1rjrhurj4o6bo00okg9.apps.googleusercontent.com&' +
   'scope=https://www.googleapis.com/auth/userinfo.email&' +
   'approval_prompt=force&' +
   'access_type=offline';
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate([redirectURL]);
         } else {
           // user not present in DB
-          this.snackbar.open('Login failed', undefined, { duration: 5000, });
+          this.snackbar.open('Not registered email', 'Failed', { duration: 5000, });
         }
       });
     }
@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate([redirectURL]);
               }
           }
-          else this.snackbar.open('Login failed', undefined, { duration: 5000, });        
+          else this.snackbar.open('Login failed', 'Failed', { duration: 5000, });        
         } // end of ld
       );
     }

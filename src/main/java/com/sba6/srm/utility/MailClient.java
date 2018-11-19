@@ -19,7 +19,7 @@ public class MailClient {
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setFrom("ps2@gmail.com");
-            messageHelper.setTo(recipient);
+            messageHelper.setTo("man@tech.com");
             messageHelper.setSubject(subject);
             String content = mailContentBuilder.build(message);
             messageHelper.setText(content,true);
@@ -28,6 +28,7 @@ public class MailClient {
             mailSender.send(messagePreparator);
         } catch (MailException e) {
             // runtime exception; compiler will not force you to handle it
+        	System.out.println(e);
         }
     }
  

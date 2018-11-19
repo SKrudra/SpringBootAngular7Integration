@@ -14,6 +14,11 @@
 	<h2>Explanation</h2>
 	<p>{{theRequest.description}}</p>
 </div>
-<div mat-dialog-actions align="end">  
-  <button mat-button [mat-dialog-close]="false">OK</button>
+<div mat-dialog-actions align="end">
+	<div *ngIf="(theRequest.status==requestStatusMap.get('OPEN') || theRequest.status==requestStatusMap.get('INDISCUSSION')) && (empRole==='MANAGER')" style="margin-right:10px;">
+		<button mat-raised-button color="primary" [mat-dialog-close]=1>Approve</button>
+		<button mat-raised-button color="warn" [mat-dialog-close]=2>Reject</button>
+		<button mat-raised-button color="accent" [mat-dialog-close]=3>Let's meet</button>
+	</div>
+	<button mat-raised-button [mat-dialog-close]="false">OK</button>
 </div>
