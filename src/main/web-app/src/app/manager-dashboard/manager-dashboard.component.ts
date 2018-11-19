@@ -97,7 +97,10 @@ export class ManagerDashboardComponent implements OnInit {
           this.requestService.updateRequest(request).subscribe();
           if(action === requestStatusMap.get('INDISCUSSION')) {
           	this.commentService.addComment(request.id, this.comment, loginDetailRoleMap.get(this.myEmpRole)).subscribe();
-          }          
+          } else {
+            this.pendingCount--;
+            this.counterService.changeCounter(this.pendingCount);   
+          }
           this.snackBar.open('Request Status Changed', action , {duration : 3000});
         }
     });
