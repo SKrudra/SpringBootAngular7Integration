@@ -1,5 +1,5 @@
-# SpringBootAngular6Integration
-An integration of Angular 6 with  Spring Boot
+# SpringBootAngular7Integration
+An integration of Angular 7 with  Spring Boot
 
 Steps to run the project:
 
