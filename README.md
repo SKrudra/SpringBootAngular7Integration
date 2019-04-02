@@ -17,7 +17,7 @@ Steps to run the project:
   mvn clean install
  
 5. On successful build run the jar:
-  java -jar target\srm-0.0.1-SNAPSHOT.jar
+  java -jar -Dserver.port=8083 target\srm-0.0.1-SNAPSHOT.jar
 
 6. Then verify the project running on:
-  http://localhost:8080/
+  http://localhost:8083/
